@@ -2,7 +2,7 @@ import numpy as np
 from MockSZ.Constants import Constants as ct
 
 class CMB(object):
-    def __init__(self, Tcmb = 2.7):
+    def __init__(self, Tcmb = 2.728):
         self.T = Tcmb
 
     def getSpecificIntensity(self, freqs):

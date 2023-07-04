@@ -16,7 +16,6 @@ setup(
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
-        "Topic :: Scientific/Engineering :: Physics"
     ],
     python_requires='>=3.8',
 )

@@ -1,0 +1,15 @@
+[run]
+branch = True
+
+[report]
+omit = 
+    build/*
+    tests/*
+    setup.py
+    src/MockSZ/__init__.py
+    src/MockSZ/*.swp
+    src/MockSZ/__pycache__/*
+    main.py
+    shibokensupport/*
+    pyscript
+    signature_bootstrap.py

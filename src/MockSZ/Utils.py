@@ -15,7 +15,7 @@ def getBetaFromVelocity(velocity):
 
     return beta
 
-def getGammaFromVelocity(velocity)
+def getGammaFromVelocity(velocity):
     """
     Obtain the gamma factor from a velocity.
 
@@ -29,7 +29,7 @@ def getGammaFromVelocity(velocity)
 
     return gamma
 
-def getGammaFromBeta(beta)
+def getGammaFromBeta(beta):
     """
     Obtain the gamma factor from a beta factor.
 
@@ -42,5 +42,19 @@ def getGammaFromBeta(beta)
 
     return gamma
 
+def getS_BETAGrid(s, beta):
+    if isinstance(beta, float) and not isinstance(s, float):
+        S, BETA = np.mgrid[s[0]:s[-1]:s.size*1j, beta:beta:1j]
 
+    elif not isinstance(beta, float) and isinstance(s, float):
+        S, BETA = np.mgrid[s:s:1j, beta[0]:beta[-1]:beta.size*1j]
+
+    elif isinstance(beta, float) and isinstance(s, float):
+        S = np.array([s])
+        BETA = np.array([beta])
+
+    else:
+        S, BETA = np.mgrid[s[0]:s[-1]:s.size*1j, beta[0]:beta[-1]:beta.size*1j]
+   
+    return S, BETA
 
