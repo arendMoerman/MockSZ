@@ -34,7 +34,7 @@ def relativisticMaxwellian(beta, Te):
 
     return nomi / deno
 
-def relativisticPowerlaw(beta, alpha=None):
+def relativisticPowerlaw(beta, beta1=0., beta2=0.99999999, alpha=None):
     """
     Generate an electron population from a relativistic power law.
 
@@ -46,12 +46,14 @@ def relativisticPowerlaw(beta, alpha=None):
 
     gamma = MUtils.getGammaFromBeta(beta)
 
-    gamma1 = np.min(gamma)
-    gamma2 = np.max(gamma)
-
+    gamma1 = MUtils.getGammaFromBeta(beta1)
+    gamma2 = MUtils.getGammaFromBeta(beta2)
+    #print(gamma1)
+    #print(gamma2)
     if alpha is None:
+        alpha = 1.
         A = np.log10(gamma2) - np.log10(gamma1)
     else:
-        A = (1 - alpha) * (gamma2**(1 - alpha) - gamma1**(1 - alpha))
+        A = (1 - alpha) * (gamma2**(1 - alpha) - gamma1**(1 - alpha))**(-1)
 
     return A * gamma**(-alpha)

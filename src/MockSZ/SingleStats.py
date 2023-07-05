@@ -43,7 +43,5 @@ def getPsbThomson(s, beta, num_mu=100, grid=True):
     out = prefac * integrand
 
     out[out < 0] = 0
-    #norm = np.sum(out * (s[1] - s[0]), axis=0)
-    #out[out > 0] /= norm[out > 0]
 
     return out
