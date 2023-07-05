@@ -14,7 +14,7 @@ def getPsbThomson(s, beta, num_mu=100, grid=True):
     """
 
     if grid:
-        S, BETA = MUtils.getS_BETAGrid(s, beta)
+        S, BETA = MUtils.getXYGrid(s, beta)
     else:
         S = s
         BETA = beta

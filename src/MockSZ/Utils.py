@@ -42,19 +42,19 @@ def getGammaFromBeta(beta):
 
     return gamma
 
-def getS_BETAGrid(s, beta):
-    if isinstance(beta, float) and not isinstance(s, float):
-        S, BETA = np.mgrid[s[0]:s[-1]:s.size*1j, beta:beta:1j]
+def getXYGrid(x, y):
+    if isinstance(y, float) and not isinstance(x, float):
+        X, Y = np.mgrid[x[0]:x[-1]:x.size*1j, y:y:1j]
 
-    elif not isinstance(beta, float) and isinstance(s, float):
-        S, BETA = np.mgrid[s:s:1j, beta[0]:beta[-1]:beta.size*1j]
+    elif not isinstance(y, float) and isinstance(x, float):
+        X, Y = np.mgrid[x:x:1j, y[0]:y[-1]:y.size*1j]
 
-    elif isinstance(beta, float) and isinstance(s, float):
-        S = np.array([s])
-        BETA = np.array([beta])
+    elif isinstance(y, float) and isinstance(x, float):
+        X = np.array([x])
+        Y = np.array([y])
 
     else:
-        S, BETA = np.mgrid[s[0]:s[-1]:s.size*1j, beta[0]:beta[-1]:beta.size*1j]
+        X, Y = np.mgrid[x[0]:x[-1]:x.size*1j, y[0]:y[-1]:y.size*1j]
    
-    return S, BETA
+    return X, Y
 
