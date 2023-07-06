@@ -8,3 +8,4 @@ class Constants(object):
     k = 1.380649e-23 # J K**-1
     c = 2.99792458e8 # m s**-1
     me = 9.1093837e-31 # kg
+    eV = 1.602176634e-19 # J

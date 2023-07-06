@@ -19,11 +19,6 @@ class TestSinglePointing(unittest.TestCase):
         test_out = SPoint.getSpecIntensityRM(mu, Te, tau_e)
         test_out2 = SPoint.getSpecIntensityRM(mu, 3*Te, tau_e)
         self.assertEqual(test_out.shape, (num_arr,))
-
-        pt.plot(mu, test_out)
-        pt.plot(mu, test_out2)
-        pt.axhline(y=0)
-        pt.show()
     
     def test_getSpecIntensityPL(self):
         alpha = 2.5
@@ -34,17 +29,10 @@ class TestSinglePointing(unittest.TestCase):
         
         test_out = SPoint.getSpecIntensityPL(mu, alpha, tau_e)
         self.assertEqual(test_out.shape, (num_arr,))
-        pt.plot(mu, test_out)
-        pt.axhline(y=0)
-        pt.show()
         
         alpha = None
         test_out = SPoint.getSpecIntensityPL(mu, alpha, tau_e)
         self.assertEqual(test_out.shape, (num_arr,))
-
-        pt.plot(mu, test_out)
-        pt.axhline(y=0)
-        pt.show()
 
 if __name__ == "__main__":
     import nose2

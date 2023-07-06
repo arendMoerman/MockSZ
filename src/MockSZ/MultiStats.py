@@ -26,7 +26,9 @@ def getP1_RM(s, Te, num_beta=100, num_mu=100):
     P1 = np.zeros(s.shape)
     for i in range(num_beta):
         be = beta_lim + i*dbeta
+
         Psb = MSingle.getPsbThomson(s, be, num_mu, grid=False)
+
         Pe = EDist.relativisticMaxwellian(be, Te)
         P1 += Pe * Psb * dbeta
         

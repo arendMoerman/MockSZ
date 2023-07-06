@@ -1,0 +1,49 @@
+/** 
+\mainpage Home
+
+\section intro_sec Introduction
+These pages contain the software documentation for `MockSZ`, a Python package for simulating Sunyaev-Zeldovich (SZ) maps.
+
+\section inst Installation
+The prerequisites for installing `MockSZ` on any operating system are:
+- A working [Python installation of version 3.8 or higher](https://www.python.org/downloads/release/python-380/).
+- A [pip installation](https://pip.pypa.io/en/stable/installation/).
+
+All other necessary prerequisites are fetched and installed upon installing `MockSZ`.
+
+\subsection pdist Install From PyPi
+`MockSZ` is on PyPi! Just pip install:
+```
+pip install MockSZ
+```
+and it should be good to go.
+
+\subsection sdist Install From Source
+Wheel is required if building from source::
+```
+pip install wheel
+```
+
+Then, clone into the git repo and pip install:
+```
+git clone https://github.com/arend95/MockSZ
+pip install .
+```
+
+\subsection optdep Optional Dependencies
+The automated tests are run using the nose2 framework:
+```
+pip install nose2
+```
+
+Documentation in `MockSZ` is generated using [Doxygen](https://www.doxygen.nl/index.html).
+Please see their [installation page](https://www.doxygen.nl/manual/install.html) for instructions regarding installation.
+
+
+\section license License
+This project is released under the [MIT License](https://opensource.org/licenses/MIT).
+
+\section contact Contact
+For questions/support, please contact:
+A.Moerman-1(at)tudelft.nl
+*/

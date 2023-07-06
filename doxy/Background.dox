@@ -1,0 +1,14 @@
+/**
+\page background `MockSZ` : Behind The Scenes
+\section background_intro Introduction
+This page contains notebooks that highlight and explain the theoretical underpinnings of `MockSZ`.
+They are arranged in a bottom-up fashion, starting from the single electron-photon scattering case and working up from there.
+Most of the information in these sections is taken from \cite Birkinshaw1999. 
+However, we include the scripts necessary for generating the figures in the notebooks so that users can experiment as well.
+
+[Single electron-photon scattering](demos/SingleElectronScattering)
+
+[Photon scattering from a population of electrons](demos/MultiElectronScattering)
+
+[The SZ effect along a single line-of-sight](demos/SinglePointing)
+*/
