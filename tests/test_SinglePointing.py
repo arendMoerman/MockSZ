@@ -17,7 +17,6 @@ class TestSinglePointing(unittest.TestCase):
         mu = np.linspace(1, 1000, num=num_arr) * 1e9
         
         test_out = SPoint.getSpecIntensityRM(mu, Te, tau_e)
-        test_out2 = SPoint.getSpecIntensityRM(mu, 3*Te, tau_e)
         self.assertEqual(test_out.shape, (num_arr,))
     
     def test_getSpecIntensityPL(self):
@@ -34,6 +33,15 @@ class TestSinglePointing(unittest.TestCase):
         test_out = SPoint.getSpecIntensityPL(mu, alpha, tau_e)
         self.assertEqual(test_out.shape, (num_arr,))
 
+    def test_getSpecIntensityKSZ(self):
+        beta_z = 0.1
+        tau_e = 1
+        num_arr = 1000
+
+        nu = np.linspace(1, 1000, num=num_arr) * 1e9
+        
+        test_out = SPoint.getSpecIntensityKSZ(nu, beta_z, tau_e)
+        self.assertEqual(test_out.shape, (num_arr,))
 if __name__ == "__main__":
     import nose2
     nose2.main()
