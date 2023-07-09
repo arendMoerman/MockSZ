@@ -48,6 +48,19 @@ def SI_Temp(I_freq, freqHz):
     ct = Constants()
 
     Tb = ct.h * freqHz / ct.k / (np.log(1 + 2 * ct.h * freqHz**3 / (I_freq * ct.c**2)))
-    #Tb = I_freq * ct.c**2 / (2 * ct.k * freqHz**2)
     return Tb
+
+def pc_m(l_pc):
+    """!
+    Convert a length in parsecs to meters.
+
+    @param l_pc Length in parsecs.
+    
+    @returns l_m Length in meters.
+    """
+
+    conv = 3.0857e16
+    l_m = l_pc * conv
+
+    return l_m
 

@@ -122,6 +122,9 @@ def&#160;</td><td class="memItemRight" valign="bottom"><b>MockSZ.SinglePointing.
 <tr class="memitem:adf41b92fee0403344381d16ae8a51eb2"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="SinglePointing_8py.html#adf41b92fee0403344381d16ae8a51eb2">MockSZ.SinglePointing.getSpecIntensity</a> (mu, param, tau_e, func)</td></tr>
 <tr class="memdesc:adf41b92fee0403344381d16ae8a51eb2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the specific intensity of the CMBR distortion along a single line of sight.  <br /></td></tr>
 <tr class="separator:adf41b92fee0403344381d16ae8a51eb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a226f8081fbbc1b872d807968f844112a"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="SinglePointing_8py.html#a226f8081fbbc1b872d807968f844112a">MockSZ.SinglePointing.getSpecIntensityKSZ</a> (nu, beta_z, tau_e)</td></tr>
+<tr class="memdesc:a226f8081fbbc1b872d807968f844112a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the specific intensity of the CMBR distortion along a single line of sight.  <br /></td></tr>
+<tr class="separator:a226f8081fbbc1b872d807968f844112a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>File containing expressions for single pointing spectral distortions. </p>
@@ -165,6 +168,7 @@ def&#160;</td><td class="memItemRight" valign="bottom"><b>MockSZ.SinglePointing.
 </div><div class="memdoc">
 
 <p>Calculate the specific intensity of the CMBR distortion along a single line of sight. </p>
+<p>Can choose between thermalised electrons (Maxwellian) or non-thermal population (power law). Note that this only returns the thermal SZ effect: distortion due to random scattering.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">mu</td><td>Range of frequencies over which to evaluate the intensity in Hertz. </td></tr>
@@ -174,7 +178,53 @@ def&#160;</td><td class="memItemRight" valign="bottom"><b>MockSZ.SinglePointing.
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Itot Comptonised CMBR specific intensity. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Itot Comptonised CMBR specific intensity relative to CMBR. </dd></dl>
+
+</div>
+</div>
+<a id="a226f8081fbbc1b872d807968f844112a" name="a226f8081fbbc1b872d807968f844112a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a226f8081fbbc1b872d807968f844112a">&#9670;&#160;</a></span>getSpecIntensityKSZ()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def MockSZ.SinglePointing.getSpecIntensityKSZ </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>nu</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>beta_z</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>tau_e</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Calculate the specific intensity of the CMBR distortion along a single line of sight. </p>
+<p>Note that this only returns the kinematic SZ effect: distortion due to gas bulk motion.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">nu</td><td>Range of frequencies over which to evaluate the intensity in Hertz. </td></tr>
+    <tr><td class="paramname">beta_z</td><td>Beta parameter of cluster receding velocity. </td></tr>
+    <tr><td class="paramname">tau_e</td><td>Optical depth of cluster gas along line of sight. Note that this method assumes optically thin gases, i.e. tau_e &lt;&lt; 1.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Itot Comptonised CMBR specific intensity relative to CMBR. </dd></dl>
 
 </div>
 </div>

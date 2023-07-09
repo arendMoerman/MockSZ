@@ -6,9 +6,11 @@ They are arranged in a bottom-up fashion, starting from the single electron-phot
 Most of the information in these sections is taken from \cite Birkinshaw1999. 
 However, we include the scripts necessary for generating the figures in the notebooks so that users can experiment as well.
 
-[Single electron-photon scattering](demos/SingleElectronScattering)
+[Single electron-photon scattering](demos/SingleElectronScattering.html)
 
-[Photon scattering from a population of electrons](demos/MultiElectronScattering)
+[Photon scattering from a population of electrons](demos/MultiElectronScattering.html)
 
-[The SZ effect along a single line-of-sight](demos/SinglePointing)
+[The SZ effect along a single line-of-sight](demos/SinglePointing.html)
+
+[The isothermal-\f$\beta\f$ model](demos/IsoBetaMaps.html)
 */

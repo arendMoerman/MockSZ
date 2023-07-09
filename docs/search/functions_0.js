@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['ev_5ftemp_0',['eV_Temp',['../Conversions_8py.html#a6796150707785aa68f773b2a0fa14c2d',1,'MockSZ::Conversions']]]
+  ['_5f_5finit_5f_5f_0',['__init__',['../classMockSZ_1_1Models_1_1IsoBetaModel.html#a7238cd98eb7365d7fca8e577bb11cd7b',1,'MockSZ::Models::IsoBetaModel']]]
 ];

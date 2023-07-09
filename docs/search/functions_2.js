@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['si_5fjysr_0',['SI_JySr',['../Conversions_8py.html#a9b45b2ab1bbb472a0928226b263cd78c',1,'MockSZ::Conversions']]],
-  ['si_5ftemp_1',['SI_Temp',['../Conversions_8py.html#ab43e6419b07e9d72d4b0ffdeaffd01f1',1,'MockSZ::Conversions']]]
+  ['getspecintensity_0',['getSpecIntensity',['../SinglePointing_8py.html#adf41b92fee0403344381d16ae8a51eb2',1,'MockSZ::SinglePointing']]],
+  ['getspecintensityksz_1',['getSpecIntensityKSZ',['../SinglePointing_8py.html#a226f8081fbbc1b872d807968f844112a',1,'MockSZ::SinglePointing']]]
 ];

@@ -35,7 +35,7 @@ def getSpecIntensity(mu, param, tau_e, func):
     @param tau_e Optical depth of cluster gas along line of sight. Note that this method assumes optically thin gases, i.e. tau_e << 1.
     @param func Electron distribution to use. Can choose between relativistic Maxwellian or power law.
     
-    @returns Itot Comptonised CMBR specific intensity.
+    @returns Itot Comptonised CMBR specific intensity relative to CMBR.
     """
 
     s_range = np.linspace(-20, 20, num=1000)
@@ -44,7 +44,7 @@ def getSpecIntensity(mu, param, tau_e, func):
 
     I0 = cmb.getSpecificIntensity(mu)
 
-    trans_I0 = (1 - tau_e) * I0 # CMB transmitted through cluster, attenuated by tau_e
+    trans_I0 = -tau_e * I0 # CMB transmitted through cluster, attenuated by tau_e
 
     S, MU = MUtils.getXYGrid(s_range, mu)
 
@@ -68,7 +68,7 @@ def getSpecIntensityKSZ(nu, beta_z, tau_e):
     @param beta_z Beta parameter of cluster receding velocity.
     @param tau_e Optical depth of cluster gas along line of sight. Note that this method assumes optically thin gases, i.e. tau_e << 1.
     
-    @returns Itot Comptonised CMBR specific intensity.
+    @returns Itot Comptonised CMBR specific intensity relative to CMBR.
     """
     
     gamma_z = MUtils.getGammaFromBeta(beta_z)
