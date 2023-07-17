@@ -37,7 +37,7 @@ def SI_JySr(I_freq):
 def SI_Temp(I_freq, freqHz):
     """!
     Take specific intensity in SI units.
-    Convert to a brightness temperature in Kelvin.
+    Convert to a brightness temperature in Kelvin, assuming Rayleigh-Jeans tail.
 
     @param I_freq Specific intensity in SI units.
     @param freqHz Frequencies of I_freq in Hz.
@@ -47,7 +47,7 @@ def SI_Temp(I_freq, freqHz):
     
     ct = Constants()
 
-    Tb = ct.h * freqHz / ct.k / (np.log(1 + 2 * ct.h * freqHz**3 / (I_freq * ct.c**2)))
+    Tb = I_freq * ct.c**2 / (2 * ct.k * freqHz**2)
     return Tb
 
 def pc_m(l_pc):

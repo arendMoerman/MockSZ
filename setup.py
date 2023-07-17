@@ -1,8 +1,7 @@
 import os
 import pathlib
 
-from setuptools import setup, Extension, find_packages
-from setuptools.command.build_ext import build_ext as build_ext_orig
+from setuptools import setup
 
 setup(
     name='MockSZ',
