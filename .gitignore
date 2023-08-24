@@ -158,6 +158,7 @@ cython_debug/
 
 # Dev specific 
 main.py
+src/MockSZ_CPU/*
 
 # PyCharm
 #  JetBrains specific template is maintained in a separate JetBrains.gitignore that can

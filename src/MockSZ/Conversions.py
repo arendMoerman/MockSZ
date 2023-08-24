@@ -64,3 +64,16 @@ def pc_m(l_pc):
 
     return l_m
 
+def freq_x(freqHz):
+    """!
+    Convert frequency in Hertz to dimensionless frequency using CMB temperature.
+
+    @param freqHz Frequencies in Hertz.
+    
+    @returns x The dimensionless frequency.
+    """
+
+    ct = Constants()
+    x = ct.h * freqHz / (ct.k * ct.Tcmb)
+
+    return x

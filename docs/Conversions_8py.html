@@ -39,6 +39,7 @@ MathJax.Hub.Config({
   <td id="projectalign">
    <div id="projectname">MockSZ User Manual
    </div>
+   <div id="projectbrief">Generate mock SZ maps of galaxy clusters</div>
   </td>
     <td>        <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -124,6 +125,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a8ab6973edeb085a0f4fad64713882aa5"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Conversions_8py.html#a8ab6973edeb085a0f4fad64713882aa5">MockSZ.Conversions.pc_m</a> (l_pc)</td></tr>
 <tr class="memdesc:a8ab6973edeb085a0f4fad64713882aa5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a length in parsecs to meters.  <br /></td></tr>
 <tr class="separator:a8ab6973edeb085a0f4fad64713882aa5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f93a0bb5325a19bdeaf58e3f43d4cae"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Conversions_8py.html#a3f93a0bb5325a19bdeaf58e3f43d4cae">MockSZ.Conversions.freq_x</a> (freqHz)</td></tr>
+<tr class="memdesc:a3f93a0bb5325a19bdeaf58e3f43d4cae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert frequency in Hertz to dimensionless frequency using CMB temperature.  <br /></td></tr>
+<tr class="separator:a3f93a0bb5325a19bdeaf58e3f43d4cae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>File containing methods for unit conversions. </p>
@@ -153,6 +157,33 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>T temperature in Kelvin. </dd></dl>
+
+</div>
+</div>
+<a id="a3f93a0bb5325a19bdeaf58e3f43d4cae" name="a3f93a0bb5325a19bdeaf58e3f43d4cae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f93a0bb5325a19bdeaf58e3f43d4cae">&#9670;&#160;</a></span>freq_x()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def MockSZ.Conversions.freq_x </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>freqHz</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Convert frequency in Hertz to dimensionless frequency using CMB temperature. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">freqHz</td><td>Frequencies in Hertz.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>x The dimensionless frequency. </dd></dl>
 
 </div>
 </div>
@@ -233,7 +264,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Take specific intensity in SI units. </p>
-<p>Convert to a brightness temperature in Kelvin.</p>
+<p>Convert to a brightness temperature in Kelvin, assuming Rayleigh-Jeans tail.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">I_freq</td><td>Specific intensity in SI units. </td></tr>

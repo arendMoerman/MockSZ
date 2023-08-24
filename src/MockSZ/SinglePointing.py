@@ -47,7 +47,6 @@ def getSpecIntensity(mu, param, tau_e, func):
     trans_I0 = -tau_e * I0 # CMB transmitted through cluster, attenuated by tau_e
 
     S, MU = MUtils.getXYGrid(s_range, mu)
-
     P1 = func(s_range, param)
     P1_mat = np.vstack([P1] * S.shape[1]).T
 

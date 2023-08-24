@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['pc_5fm_0',['pc_m',['../Conversions_8py.html#a8ab6973edeb085a0f4fad64713882aa5',1,'MockSZ::Conversions']]]
+  ['opticaldepths_0',['opticalDepths',['../classMockSZ_1_1Models_1_1IsoBetaModel.html#aa7e7c6328b0768cb249b6f75c28ebc4e',1,'MockSZ::Models::IsoBetaModel']]]
 ];

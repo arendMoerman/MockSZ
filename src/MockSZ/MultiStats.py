@@ -23,6 +23,8 @@ def getP1_RM(s, Te, num_beta=100, num_mu=100):
 
     dbeta = (1 - beta_lim) / num_beta
 
+    rbeta = np.linspace(0, (num_beta - 1)*dbeta, num_beta) + beta_lim
+    
     P1 = np.zeros(s.shape)
     for i in range(num_beta):
         be = beta_lim + i*dbeta
