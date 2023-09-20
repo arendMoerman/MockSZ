@@ -77,3 +77,57 @@ def freq_x(freqHz):
     x = ct.h * freqHz / (ct.k * ct.Tcmb)
 
     return x
+
+def Te_theta(Te):
+    """!
+    Get dimensionless electron temperature.
+
+    @param Te Electron temperature in Kelvin.
+    
+    @returns theta Dimensionless electron temperature.
+    """
+
+    ct = Constants()
+    theta = ct.k * Te / (ct.me * ct.c**2)
+    return theta
+
+def v_beta(velocity):
+    """!
+    Obtain the beta factor from a velocity.
+
+    @param velocity The electron velocity in m / s. Float or numpy array.
+
+    @returns beta The beta factor. Float or numpy array.
+    """
+    
+    ct = Constants()
+    beta = velocity / ct.c
+
+    return beta
+
+def v_gamma(velocity):
+    """!
+    Obtain the gamma factor from a velocity.
+
+    @param velocity The electron velocity in m / s. Float or numpy array.
+
+    @returns gamma The gamma factor. Float or numpy array.
+    """
+
+    beta = v_beta(velocity)
+    gamma = beta_gamma(beta) 
+
+    return gamma
+
+def beta_gamma(beta):
+    """!
+    Obtain the gamma factor from a beta factor.
+
+    @param beta The electron beta factor. Float or numpy array.
+
+    @returns gamma The gamma factor. Float or numpy array.
+    """
+
+    gamma = 1 / np.sqrt(1 - beta**2)
+
+    return gamma

@@ -1,12 +1,15 @@
 import numpy as np
+import os
 
 import MockSZ.SingleStats as MSingle
-import MockSZ.Utils as MUtils
 import MockSZ.ElectronDistributions as EDist
+
+from multiprocessing import Pool
+from functools import partial
 
 import matplotlib.pyplot as pt
 
-def getP1_RM(s, Te, num_beta=100, num_mu=100):
+def getP1_RM(s, Te, num_beta=1000, num_mu=100):
     """!
     Generate the one-scattering ensemble scattering kernel P1.
     This kernel corresponds to a relativistic Maxwellian.
@@ -22,21 +25,39 @@ def getP1_RM(s, Te, num_beta=100, num_mu=100):
     beta_lim = (np.exp(np.absolute(s)) - 1) / (np.exp(np.absolute(s)) + 1)
 
     dbeta = (1 - beta_lim) / num_beta
-
-    rbeta = np.linspace(0, (num_beta - 1)*dbeta, num_beta) + beta_lim
     
+    numThreads = os.cpu_count()# if numThreads is None else numThreads
+    
+    chunks_beta = np.array_split(np.arange(num_beta), numThreads)
+    args = chunks_beta
+
+    _parallelFuncPartial = partial(_MJ_parallel, 
+                                   beta_lim=beta_lim,
+                                   num_mu=num_mu,
+                                   s=s,
+                                   dbeta=dbeta,
+                                   Te=Te)
+        
+    pool = Pool(numThreads)
+    res = np.sum(np.array(pool.map(_parallelFuncPartial, args)), axis=0)
+    
+    return res
+
+def _MJ_parallel(args, beta_lim, num_mu, s, dbeta, Te):
+    beta = args
+
     P1 = np.zeros(s.shape)
-    for i in range(num_beta):
-        be = beta_lim + i*dbeta
+    for i in beta:
+        be = beta_lim + (i + 0.5)*dbeta
 
         Psb = MSingle.getPsbThomson(s, be, num_mu, grid=False)
 
         Pe = EDist.relativisticMaxwellian(be, Te)
         P1 += Pe * Psb * dbeta
-        
+
     return P1
 
-def getP1_PL(s, alpha, num_beta=100, num_mu=100):
+def getP1_PL(s, alpha, num_beta=1000, num_mu=100):
     """!
     Generate the one-scattering ensemble scattering kernel P1.
     This kernel corresponds to a power law.
@@ -51,12 +72,33 @@ def getP1_PL(s, alpha, num_beta=100, num_mu=100):
     beta_lim = (np.exp(np.absolute(s)) - 1) / (np.exp(np.absolute(s)) + 1)
 
     dbeta = (1 - beta_lim) / num_beta
+    numThreads = os.cpu_count()# if numThreads is None else numThreads
+    
+    chunks_beta = np.array_split(np.arange(num_beta), numThreads)
+    args = chunks_beta
+
+    _parallelFuncPartial = partial(_PL_parallel, 
+                                   beta_lim=beta_lim,
+                                   num_mu=num_mu,
+                                   s=s,
+                                   dbeta=dbeta,
+                                   alpha=alpha)
+        
+    pool = Pool(numThreads)
+    res = np.sum(np.array(pool.map(_parallelFuncPartial, args)), axis=0)
+    
+    return res
+
+def _PL_parallel(args, beta_lim, num_mu, s, dbeta, alpha):
+    beta = args
+
     P1 = np.zeros(s.shape)
-    for i in range(num_beta):
-        be = beta_lim + i*dbeta
+    for i in beta:
+        be = beta_lim + (i + 0.5)*dbeta
+
         Psb = MSingle.getPsbThomson(s, be, num_mu, grid=False)
+
         Pe = EDist.relativisticPowerlaw(be, np.min(beta_lim), alpha=alpha)
         P1 += Pe * Psb * dbeta * be * (1 - be**2)**(-3/2)
-        
-    return P1
 
+    return P1

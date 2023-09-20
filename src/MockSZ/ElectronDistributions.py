@@ -3,18 +3,7 @@ import scipy.special as sp
 
 from MockSZ.Constants import Constants as ct
 import MockSZ.Utils as MUtils
-
-def getDimTemp(Te):
-    """
-    Get dimensionless electron temperature.
-
-    @param Te Electron temperature in Kelvin.
-    
-    @returns theta Dimensionless electron temperature.
-    """
-
-    theta = ct.k * Te / (ct.me * ct.c**2)
-    return theta
+import MockSZ.Conversions as MConv
 
 def relativisticMaxwellian(beta, Te):
     """
@@ -26,8 +15,8 @@ def relativisticMaxwellian(beta, Te):
     @returns pe Electron probability distribution.
     """
 
-    theta = getDimTemp(Te)
-    gamma = MUtils.getGammaFromBeta(beta)
+    theta = MConv.Te_theta(Te)
+    gamma = MConv.beta_gamma(beta)
 
     nomi = gamma**5 * beta**2 * np.exp(-gamma / theta)
     deno = theta * sp.kn(2, 1/theta)
@@ -44,10 +33,10 @@ def relativisticPowerlaw(beta, beta1=0., beta2=0.99999999, alpha=None):
     @returns pe Electron probability distribution.
     """
 
-    gamma = MUtils.getGammaFromBeta(beta)
+    gamma = MConv.beta_gamma(beta)
 
-    gamma1 = MUtils.getGammaFromBeta(beta1)
-    gamma2 = MUtils.getGammaFromBeta(beta2)
+    gamma1 = MConv.beta_gamma(beta1)
+    gamma2 = MConv.beta_gamma(beta2)
     #print(gamma1)
     #print(gamma2)
     if alpha is None:

@@ -1,8 +1,9 @@
 import numpy as np
 
 import MockSZ.Utils as MUtils
+import MockSZ.Conversions as MConv
 
-def getPsbThomson(s, beta, num_mu=100, grid=True):
+def getPsbThomson(s, beta, num_mu=1000, grid=True):
     """
     Get the probability of a logarithmic frequency shift s, given a beta factor of an electron.
     Note that this probability is calculated assuming Thomson scattering.
@@ -30,12 +31,12 @@ def getPsbThomson(s, beta, num_mu=100, grid=True):
 
     dmu = (mu2 - mu1) / num_mu
 
-    GAMMA = MUtils.getGammaFromBeta(BETA)
+    GAMMA = MConv.beta_gamma(BETA)
     prefac = 3 / (16 * GAMMA**4 * BETA)
 
     integrand = np.zeros(S.shape)
     for i in range(num_mu):
-        mu = mu1 + i*dmu
+        mu = mu1 + (i + 0.5)*dmu
         mu_pr = (np.exp(S) * (1 - BETA * mu) - 1) / BETA
 
         integrand += (1 + BETA * mu_pr) * (1 + mu**2 * mu_pr**2 + 0.5 * (1 - mu**2) * (1 - mu_pr**2)) * (1 - BETA * mu)**(-3) * dmu

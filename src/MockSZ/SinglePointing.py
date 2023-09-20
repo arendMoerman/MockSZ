@@ -8,29 +8,33 @@ import numpy as np
 import MockSZ.MultiStats as MStats
 import MockSZ.Utils as MUtils
 from MockSZ.Constants import Constants as ct
-from MockSZ.Backgrounds import CMB
+import MockSZ.Backgrounds as MBack
+import MockSZ.Conversions as MConv
 
 import matplotlib.pyplot as pt
 
-def getSpecIntensityRM(mu, Te, tau_e):
+def getSpecIntensityRM(nu, Te, tau_e):
+    lims_s = [-1.5, 2.5]
     func = MStats.getP1_RM
-    Imu = getSpecIntensity(mu, Te, tau_e, func)
+    Inu = getSpecIntensity(nu, Te, tau_e, func, lims_s)
 
-    return Imu
+    return Inu
+    #return MIntegral.solveTripleIntegral(Te, nu, tau_e, dist="MJ")
 
-def getSpecIntensityPL(mu, alpha, tau_e):
+def getSpecIntensityPL(nu, alpha, tau_e):
+    lims_s = [-1.5, 10]
     func = MStats.getP1_PL
-    Imu = getSpecIntensity(mu, alpha, tau_e, func)
+    Inu = getSpecIntensity(nu, alpha, tau_e, func, lims_s)
 
-    return Imu
+    return Inu
 
-def getSpecIntensity(mu, param, tau_e, func):
+def getSpecIntensity(nu, param, tau_e, func, lims_s):
     """!
     Calculate the specific intensity of the CMBR distortion along a single line of sight.
     Can choose between thermalised electrons (Maxwellian) or non-thermal population (power law).
     Note that this only returns the thermal SZ effect: distortion due to random scattering.
 
-    @param mu Range of frequencies over which to evaluate the intensity in Hertz.
+    @param nu Range of frequencies over which to evaluate the intensity in Hertz.
     @param param Parameter for electron distribution. If relativistic Maxwellian, electron temperature of the cluster gas. If power law, spectral slope.
     @param tau_e Optical depth of cluster gas along line of sight. Note that this method assumes optically thin gases, i.e. tau_e << 1.
     @param func Electron distribution to use. Can choose between relativistic Maxwellian or power law.
@@ -38,20 +42,20 @@ def getSpecIntensity(mu, param, tau_e, func):
     @returns Itot Comptonised CMBR specific intensity relative to CMBR.
     """
 
-    s_range = np.linspace(-20, 20, num=1000)
+    s_range = np.linspace(lims_s[0], lims_s[1], num=1000)
+    ds = s_range[1] - s_range[1]
 
-    cmb = CMB()
-
-    I0 = cmb.getSpecificIntensity(mu)
+    I0 = MBack.getSpecificIntensityCMB(nu)
 
     trans_I0 = -tau_e * I0 # CMB transmitted through cluster, attenuated by tau_e
 
-    S, MU = MUtils.getXYGrid(s_range, mu)
+    S, NU = MUtils.getXYGrid(s_range, nu)
+    S += ds / 2
     P1 = func(s_range, param)
     P1_mat = np.vstack([P1] * S.shape[1]).T
 
     # Now, evaluate I0 on an mu*e^(-s) grid
-    I0_mat = cmb.getSpecificIntensity(MU*np.exp(-S))
+    I0_mat = MBack.getSpecificIntensityCMB(NU*np.exp(-S))
     scatter_I0 = tau_e * np.sum(P1_mat * I0_mat * (s_range[1] - s_range[0]), axis=0)
 
     Itot = (scatter_I0 + trans_I0)
@@ -70,18 +74,18 @@ def getSpecIntensityKSZ(nu, beta_z, tau_e):
     @returns Itot Comptonised CMBR specific intensity relative to CMBR.
     """
     
-    gamma_z = MUtils.getGammaFromBeta(beta_z)
+    gamma_z = MConv.beta_gamma(beta_z)
 
     mu_range = np.linspace(-1, 1, num=1000)
     
     dmu = mu_range[1] - mu_range[0]
 
-    cmb = CMB()
-
-    I0 = cmb.getSpecificIntensity(nu)
+    I0 = MBack.getSpecificIntensityCMB(nu)
 
     MU, NU = MUtils.getXYGrid(mu_range, nu)
-    
+
+    MU += dmu / 2
+
     X = ct.h * NU / ct.k / ct.Tcmb
     X2 = X * gamma_z**2 * (1 + beta_z) * (1 - beta_z * MU)
 
