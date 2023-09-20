@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['si_5fjysr_0',['SI_JySr',['../Conversions_8py.html#a9b45b2ab1bbb472a0928226b263cd78c',1,'MockSZ::Conversions']]],
-  ['si_5ftemp_1',['SI_Temp',['../Conversions_8py.html#ab43e6419b07e9d72d4b0ffdeaffd01f1',1,'MockSZ::Conversions']]]
+  ['relativisticmaxwellian_0',['relativisticMaxwellian',['../ElectronDistributions_8py.html#a21dbd322d5d0fd27e5bcea4166cc3076',1,'MockSZ::ElectronDistributions']]],
+  ['relativisticpowerlaw_1',['relativisticPowerlaw',['../ElectronDistributions_8py.html#ad011a337b9aebb9e97d33b4d7b97186f',1,'MockSZ::ElectronDistributions']]]
 ];

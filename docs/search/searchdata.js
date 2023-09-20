@@ -1,10 +1,11 @@
 var indexSectionsWithContent =
 {
-  0: "<_bcefghikmopstuv",
+  0: "<_bcdefghikmoprstuv",
   1: "i",
-  2: "cmsu",
-  3: "_befgkopstv",
-  4: "<bh"
+  2: "bcemsu",
+  3: "_befgkoprstv",
+  4: "cs",
+  5: "<bdh"
 };
 
 var indexSectionNames =
@@ -13,7 +14,8 @@ var indexSectionNames =
   1: "classes",
   2: "files",
   3: "functions",
-  4: "pages"
+  4: "groups",
+  5: "pages"
 };
 
 var indexSectionLabels =
@@ -22,6 +24,7 @@ var indexSectionLabels =
   1: "Classes",
   2: "Files",
   3: "Functions",
-  4: "Pages"
+  4: "Modules",
+  5: "Pages"
 };
 

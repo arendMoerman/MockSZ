@@ -1,10 +1,15 @@
+"""!
+@file
+Single electron scattering statistics.
+"""
+
 import numpy as np
 
 import MockSZ.Utils as MUtils
 import MockSZ.Conversions as MConv
 
 def getPsbThomson(s, beta, num_mu=1000, grid=True):
-    """
+    """!
     Get the probability of a logarithmic frequency shift s, given a beta factor of an electron.
     Note that this probability is calculated assuming Thomson scattering.
 

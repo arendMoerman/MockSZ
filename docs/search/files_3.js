@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['utils_2epy_0',['Utils.py',['../Utils_8py.html',1,'']]]
+  ['models_2epy_0',['Models.py',['../Models_8py.html',1,'']]],
+  ['multistats_2epy_1',['MultiStats.py',['../MultiStats_8py.html',1,'']]]
 ];

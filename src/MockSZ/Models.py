@@ -1,7 +1,8 @@
 """!
 @file
-File containing expressions for single pointing spectral distortions.
+Cluster models for making SZ maps.
 """
+
 from scipy.special import gamma
 import numpy as np
 
@@ -12,6 +13,13 @@ import MockSZ.Constants as ct
 import matplotlib.pyplot as pt
 
 class IsoBetaModel():
+    """!
+    Class representing an isothermal-beta model.
+    Should be instantiated and serves as an interface for MockSZ when simulating these types of clusters.
+
+    @ingroup clustermodels
+    """
+
     def __init__(self, Te, ne0, rc, beta, Da, v_pec=0):
         """!
         Constructor: initisalise isethermal-beta model.

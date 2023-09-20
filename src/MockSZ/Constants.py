@@ -1,6 +1,6 @@
 """!
 @file
-File containing physical constants.
+Often used physical constants.
 """
 
 h = 6.62607015e-34 # J Hz**-1

@@ -5,6 +5,7 @@
     <tab type="mainpage" visible="yes" title=""/>
     <!--<tab type="pages" visible="no" title="" intro=""/>-->
     <tab type="user" url="@ref background" visible="yes" title="Background"/>
+    <tab type="user" url="@ref mockszdocs" visible="yes" title="Documentation"/>
     <tab type="modules" visible="no" title="" intro=""/>
     <tab type="namespaces" visible="no" title="">
       <tab type="namespacelist" visible="no" title="" intro=""/>

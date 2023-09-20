@@ -1,7 +1,6 @@
 """!
 @file
-File containing methods for unit conversions.
-The methods in this file are part of the public interface.
+Methods for unit conversions.
 """
 
 import MockSZ.Constants as ct

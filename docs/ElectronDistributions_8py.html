@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.6"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>MockSZ User Manual: src/MockSZ/SinglePointing.py File Reference</title>
+<title>MockSZ User Manual: src/MockSZ/ElectronDistributions.py File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -77,7 +77,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('SinglePointing_8py.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('ElectronDistributions_8py.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -105,66 +105,42 @@ $(document).ready(function(){initNavTree('SinglePointing_8py.html',''); initResi
 <div class="header">
   <div class="summary">
 <a href="#func-members">Functions</a>  </div>
-  <div class="headertitle"><div class="title">SinglePointing.py File Reference</div></div>
+  <div class="headertitle"><div class="title">ElectronDistributions.py File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Expressions for single pointing spectral distortions.  
+<p>Distributions for electron populations.  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:gaac895b51ddd72bcfde650caa31de3d48"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__singlepointing.html#gaac895b51ddd72bcfde650caa31de3d48">MockSZ.SinglePointing.getSpecIntensityRM</a> (nu, Te, tau_e)</td></tr>
-<tr class="memdesc:gaac895b51ddd72bcfde650caa31de3d48"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate CMB distortion due to a thermal electron population along a single L.O.S.  <br /></td></tr>
-<tr class="separator:gaac895b51ddd72bcfde650caa31de3d48"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga25968b42f6b94969cb0b9bcb69e7bf5d"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__singlepointing.html#ga25968b42f6b94969cb0b9bcb69e7bf5d">MockSZ.SinglePointing.getSpecIntensityPL</a> (nu, alpha, tau_e)</td></tr>
-<tr class="memdesc:ga25968b42f6b94969cb0b9bcb69e7bf5d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate CMB distortion due to a powerlaw electron population along a single L.O.S.  <br /></td></tr>
-<tr class="separator:ga25968b42f6b94969cb0b9bcb69e7bf5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:affe0c4af6e31b3a50b88d1f93e7a3f31"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="SinglePointing_8py.html#affe0c4af6e31b3a50b88d1f93e7a3f31">MockSZ.SinglePointing.getSpecIntensity</a> (nu, param, tau_e, func, lims_s)</td></tr>
-<tr class="memdesc:affe0c4af6e31b3a50b88d1f93e7a3f31"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the specific intensity of the CMBR distortion along a single line of sight.  <br /></td></tr>
-<tr class="separator:affe0c4af6e31b3a50b88d1f93e7a3f31"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga226f8081fbbc1b872d807968f844112a"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__singlepointing.html#ga226f8081fbbc1b872d807968f844112a">MockSZ.SinglePointing.getSpecIntensityKSZ</a> (nu, beta_z, tau_e)</td></tr>
-<tr class="memdesc:ga226f8081fbbc1b872d807968f844112a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate CMB distortion due to peculiar cluster motion along a single L.O.S.  <br /></td></tr>
-<tr class="separator:ga226f8081fbbc1b872d807968f844112a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21dbd322d5d0fd27e5bcea4166cc3076"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ElectronDistributions_8py.html#a21dbd322d5d0fd27e5bcea4166cc3076">MockSZ.ElectronDistributions.relativisticMaxwellian</a> (beta, Te)</td></tr>
+<tr class="memdesc:a21dbd322d5d0fd27e5bcea4166cc3076"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate an electron population from a relativistic Maxwellian.  <br /></td></tr>
+<tr class="separator:a21dbd322d5d0fd27e5bcea4166cc3076"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad011a337b9aebb9e97d33b4d7b97186f"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ElectronDistributions_8py.html#ad011a337b9aebb9e97d33b4d7b97186f">MockSZ.ElectronDistributions.relativisticPowerlaw</a> (beta, beta1=0., beta2=0.99999999, alpha=None)</td></tr>
+<tr class="memdesc:ad011a337b9aebb9e97d33b4d7b97186f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate an electron population from a relativistic power law.  <br /></td></tr>
+<tr class="separator:ad011a337b9aebb9e97d33b4d7b97186f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Expressions for single pointing spectral distortions. </p>
+<div class="textblock"><p>Distributions for electron populations. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="affe0c4af6e31b3a50b88d1f93e7a3f31" name="affe0c4af6e31b3a50b88d1f93e7a3f31"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#affe0c4af6e31b3a50b88d1f93e7a3f31">&#9670;&#160;</a></span>getSpecIntensity()</h2>
+<a id="a21dbd322d5d0fd27e5bcea4166cc3076" name="a21dbd322d5d0fd27e5bcea4166cc3076"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a21dbd322d5d0fd27e5bcea4166cc3076">&#9670;&#160;</a></span>relativisticMaxwellian()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">def MockSZ.SinglePointing.getSpecIntensity </td>
+          <td class="memname">def MockSZ.ElectronDistributions.relativisticMaxwellian </td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>nu</em>, </td>
+          <td class="paramname"><em>beta</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>param</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>tau_e</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>func</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>lims_s</em>&#160;</td>
+          <td class="paramname"><em>Te</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -174,18 +150,65 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Calculate the specific intensity of the CMBR distortion along a single line of sight. </p>
-<p>Can choose between thermalised electrons (Maxwellian) or non-thermal population (power law).</p>
+<p>Generate an electron population from a relativistic Maxwellian. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">nu</td><td>Range of frequencies over which to evaluate the intensity in Hertz. </td></tr>
-    <tr><td class="paramname">param</td><td>Parameter for electron distribution. If relativistic Maxwellian, electron temperature of the cluster gas. If power law, spectral slope. </td></tr>
-    <tr><td class="paramname">tau_e</td><td>Optical depth of cluster gas along line of sight. Note that this method assumes optically thin gases, i.e. tau_e &lt;&lt; 1. </td></tr>
-    <tr><td class="paramname">func</td><td>Electron distribution to use. Can choose between relativistic Maxwellian or power law.</td></tr>
+    <tr><td class="paramname">beta</td><td>Range of beta factors over which to define the distribution. </td></tr>
+    <tr><td class="paramname">Te</td><td>Mean electron temperature in Kelvin.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Itot Comptonised CMBR specific intensity relative to CMBR. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>pe Electron probability distribution. </dd></dl>
+
+</div>
+</div>
+<a id="ad011a337b9aebb9e97d33b4d7b97186f" name="ad011a337b9aebb9e97d33b4d7b97186f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad011a337b9aebb9e97d33b4d7b97186f">&#9670;&#160;</a></span>relativisticPowerlaw()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def MockSZ.ElectronDistributions.relativisticPowerlaw </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>beta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>beta1</em> = <code>0.</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>beta2</em> = <code>0.99999999</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>alpha</em> = <code>None</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Generate an electron population from a relativistic power law. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">beta</td><td>Range of beta factors over which to define the distribution. </td></tr>
+    <tr><td class="paramname">alpha</td><td>Slope of power law.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>pe Electron probability distribution. </dd></dl>
 
 </div>
 </div>
@@ -194,7 +217,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_2be84bee23f9711c0e08ef451c33abb3.html">MockSZ</a></li><li class="navelem"><a class="el" href="SinglePointing_8py.html">SinglePointing.py</a></li>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_2be84bee23f9711c0e08ef451c33abb3.html">MockSZ</a></li><li class="navelem"><a class="el" href="ElectronDistributions_8py.html">ElectronDistributions.py</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6 </li>
   </ul>
 </div>

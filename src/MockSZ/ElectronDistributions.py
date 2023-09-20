@@ -1,3 +1,8 @@
+"""!
+@file
+Distributions for electron populations.
+"""
+
 import numpy as np
 import scipy.special as sp
 
@@ -5,7 +10,7 @@ import MockSZ.Utils as MUtils
 import MockSZ.Conversions as MConv
 
 def relativisticMaxwellian(beta, Te):
-    """
+    """!
     Generate an electron population from a relativistic Maxwellian.
 
     @param beta Range of beta factors over which to define the distribution.
@@ -23,7 +28,7 @@ def relativisticMaxwellian(beta, Te):
     return nomi / deno
 
 def relativisticPowerlaw(beta, beta1=0., beta2=0.99999999, alpha=None):
-    """
+    """!
     Generate an electron population from a relativistic power law.
 
     @param beta Range of beta factors over which to define the distribution.

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['opticaldepths_0',['opticalDepths',['../classMockSZ_1_1Models_1_1IsoBetaModel.html#aa7e7c6328b0768cb249b6f75c28ebc4e',1,'MockSZ::Models::IsoBetaModel']]]
+  ['models_2epy_0',['Models.py',['../Models_8py.html',1,'']]],
+  ['multistats_2epy_1',['MultiStats.py',['../MultiStats_8py.html',1,'']]]
 ];

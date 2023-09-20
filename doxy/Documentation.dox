@@ -1,0 +1,17 @@
+/** 
+\page mockszdocs Documentation
+This page contains the full software documentation for `MockSZ`. 
+
+\section apiref Public API Reference
+The public API reference contains all public methods of `MockSZ`.
+This list acts as a reference for general users and is structured in groups for a better overview.
+
+\subpage singlepointing
+
+\subpage clustermodels
+
+\section fulldocs Full Software Documentation
+This page contains the entire documented source code. 
+
+[Full software documentation](files.html)
+*/

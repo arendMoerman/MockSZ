@@ -6,9 +6,9 @@ from setuptools import setup
 setup(
     name='MockSZ',
     license="MIT",
-    version='0.0.2',
+    version='0.1.0',
     author="Arend Moerman",
-    install_requires = ["numpy", "matplotlib", "scipy"],
+    install_requires = ["numpy", "matplotlib", "scipy", "wheel"],
     package_dir = {'': 'src'},
     packages=['MockSZ'],
     classifiers=[
@@ -16,6 +16,6 @@ setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
-    python_requires='>=3.8',
+    python_requires='>=3.8'
 )
 

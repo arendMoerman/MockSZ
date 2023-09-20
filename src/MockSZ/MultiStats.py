@@ -1,3 +1,8 @@
+"""!
+@file
+Expressions for calculating multi-electron scattering statistics.
+"""
+
 import numpy as np
 import os
 
@@ -44,6 +49,21 @@ def getP1_RM(s, Te, num_beta=1000, num_mu=100):
     return res
 
 def _MJ_parallel(args, beta_lim, num_mu, s, dbeta, Te):
+    """!
+    Function to be called in multiprocessing.
+    Calculates chunks of the scattering, as function of s, over beta.
+    Uses the Maxwell-Juttner distribution for the electron population.
+
+    @param args Chunk of array to be calculated in parallel.
+    @param beta_lim Array with lower limits on beta, as function of s.
+    @param num_mu Number of scattering angles to consider in integration.
+    @param s Array with s values.
+    @param dbeta Steps between beta values.
+    @param Te electron temperature, in Kelvin.
+
+    @returns P1 Calculated contribution of beta chunk to scattering kernel.
+    """
+
     beta = args
 
     P1 = np.zeros(s.shape)
@@ -90,6 +110,21 @@ def getP1_PL(s, alpha, num_beta=1000, num_mu=100):
     return res
 
 def _PL_parallel(args, beta_lim, num_mu, s, dbeta, alpha):
+    """!
+    Function to be called in multiprocessing.
+    Calculates chunks of the scattering, as function of s, over beta.
+    Uses the powerlaw distribution for the electron population.
+
+    @param args Chunk of array to be calculated in parallel.
+    @param beta_lim Array with lower limits on beta, as function of s.
+    @param num_mu Number of scattering angles to consider in integration.
+    @param s Array with s values.
+    @param dbeta Steps between beta values.
+    @param alpha Powerlaw spectral index.
+
+    @returns P1 Calculated contribution of beta chunk to scattering kernel.
+    """
+
     beta = args
 
     P1 = np.zeros(s.shape)

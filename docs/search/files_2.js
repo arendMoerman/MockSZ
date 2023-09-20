@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['singlepointing_2epy_0',['SinglePointing.py',['../SinglePointing_8py.html',1,'']]]
+  ['electrondistributions_2epy_0',['ElectronDistributions.py',['../ElectronDistributions_8py.html',1,'']]]
 ];

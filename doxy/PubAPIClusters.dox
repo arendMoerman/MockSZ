@@ -1,0 +1,7 @@
+/**
+\defgroup clustermodels Cluster Models
+\brief This section contains the public API methods available for making a galaxy cluster SZ map.
+
+Currently, only spherically symmetric isothermal-\f$\beta\f$ models are supported.
+*/
+

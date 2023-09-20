@@ -1,6 +1,6 @@
 """!
 @file
-File containing expressions for single pointing spectral distortions.
+Expressions for single pointing spectral distortions.
 """
 
 import numpy as np
@@ -14,15 +14,38 @@ import MockSZ.Conversions as MConv
 import matplotlib.pyplot as pt
 
 def getSpecIntensityRM(nu, Te, tau_e):
-    lims_s = [-1.5, 2.5]
+    """!
+    Calculate CMB distortion due to a thermal electron population along a single L.O.S.
+    
+    @ingroup singlepointing
+
+    @param nu Range of frequencies over which to evaluate the intensity in Hertz.
+    @param Te Electron temperature of the cluster gas.
+    @param tau_e Optical depth of cluster gas along line of sight. Note that this method assumes optically thin gases, i.e. tau_e << 1.
+    
+    @returns Itot Comptonised CMBR specific intensity relative to CMBR.
+    """
+    
+    lims_s = [-1.5, 2.5] # Chosen to work well for Te < 45 KeV
     func = MStats.getP1_RM
     Inu = getSpecIntensity(nu, Te, tau_e, func, lims_s)
 
     return Inu
-    #return MIntegral.solveTripleIntegral(Te, nu, tau_e, dist="MJ")
 
 def getSpecIntensityPL(nu, alpha, tau_e):
-    lims_s = [-1.5, 10]
+    """!
+    Calculate CMB distortion due to a powerlaw electron population along a single L.O.S.
+
+    @ingroup singlepointing
+
+    @param nu Range of frequencies over which to evaluate the intensity in Hertz.
+    @param alpha Spectral powerlaw slope of the cluster gas.
+    @param tau_e Optical depth of cluster gas along line of sight. Note that this method assumes optically thin gases, i.e. tau_e << 1.
+    
+    @returns Itot Comptonised CMBR specific intensity relative to CMBR.
+    """
+    
+    lims_s = [-1.5, 10] # Chosen to work well for alpha > 2
     func = MStats.getP1_PL
     Inu = getSpecIntensity(nu, alpha, tau_e, func, lims_s)
 
@@ -32,7 +55,6 @@ def getSpecIntensity(nu, param, tau_e, func, lims_s):
     """!
     Calculate the specific intensity of the CMBR distortion along a single line of sight.
     Can choose between thermalised electrons (Maxwellian) or non-thermal population (power law).
-    Note that this only returns the thermal SZ effect: distortion due to random scattering.
 
     @param nu Range of frequencies over which to evaluate the intensity in Hertz.
     @param param Parameter for electron distribution. If relativistic Maxwellian, electron temperature of the cluster gas. If power law, spectral slope.
@@ -64,8 +86,9 @@ def getSpecIntensity(nu, param, tau_e, func, lims_s):
 
 def getSpecIntensityKSZ(nu, beta_z, tau_e):
     """!
-    Calculate the specific intensity of the CMBR distortion along a single line of sight.
-    Note that this only returns the kinematic SZ effect: distortion due to gas bulk motion.
+    Calculate CMB distortion due to peculiar cluster motion along a single L.O.S.
+
+    @ingroup singlepointing
 
     @param nu Range of frequencies over which to evaluate the intensity in Hertz.
     @param beta_z Beta parameter of cluster receding velocity.

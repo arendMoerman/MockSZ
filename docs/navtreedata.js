@@ -26,7 +26,8 @@ var NAVTREE =
 [
   [ "MockSZ User Manual", "index.html", [
     [ "Home", "index.html", "index" ],
-    [ "Background", "background.html", null ]
+    [ "Background", "background.html", null ],
+    [ "Documentation", "mockszdocs.html", null ]
   ] ]
 ];
 
