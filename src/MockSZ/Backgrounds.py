@@ -1,5 +1,5 @@
 import numpy as np
-from MockSZ.Constants import Constants as ct
+import MockSZ.Constants as ct
 
 def getSpecificIntensityCMB(freqs):
     prefac = 2 * ct.h * freqs**3 / ct.c**2

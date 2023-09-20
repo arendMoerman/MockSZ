@@ -1,7 +1,6 @@
 import numpy as np
 import scipy.special as sp
 
-from MockSZ.Constants import Constants as ct
 import MockSZ.Utils as MUtils
 import MockSZ.Conversions as MConv
 
@@ -37,8 +36,6 @@ def relativisticPowerlaw(beta, beta1=0., beta2=0.99999999, alpha=None):
 
     gamma1 = MConv.beta_gamma(beta1)
     gamma2 = MConv.beta_gamma(beta2)
-    #print(gamma1)
-    #print(gamma2)
     if alpha is None:
         alpha = 1.
         A = np.log10(gamma2) - np.log10(gamma1)

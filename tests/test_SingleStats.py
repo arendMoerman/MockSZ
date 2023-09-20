@@ -9,7 +9,7 @@ import MockSZ.SingleStats as MSingle
 
 class TestSingleStats(unittest.TestCase):
     def test_getPsbThomson(self):
-        num_arr = 100
+        num_arr = 10
         s = np.linspace(-1, 1, num=num_arr)
         beta = 0.5
         
@@ -26,7 +26,7 @@ class TestSingleStats(unittest.TestCase):
         s = 0.
         
         test_out = MSingle.getPsbThomson(s, beta, num_arr)
-        self.assertEqual(test_out.shape, (1, 100))
+        self.assertEqual(test_out.shape, (1, num_arr))
         
         beta = 0.5 
         s = 0.

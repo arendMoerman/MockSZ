@@ -7,7 +7,7 @@ import numpy as np
 
 import MockSZ.Utils as MUtils
 import MockSZ.SinglePointing as MSingle
-from MockSZ.Constants import Constants as ct
+import MockSZ.Constants as ct
 
 import matplotlib.pyplot as pt
 

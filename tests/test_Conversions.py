@@ -6,7 +6,8 @@ Test constants in MockSZ.
 import numpy as np
 import unittest
 import MockSZ.Conversions as MConv
-from MockSZ.Backgrounds import CMB
+import MockSZ.Backgrounds as MBack
+import MockSZ.Constants as ct
 
 class TestConversions(unittest.TestCase):
     def test_eV_Temp(self):
@@ -17,12 +18,40 @@ class TestConversions(unittest.TestCase):
 
     def test_SI_Temp(self):
         nu = np.linspace(1, 100)
-        cmb = CMB()
-        I0 = cmb.getSpecificIntensity(nu)
-        self.assertAlmostEqual(np.mean(MConv.SI_Temp(I0, nu)), cmb.T ,delta=1e-3)
+        I0 = MBack.getSpecificIntensityCMB(nu)
+        self.assertAlmostEqual(np.mean(MConv.SI_Temp(I0, nu)), ct.Tcmb ,delta=1e-3)
 
     def test_pc_m(self):
         self.assertAlmostEqual(MConv.pc_m(1)*1e-16, 3.0857, delta=1e-3)
+    
+    def test_v_beta(self):
+        test_vel = 100 # m / s
+        test_out = MConv.v_beta(test_vel)
+
+        self.assertTrue(isinstance(test_out, float))
+    
+    def test_v_gamma(self):
+        test_vel = 100 # m / s
+        test_out = MConv.v_gamma(test_vel)
+
+        self.assertTrue(isinstance(test_out, float))
+
+    def test_beta_gamma(self):
+        test_beta = 0.5 # m / s
+        test_out = MConv.beta_gamma(test_beta)
+
+        self.assertTrue(isinstance(test_out, float))
+
+    def test_freq_x(self):
+        freq = 100
+        test_out = MConv.freq_x(freq)
+        self.assertTrue(isinstance(test_out, float))
+    
+    def test_Te_theta(self):
+        Te = 100
+        test_out = MConv.Te_theta(Te)
+        self.assertTrue(isinstance(test_out, float))
+
 
 if __name__ == "__main__":
     import nose2

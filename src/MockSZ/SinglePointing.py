@@ -7,7 +7,7 @@ import numpy as np
 
 import MockSZ.MultiStats as MStats
 import MockSZ.Utils as MUtils
-from MockSZ.Constants import Constants as ct
+import MockSZ.Constants as ct
 import MockSZ.Backgrounds as MBack
 import MockSZ.Conversions as MConv
 

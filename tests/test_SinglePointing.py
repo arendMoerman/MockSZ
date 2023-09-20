@@ -12,7 +12,7 @@ class TestSinglePointing(unittest.TestCase):
     def test_getSpecIntensityRM(self):
         Te = 59e6
         tau_e = 1
-        num_arr = 1000
+        num_arr = 10
 
         mu = np.linspace(1, 1000, num=num_arr) * 1e9
         
@@ -22,7 +22,7 @@ class TestSinglePointing(unittest.TestCase):
     def test_getSpecIntensityPL(self):
         alpha = 2.5
         tau_e = 1
-        num_arr = 1000
+        num_arr = 10
 
         mu = np.linspace(1, 1000, num=num_arr) * 1e9
         
@@ -36,7 +36,7 @@ class TestSinglePointing(unittest.TestCase):
     def test_getSpecIntensityKSZ(self):
         beta_z = 0.1
         tau_e = 1
-        num_arr = 1000
+        num_arr = 10
 
         nu = np.linspace(1, 1000, num=num_arr) * 1e9
         

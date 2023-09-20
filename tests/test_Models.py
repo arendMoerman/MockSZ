@@ -22,19 +22,24 @@ class TestModels(unittest.TestCase):
 
         isob = IsoBetaModel(Te, ne0, rc, beta, Da)
 
-        Az, El = np.mgrid[-1:1:100*1j, -1:1:100*1j]
+        nAz = 10
+        nEl = 10
+
+        nfreq = 10
+
+        Az, El = np.mgrid[-1:1:nAz*1j, -1:1:nEl*1j]
 
         theta = np.sqrt(Az**2 + El**2)
 
         tau = isob.opticalDepths(theta)
-        self.assertEqual(tau.shape, (100, 100))
+        self.assertEqual(tau.shape, (nAz, nEl))
         
-        nu = np.linspace(1, 1000, num=1000)
+        nu = np.linspace(1, 1000, num=nfreq)
         tSZ = isob.tSZMap(theta, nu)
-        self.assertEqual(tSZ.shape, (100, 100, 1000))
+        self.assertEqual(tSZ.shape, (nAz, nEl, nfreq))
         
         kSZ = isob.kSZMap(theta, nu)
-        self.assertEqual(kSZ.shape, (100, 100, 1000))
+        self.assertEqual(kSZ.shape, (nAz, nEl, nfreq))
 
 if __name__ == "__main__":
     import nose2

@@ -4,7 +4,7 @@ File containing methods for unit conversions.
 The methods in this file are part of the public interface.
 """
 
-from MockSZ.Constants import Constants
+import MockSZ.Constants as ct
 import numpy as np
 
 def eV_Temp(energy_eV):
@@ -16,7 +16,6 @@ def eV_Temp(energy_eV):
     @returns T temperature in Kelvin.
     """
 
-    ct = Constants()
     T = energy_eV / ct.k * ct.eV
 
     return T
@@ -44,8 +43,6 @@ def SI_Temp(I_freq, freqHz):
 
     @returns Tb Brightness temperature.
     """
-    
-    ct = Constants()
 
     Tb = I_freq * ct.c**2 / (2 * ct.k * freqHz**2)
     return Tb
@@ -73,7 +70,6 @@ def freq_x(freqHz):
     @returns x The dimensionless frequency.
     """
 
-    ct = Constants()
     x = ct.h * freqHz / (ct.k * ct.Tcmb)
 
     return x
@@ -87,7 +83,6 @@ def Te_theta(Te):
     @returns theta Dimensionless electron temperature.
     """
 
-    ct = Constants()
     theta = ct.k * Te / (ct.me * ct.c**2)
     return theta
 
@@ -100,7 +95,6 @@ def v_beta(velocity):
     @returns beta The beta factor. Float or numpy array.
     """
     
-    ct = Constants()
     beta = velocity / ct.c
 
     return beta
