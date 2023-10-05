@@ -86,5 +86,5 @@ class IsoBetaModel():
         """
         theta = np.radians(theta)
 
-        tau_e = self.tau0 * (1 + theta**2/self.thetac)**(0.5 - 1.5 * self.beta)
+        tau_e = self.tau0 * (1 + (theta/self.thetac)**2)**(0.5 - 1.5 * self.beta)
         return tau_e
