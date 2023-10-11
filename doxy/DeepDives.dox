@@ -6,7 +6,7 @@ They are arranged in a bottom-up fashion, starting from the single electron-phot
 Most of the information in these sections is taken from \cite Birkinshaw1999. 
 However, we include the scripts necessary for generating the figures in the notebooks so that users can experiment as well.
 
-[Scattering of photons from electrons](demos/Scattering.html)
+[Scattering of photons from electrons](demos/Scatterings.html)
 
 [The SZ effect along a single line-of-sight](demos/SinglePointing.html)
 
