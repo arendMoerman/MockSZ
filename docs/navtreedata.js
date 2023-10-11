@@ -26,14 +26,14 @@ var NAVTREE =
 [
   [ "MockSZ User Manual", "index.html", [
     [ "Home", "index.html", "index" ],
-    [ "Background", "background.html", null ],
+    [ "Deep Dive", "deepdive.html", null ],
     [ "Documentation", "mockszdocs.html", null ]
   ] ]
 ];
 
 var NAVTREEINDEX =
 [
-"background.html"
+"deepdive.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
