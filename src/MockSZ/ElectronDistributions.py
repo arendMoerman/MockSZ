@@ -5,7 +5,7 @@ Distributions for electron populations.
 
 import numpy as np
 import scipy.special as sp
-
+np.seterr(divide='ignore', invalid='ignore')
 import MockSZ.Utils as MUtils
 import MockSZ.Conversions as MConv
 

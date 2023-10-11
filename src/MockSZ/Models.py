@@ -22,7 +22,7 @@ class IsoBetaModel():
 
     def __init__(self, Te, ne0, rc, beta, Da, v_pec=0):
         """!
-        Constructor: initisalise isethermal-beta model.
+        Constructor: initisalise isothermal-beta model.
 
         @param Te Electron temperature in Kelvin.
         @param ne0 Central electron number density per cubic meter.

@@ -47,6 +47,11 @@ class TestConversions(unittest.TestCase):
         test_out = MConv.freq_x(freq)
         self.assertTrue(isinstance(test_out, float))
     
+    def test_x_freq(self):
+        x = 1
+        test_out = MConv.x_freq(x)
+        self.assertTrue(isinstance(test_out, float))
+    
     def test_Te_theta(self):
         Te = 100
         test_out = MConv.Te_theta(Te)

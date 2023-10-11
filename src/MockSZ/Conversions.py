@@ -73,6 +73,19 @@ def freq_x(freqHz):
 
     return x
 
+def x_freq(x):
+    """!
+    Convert dimensionless frequency to frequency in Hertz using CMB temperature.
+
+    @param x Dimensionless frequency.
+    
+    @returns freqHz The frequency in Hertz.
+    """
+
+    freqHz = x / ct.h * ct.k * ct.Tcmb
+
+    return freqHz
+
 def Te_theta(Te):
     """!
     Get dimensionless electron temperature.
