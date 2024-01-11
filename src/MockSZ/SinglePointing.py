@@ -23,7 +23,6 @@ def getSpecIntensityRM(nu, Te, tau_e, log_nu=False):
     @param Te Electron temperature of the cluster gas.
     @param tau_e Optical depth of cluster gas along line of sight. Note that this method assumes optically thin gases, i.e. tau_e << 1.
     @param log_nu Whether to evaluate frequencies in linear or log10 space.
-    
     @returns Itot Comptonised CMBR specific intensity relative to CMBR.
     """
     
@@ -69,7 +68,7 @@ def getSpecIntensity(nu, param, tau_e, func, lims_s, log_nu=False):
     """
 
     s_range = np.linspace(lims_s[0], lims_s[1], num=1000)
-    ds = s_range[1] - s_range[1]
+    ds = s_range[1] - s_range[0]
 
     I0 = MBack.getSpecificIntensityCMB(nu)
 

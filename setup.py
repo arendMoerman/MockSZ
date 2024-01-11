@@ -6,7 +6,7 @@ from setuptools import setup
 setup(
     name='MockSZ',
     license="MIT",
-    version='0.1.0',
+    version='0.1.1',
     author="Arend Moerman",
     install_requires = ["numpy", "matplotlib", "scipy", "wheel"],
     package_dir = {'': 'src'},
