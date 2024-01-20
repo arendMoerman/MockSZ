@@ -6,7 +6,7 @@ Methods for unit conversions.
 import MockSZ.Constants as ct
 import numpy as np
 
-def eV_Temp(energy_eV):
+def KeV_Temp(energy_KeV):
     """!
     Convert an energy in electronvolt to temperature in Kelvin
     
@@ -15,7 +15,7 @@ def eV_Temp(energy_eV):
     @returns T temperature in Kelvin.
     """
 
-    T = energy_eV / ct.k * ct.eV
+    T = energy_KeV / ct.k * ct.eV * 1e3
 
     return T
 
@@ -96,6 +96,18 @@ def Te_theta(Te):
     """
 
     theta = ct.k * Te / (ct.me * ct.c**2)
+    return theta
+
+def KeV_theta(energy_KeV):
+    """!
+    Get dimensionless electron temperature.
+
+    @param Te Electron temperature in KeV.
+    
+    @returns theta Dimensionless electron temperature.
+    """
+
+    theta = ct.k * KeV_Temp(energy_KeV) / (ct.me * ct.c**2)
     return theta
 
 def v_beta(velocity):
