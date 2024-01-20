@@ -10,6 +10,8 @@ import MockSZ.Utils as MUtils
 import MockSZ.SinglePointing as MSingle
 import MockSZ.Constants as ct
 
+import MockSZ.Bindings as MBind
+
 import matplotlib.pyplot as pt
 
 class IsoBetaModel():
@@ -88,3 +90,71 @@ class IsoBetaModel():
 
         tau_e = self.tau0 * (1 + (theta/self.thetac)**2)**(0.5 - 1.5 * self.beta)
         return tau_e
+
+class SinglePointing(object):
+    """! 
+    Class for generating a single pointing SZ signal.
+
+    """
+
+    def getSingleSignal_tSZ(self, nu_arr, Te, n_s=500, n_beta=500, no_CMB=False):
+        res = MBind.getSinglePointing_tSZ(nu_arr, Te, n_s, n_beta, no_CMB)
+
+        return res
+    
+    def getSingleSignal_kSZ(self, nu_arr, v_pec, n_mu=500):
+        res = MBind.getSinglePointing_kSZ(nu_arr, v_pec, n_mu)
+
+        return res
+
+class ScatteringKernels(object):
+    """!
+    Class for investigating the scattering kernels.
+    It is not to be used per se for simulations, but it provides a nice overview of available distributions.
+    So, it is mostly informative.
+    """
+
+    def getSingleScattering(self, s_arr, beta, num_mu=1000):
+        """!
+        Obtain single-electron scattering kernel, for a range of s and a single beta.
+        """
+        
+        res = MBind.getThomsonScatter(s_arr, beta, num_mu)
+
+        return res
+    
+    def getMaxwellJuttner(self, beta_arr, Te):
+        """!
+        Obtain single-electron scattering kernel, for a range of s and a single beta.
+        """
+        
+        res = MBind.getMaxwellJuttner(beta_arr, Te)
+
+        return res
+    
+    def getRelatPowerlaw(self, beta_arr, alpha):
+        """!
+        Obtain single-electron scattering kernel, for a range of s and a single beta.
+        """
+        
+        res = MBind.getRelatPowerlaw(beta_arr, alpha)
+
+        return res
+    
+    def getMultiScatteringMJ(self, s_arr, Te, n_beta=100):
+        """!
+        Obtain single-electron scattering kernel, for a range of s and a single beta.
+        """
+        
+        res = MBind.getMultiScatteringMJ(s_arr, Te, n_beta)
+
+        return res
+    
+    def getMultiScatteringRP(self, s_arr, alpha, n_beta=100):
+        """!
+        Obtain single-electron scattering kernel, for a range of s and a single beta.
+        """
+        
+        res = MBind.getMultiScatteringRP(s_arr, alpha, n_beta)
+
+        return res
