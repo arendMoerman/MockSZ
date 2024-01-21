@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['kszmap_0',['kSZMap',['../classMockSZ_1_1Models_1_1IsoBetaModel.html#afe8ce2096957d110b6d9ccbec5b52163',1,'MockSZ::Models::IsoBetaModel']]]
+  ['pc_5fm_0',['pc_m',['../Conversions_8py.html#a8ab6973edeb085a0f4fad64713882aa5',1,'MockSZ::Conversions']]]
 ];

@@ -19,3 +19,7 @@ MOCKSZ_DLL void MockSZ_getSignal_tSZ(double *nu, int n_nu, double Te, double *ou
 MOCKSZ_DLL void MockSZ_getSignal_kSZ(double *nu, int n_nu, double v_pec, double *output, int n_mu) {
     calcSignal_kSZ(nu, n_nu, v_pec, output, n_mu);
 }
+
+MOCKSZ_DLL void MockSZ_getIsoBeta(double *Az, double *El, int n_Az, int n_El, double ibeta, double ne0, double thetac, double Da, double *output, bool grid) {
+    getIsoBeta(Az, El, n_Az, n_El, ibeta, ne0, thetac, Da, output, grid);
+}

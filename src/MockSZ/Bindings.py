@@ -40,11 +40,18 @@ def loadMockSZlib():
     
     lib.MockSZ_getSignal_kSZ.argtypes = [ctypes.POINTER(ctypes.c_double), ctypes.c_int, ctypes.c_double, ctypes.POINTER(ctypes.c_double), ctypes.c_int] 
     
+    lib.MockSZ_getIsoBeta.argtypes = [ctypes.POINTER(ctypes.c_double), ctypes.POINTER(ctypes.c_double), 
+                                         ctypes.c_int, ctypes.c_int,
+                                         ctypes.c_double, ctypes.c_double,
+                                         ctypes.c_double, ctypes.c_double,
+                                         ctypes.POINTER(ctypes.c_double), ctypes.c_bool] 
+    
     lib.MockSZ_getThomsonScatter.restype = None
     lib.MockSZ_getMaxwellJuttner.restype = None
     lib.MockSZ_getMultiScatteringMJ.restype = None
     lib.MockSZ_getSignal_tSZ.restype = None
     lib.MockSZ_getSignal_kSZ.restype = None
+    lib.MockSZ_getIsoBeta.restype = None
 
 
     return lib
@@ -192,5 +199,47 @@ def getSinglePointing_kSZ(nu_arr, v_pec, n_mu=500):
     mgr.new_thread(target=lib.MockSZ_getSignal_kSZ, args=args)
 
     output = np.ctypeslib.as_array(coutput, shape=nu_arr.shape).astype(np.float64)
+
+    return output
+
+def getIsoBeta(Az, El, ibeta, ne0, thetac, Da, grid):
+    """!
+    Binding for calculating relativistic powerlaw distribution over range of beta, given Te.
+
+    @param s_arr Array containing logarithmic frequency shifts over which to calculate scattering probability.
+    @param v_pec Cluster peculiar velocity, in km/s.
+    @param num_mu Number of direction cosines over which to calculate scattering probability.
+
+    @returns output Array containing scattering probabilities, for each s in s_arr, given beta.
+    """
+
+    lib = loadMockSZlib()
+    mgr = TManager.Manager()
+    
+    cAz = (ctypes.c_double * Az.size)(*(Az.ravel().tolist()))
+    cEl = (ctypes.c_double * El.size)(*(El.ravel().tolist()))
+    cnum_Az = ctypes.c_int(Az.size)
+    cnum_El = ctypes.c_int(El.size)
+    cibeta = ctypes.c_double(ibeta)
+    cne0 = ctypes.c_double(ne0)
+    cthetac = ctypes.c_double(thetac)
+    cDa = ctypes.c_double(Da)
+    cgrid = ctypes.c_bool(grid)
+
+    if grid:
+        n_out = Az.size * El.size
+        out_shape = (Az.size, El.size)
+    else:
+        n_out = Az.size 
+        out_shape = (Az.size,)
+
+    coutput = (ctypes.c_double * n_out)(*(np.zeros(n_out).tolist()))
+    
+    args = [cAz, cEl, cnum_Az, cnum_El, cibeta, cne0, cthetac, cDa, coutput, cgrid]
+
+    mgr.new_thread(target=lib.MockSZ_getIsoBeta, args=args)
+    print(out_shape)
+    output = np.ctypeslib.as_array(coutput, shape=n_out).astype(np.float64)
+    output = output.reshape(out_shape)
 
     return output

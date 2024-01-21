@@ -94,3 +94,28 @@ void getMultiScatteringMJ(double *s_arr, int n_s, int n_beta, double Te, double 
     }
 }
 
+void getIsoBeta(double *Az, double *El, int n_Az, int n_El, double ibeta, double ne0, double thetac, double Da, double *output, bool grid) {
+    double Da_si = pc_m(Da * 1e6); 
+    double theta_c_si = thetac / 3600 / 180 * PI;
+    double rc = theta_c_si * Da_si;
+
+    double te0 = ne0*1e6 * ST * rc * sqrt(PI) * gsl_sf_gamma(3/2*ibeta - 0.5) / gsl_sf_gamma(3/2*ibeta);
+    
+    double theta2;
+
+    if(grid) {
+        for(int i=0; i<n_Az; i++) {
+            for(int j=0; j<n_El; j++) {
+                theta2 = Az[i]*Az[i] + El[j]*El[j];
+                output[i*n_El + j] = te0*pow(1 + theta2/(thetac*thetac), 0.5-1.5*ibeta);
+            }
+        }
+    }
+
+    else {
+        for(int i=0; i<n_Az; i++) {
+            theta2 = Az[i]*Az[i] + El[i]*El[i];
+            output[i] = te0*pow(1 + theta2/(thetac*thetac), 0.5-1.5*ibeta);
+        }
+    }
+}
