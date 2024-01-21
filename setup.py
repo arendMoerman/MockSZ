@@ -49,7 +49,7 @@ setup(
     license="MIT",
     version='0.1.1',
     author="Arend Moerman",
-    install_requires = ["numpy", "matplotlib", "scipy", "wheel"],
+    install_requires = ["numpy", "matplotlib", "scipy", "wheel", "cmake"],
     package_dir = {'': 'src'},
     packages=['MockSZ'],
     ext_modules=[CMakeExtension(os.path.join("MockSZ", "libs"))],
