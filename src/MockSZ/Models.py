@@ -3,16 +3,9 @@
 Cluster models for making SZ maps.
 """
 
-from scipy.special import gamma
 import numpy as np
 
-import MockSZ.Utils as MUtils
-import MockSZ.SinglePointing as MSingle
-import MockSZ.Constants as ct
-
 import MockSZ.Bindings as MBind
-
-import matplotlib.pyplot as pt
 
 class IsoBetaModel():
     """!
@@ -21,82 +14,36 @@ class IsoBetaModel():
 
     @ingroup clustermodels
     """
-
-    def __init__(self, Te, ne0, rc, beta, Da, v_pec=0):
-        """!
-        Constructor: initisalise isothermal-beta model.
-
-        @param Te Electron temperature in Kelvin.
-        @param ne0 Central electron number density per cubic meter.
-        @param rc Cluster core radius in meters.
-        @param beta Structural parameter for model.
-        @param Da Angular diameter distance to cluster in meters.
-        @param v_pec Peculiar velocity of cluster, in m/s.
-        """
-
-        self.Te = Te
-        self.ne0 = ne0
-        self.beta = beta
-        self.rc = rc
-        self.Da = Da
-        self.v_pec = v_pec / ct.c
-
-        self.thetac = rc / Da
-
-        self.tau0 = ne0 * ct.st * rc * np.sqrt(np.pi) * gamma(3/2*beta - 0.5) / gamma(3/2 * beta)
-
-    def tSZMap(self, theta, freqHz):
-        """!
-        Generate a thermal SZ map over a 3D grid.
-        The first two axes represent azimuth and elevation.
-        The third axis is the frequency axis.
-
-        @param theta Angular 2D grid on which to project cluster, in degrees.
-        @param freqHz Frequency on which to evaluate SZ effect in Hertz.
-        
-        @returns tSZ A 3D numpy.ndarray of size (theta.shape[0], theta.shape[1], freqHz.size), containing the tSZ effect over the cluster, as function of frequency.
-        """
-
-        temp_tSZ = MSingle.getSpecIntensityRM(freqHz, self.Te, tau_e=1)
-        tau = self.opticalDepths(theta)
-        
-        tSZ = tau[..., None] * temp_tSZ
-        return tSZ
+    def getIsoBeta(self, Az, El, ibeta, ne0, thetac, Da, grid=False):
+        res = MBind.getIsoBeta(Az, El, ibeta, ne0, thetac, Da, grid)
+        return res
     
-    def kSZMap(self, theta, freqHz):
-        """!
-        Generate a kinematic SZ map over a 3D grid.
-        The first two axes represent azimuth and elevation.
-        The third axis is the frequency axis.
-
-        @param theta Angular 2D grid on which to project cluster, in degrees.
-        @param freqHz Frequency on which to evaluate SZ effect in Hertz.
+    def getIsoBetaCube(self, isobeta, nu_arr, Te, v_pec, n_s=500, n_beta=500, n_mu=500, no_CMB=False):
+        res_tSZ = MBind.getSinglePointing_tSZ(nu_arr, Te, n_s, n_beta, no_CMB)
+        res_kSZ = MBind.getSinglePointing_kSZ(nu_arr, v_pec, n_mu)
         
-        @returns kSZ A 3D numpy.ndarray of size (theta.shape[0], theta.shape[1], freqHz.size), containing the kSZ effect over the cluster, as function of frequency.
-        """
+        res_SZ = res_tSZ + res_kSZ
 
-        temp_kSZ = MSingle.getSpecIntensityKSZ(freqHz, self.v_pec, tau_e=1)
-        kSZ = self.opticalDepths(theta)[..., None] * temp_kSZ
+        if len(isobeta.shape) == 1:
+            shape = (isobeta.size, nu_arr.size)
+            res = np.ones(shape)
+            for i in range(nu_arr.size):
+                res[:,i] = isobeta
+        else:
+            shape = (isobeta.shape[0], isobeta.shape[1], nu_arr.size)
+            res = np.ones(shape)
+            for i in range(nu_arr.size):
+                res[:,:,i] = isobeta
 
-        return kSZ
-
-    def opticalDepths(self, theta):
-        """!
-        Calculate optical depth along sightline in cluster.
-
-        @param theta On-sky angle, with respect to cluster center in degrees.
-        """
-        theta = np.radians(theta)
-
-        tau_e = self.tau0 * (1 + (theta/self.thetac)**2)**(0.5 - 1.5 * self.beta)
-        return tau_e
+        res *= res_SZ
+        
+        return res
 
 class SinglePointing(object):
     """! 
     Class for generating a single pointing SZ signal.
 
     """
-
     def getSingleSignal_tSZ(self, nu_arr, Te, n_s=500, n_beta=500, no_CMB=False):
         res = MBind.getSinglePointing_tSZ(nu_arr, Te, n_s, n_beta, no_CMB)
 
@@ -111,7 +58,8 @@ class ScatteringKernels(object):
     """!
     Class for investigating the scattering kernels.
     It is not to be used per se for simulations, but it provides a nice overview of available distributions.
-    So, it is mostly informative.
+    In addition, it is helpful for troubleshooting and debugging to have access to the scattering kernels directly.
+    So, it is mostly informative, and not meant to be used during actual simulations.
     """
 
     def getSingleScattering(self, s_arr, beta, num_mu=1000):
@@ -141,7 +89,7 @@ class ScatteringKernels(object):
 
         return res
     
-    def getMultiScatteringMJ(self, s_arr, Te, n_beta=100):
+    def getMultiScatteringMJ(self, s_arr, Te, n_beta=500):
         """!
         Obtain single-electron scattering kernel, for a range of s and a single beta.
         """
@@ -150,7 +98,7 @@ class ScatteringKernels(object):
 
         return res
     
-    def getMultiScatteringRP(self, s_arr, alpha, n_beta=100):
+    def getMultiScatteringRP(self, s_arr, alpha, n_beta=500):
         """!
         Obtain single-electron scattering kernel, for a range of s and a single beta.
         """

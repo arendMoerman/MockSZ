@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['isobetamodel_0',['IsoBetaModel',['../classMockSZ_1_1Models_1_1IsoBetaModel.html',1,'MockSZ::Models']]]
+  ['loadmockszlib_0',['loadMockSZlib',['../Bindings_8py.html#af88c66a4754d6c422e724d91b4ab7ddb',1,'MockSZ::Bindings']]]
 ];

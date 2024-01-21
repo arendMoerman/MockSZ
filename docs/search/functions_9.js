@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['si_5fjysr_0',['SI_JySr',['../Conversions_8py.html#a9b45b2ab1bbb472a0928226b263cd78c',1,'MockSZ::Conversions']]],
-  ['si_5ftemp_1',['SI_Temp',['../Conversions_8py.html#ab43e6419b07e9d72d4b0ffdeaffd01f1',1,'MockSZ::Conversions']]]
+  ['x_5ffreq_0',['x_freq',['../Conversions_8py.html#a680ef0a72a99a7265b1a92ea5beeafd8',1,'MockSZ::Conversions']]]
 ];

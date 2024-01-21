@@ -3,6 +3,7 @@
 #include "Utils.h"
 
 #include <gsl/gsl_sf_bessel.h>
+#include <gsl/gsl_sf_gamma.h>
 
 #ifndef __Stats_h
 #define __Stats_h
@@ -60,7 +61,29 @@ void getMaxwellJuttner(double beta, double Te, double &output);
  * @param n_beta Number of beta points to integrate over.
  * @param output Array for storing output values.
  */
-// NOTE: Maybe make this one parallel? Parallelize over s_arr!
 void getMultiScatteringMJ(double *s_arr, int n_s, int n_beta, double Te, double *output);
+
+/**
+ * Generate an isothermal-beta model, from an azimuth and elevation arrays.
+ *
+ * Returns an array of shape azimuth * elevation, containing the optical depth for each pointing.
+ *
+ * @param Az Array containing azimuth points in arcsec.
+ * @param El Array containing elevation points in arcsec.
+ * @param n_Az Number of azimuth points.
+ * @param n_El Number of elevation points.
+ * @param ibeta Beta parameter of isothermal model.
+ * @param ne0 Central electron number density, in electrons / cm**3.
+ * @param thetac Core radius of cluster in arcsec.
+ * @param Da Angular diameter distance in Megaparsec.
+ * @param output Array for storing outputs.
+ * @param grid Whether or not to evaluate on Az-El grid, or along Az-El trace.
+ *      Note: if grid=false, n_Az must equal n_El, and output must equal either one.
+ *      If grid=true, n_Az does not need to equal n_El, output should have size n_Az*n_El.
+ */
+void getIsoBeta(double *Az, double *El, int n_Az, int n_El, double ibeta, double ne0, double thetac, double Da, double *output, bool grid);
+
+
+
 
 #endif

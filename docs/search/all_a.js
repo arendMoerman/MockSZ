@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['kszmap_0',['kSZMap',['../classMockSZ_1_1Models_1_1IsoBetaModel.html#afe8ce2096957d110b6d9ccbec5b52163',1,'MockSZ::Models::IsoBetaModel']]]
+  ['manager_0',['Manager',['../classMockSZ_1_1Threadmgr_1_1Manager.html',1,'MockSZ::Threadmgr']]],
+  ['models_2epy_1',['Models.py',['../Models_8py.html',1,'']]],
+  ['threadmgr_2',['Threadmgr',['../namespaceMockSZ_1_1Threadmgr.html',1,'MockSZ']]]
 ];

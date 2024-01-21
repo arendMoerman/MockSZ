@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.6"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>MockSZ User Manual: src/MockSZ/SingleStats.py File Reference</title>
+<title>MockSZ User Manual: MockSZ.Threadmgr Namespace Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -77,7 +77,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('SingleStats_8py.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('namespaceMockSZ_1_1Threadmgr.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -104,81 +104,28 @@ $(document).ready(function(){initNavTree('SingleStats_8py.html',''); initResizab
 
 <div class="header">
   <div class="summary">
-<a href="#func-members">Functions</a>  </div>
-  <div class="headertitle"><div class="title">SingleStats.py File Reference</div></div>
+<a href="#nested-classes">Classes</a>  </div>
+  <div class="headertitle"><div class="title">MockSZ.Threadmgr Namespace Reference</div></div>
 </div><!--header-->
 <div class="contents">
-
-<p>Single electron scattering statistics.  
-<a href="#details">More...</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:af00b96f9526b7ae00035771d44052d21"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="SingleStats_8py.html#af00b96f9526b7ae00035771d44052d21">MockSZ.SingleStats.getPsbThomson</a> (s, beta, num_mu=1000, grid=True)</td></tr>
-<tr class="memdesc:af00b96f9526b7ae00035771d44052d21"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the probability of a logarithmic frequency shift s, given a beta factor of an electron.  <br /></td></tr>
-<tr class="separator:af00b96f9526b7ae00035771d44052d21"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMockSZ_1_1Threadmgr_1_1Manager.html">Manager</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">This class generates a threadmanager object.  <a href="classMockSZ_1_1Threadmgr_1_1Manager.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Single electron scattering statistics. </p>
-</div><h2 class="groupheader">Function Documentation</h2>
-<a id="af00b96f9526b7ae00035771d44052d21" name="af00b96f9526b7ae00035771d44052d21"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af00b96f9526b7ae00035771d44052d21">&#9670;&#160;</a></span>getPsbThomson()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">def MockSZ.SingleStats.getPsbThomson </td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>s</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>beta</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>num_mu</em> = <code>1000</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>grid</em> = <code>True</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Get the probability of a logarithmic frequency shift s, given a beta factor of an electron. </p>
-<p>Note that this probability is calculated assuming Thomson scattering.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">s</td><td>Logarithmic frequency shift. Float or numpy array. </td></tr>
-    <tr><td class="paramname">beta</td><td>Beta factor of electron. Float or array. </td></tr>
-    <tr><td class="paramname">num_mu</td><td>Number of points in mu to integrate over. </td></tr>
-    <tr><td class="paramname">grid</td><td>Whether to evaluate on an S-BETA grid or Hadamard product. If False, length of s needs to be the same as beta. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-</div><!-- contents -->
+<div class="textblock"><pre class="fragment">@file 
+File containing the threadmanager class for TiEMPO2.
+This class is responsible for launching heavy calculations on a separate daemon thread,
+preventing the program from becoming unresponsive.
+</pre> </div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_2be84bee23f9711c0e08ef451c33abb3.html">MockSZ</a></li><li class="navelem"><a class="el" href="SingleStats_8py.html">SingleStats.py</a></li>
+    <li class="navelem"><b>MockSZ</b></li><li class="navelem"><a class="el" href="namespaceMockSZ_1_1Threadmgr.html">Threadmgr</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6 </li>
   </ul>
 </div>

@@ -10,5 +10,6 @@
 #define JY 1E26             /* SI to Jansky */
 #define DBL_EPSILON 2.220446E-16 /* Double precision machine epsilon */
 #define TCMB 2.726          /* CMB temperature */
+#define PI 3.14159265359 /* Pi. */
 
 #endif

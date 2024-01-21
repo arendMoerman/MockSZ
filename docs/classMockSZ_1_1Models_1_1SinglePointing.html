@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.6"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>MockSZ User Manual: MockSZ.Models.IsoBetaModel Class Reference</title>
+<title>MockSZ User Manual: MockSZ.Models.SinglePointing Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -77,7 +77,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('classMockSZ_1_1Models_1_1IsoBetaModel.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('classMockSZ_1_1Models_1_1SinglePointing.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -105,26 +105,31 @@ $(document).ready(function(){initNavTree('classMockSZ_1_1Models_1_1IsoBetaModel.
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="classMockSZ_1_1Models_1_1IsoBetaModel-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">MockSZ.Models.IsoBetaModel Class Reference<div class="ingroups"><a class="el" href="group__clustermodels.html">Cluster Models</a></div></div></div>
+<a href="classMockSZ_1_1Models_1_1SinglePointing-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">MockSZ.Models.SinglePointing Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Class representing an isothermal-beta model.  
- <a href="classMockSZ_1_1Models_1_1IsoBetaModel.html#details">More...</a></p>
+<p>Class for generating a single pointing SZ signal.  
+ <a href="classMockSZ_1_1Models_1_1SinglePointing.html#details">More...</a></p>
+<div class="dynheader">
+Inheritance diagram for MockSZ.Models.SinglePointing:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classMockSZ_1_1Models_1_1SinglePointing.png" alt=""/>
+ </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ab05d7ac9cd2fcbced0553945f0f1981a"><td class="memItemLeft" align="right" valign="top"><a id="ab05d7ac9cd2fcbced0553945f0f1981a" name="ab05d7ac9cd2fcbced0553945f0f1981a"></a>
-def&#160;</td><td class="memItemRight" valign="bottom"><b>getIsoBeta</b> (self, Az, El, ibeta, ne0, thetac, Da, grid=False)</td></tr>
-<tr class="separator:ab05d7ac9cd2fcbced0553945f0f1981a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acda47e679e7ad4a19d663bb291a54795"><td class="memItemLeft" align="right" valign="top"><a id="acda47e679e7ad4a19d663bb291a54795" name="acda47e679e7ad4a19d663bb291a54795"></a>
-def&#160;</td><td class="memItemRight" valign="bottom"><b>getIsoBetaCube</b> (self, isobeta, nu_arr, Te, v_pec, n_s=500, n_beta=500, n_mu=500, no_CMB=False)</td></tr>
-<tr class="separator:acda47e679e7ad4a19d663bb291a54795"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c2d874bb60447871f8166b7d2cbcc98"><td class="memItemLeft" align="right" valign="top"><a id="a2c2d874bb60447871f8166b7d2cbcc98" name="a2c2d874bb60447871f8166b7d2cbcc98"></a>
+def&#160;</td><td class="memItemRight" valign="bottom"><b>getSingleSignal_tSZ</b> (self, nu_arr, Te, n_s=500, n_beta=500, no_CMB=False)</td></tr>
+<tr class="separator:a2c2d874bb60447871f8166b7d2cbcc98"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9bb39e76fa556e12350230fb96bcbd22"><td class="memItemLeft" align="right" valign="top"><a id="a9bb39e76fa556e12350230fb96bcbd22" name="a9bb39e76fa556e12350230fb96bcbd22"></a>
+def&#160;</td><td class="memItemRight" valign="bottom"><b>getSingleSignal_kSZ</b> (self, nu_arr, v_pec, n_mu=500)</td></tr>
+<tr class="separator:a9bb39e76fa556e12350230fb96bcbd22"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Class representing an isothermal-beta model. </p>
-<p>Should be instantiated and serves as an interface for MockSZ when simulating these types of clusters. </p>
+<div class="textblock"><p>Class for generating a single pointing SZ signal. </p>
 </div><hr/>The documentation for this class was generated from the following file:<ul>
 <li>src/MockSZ/<a class="el" href="Models_8py.html">Models.py</a></li>
 </ul>
@@ -133,7 +138,7 @@ def&#160;</td><td class="memItemRight" valign="bottom"><b>getIsoBetaCube</b> (se
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><b>MockSZ</b></li><li class="navelem"><b>Models</b></li><li class="navelem"><a class="el" href="classMockSZ_1_1Models_1_1IsoBetaModel.html">IsoBetaModel</a></li>
+    <li class="navelem"><b>MockSZ</b></li><li class="navelem"><b>Models</b></li><li class="navelem"><a class="el" href="classMockSZ_1_1Models_1_1SinglePointing.html">SinglePointing</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6 </li>
   </ul>
 </div>
