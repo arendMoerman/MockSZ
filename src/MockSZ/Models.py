@@ -7,7 +7,7 @@ import numpy as np
 
 import MockSZ.Bindings as MBind
 
-class IsoBetaModel():
+class IsoBetaModel(object):
     """!
     Class representing an isothermal-beta model.
     Should be instantiated and serves as an interface for MockSZ when simulating these types of clusters.
@@ -46,6 +46,10 @@ class SinglePointing(object):
     """
     def getSingleSignal_tSZ(self, nu_arr, Te, n_s=500, n_beta=500, no_CMB=False):
         res = MBind.getSinglePointing_tSZ(nu_arr, Te, n_s, n_beta, no_CMB)
+        return res
+    
+    def getSingleSignal_ntSZ(self, nu_arr, alpha, n_s=500, n_beta=500, no_CMB=False):
+        res = MBind.getSinglePointing_ntSZ(nu_arr, alpha, n_s, n_beta, no_CMB)
 
         return res
     
@@ -80,12 +84,12 @@ class ScatteringKernels(object):
 
         return res
     
-    def getRelatPowerlaw(self, beta_arr, alpha):
+    def getPowerlaw(self, beta_arr, alpha):
         """!
         Obtain single-electron scattering kernel, for a range of s and a single beta.
         """
         
-        res = MBind.getRelatPowerlaw(beta_arr, alpha)
+        res = MBind.getPowerlaw(beta_arr, alpha)
 
         return res
     
@@ -98,11 +102,11 @@ class ScatteringKernels(object):
 
         return res
     
-    def getMultiScatteringRP(self, s_arr, alpha, n_beta=500):
+    def getMultiScatteringPL(self, s_arr, alpha, n_beta=500):
         """!
         Obtain single-electron scattering kernel, for a range of s and a single beta.
         """
         
-        res = MBind.getMultiScatteringRP(s_arr, alpha, n_beta)
+        res = MBind.getMultiScatteringPL(s_arr, alpha, n_beta)
 
         return res

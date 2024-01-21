@@ -54,6 +54,26 @@ void getMaxwellJuttner(double *beta_arr, int n_beta, double Te, double *output);
 void getMaxwellJuttner(double beta, double Te, double &output);
 
 /**
+ * Generate a powerlaw (relativistic nonthermal) distribution.
+ *
+ * @param beta_arr Array of beta values over which to calculate distribution.
+ * @param n_beta Number of beta values in array.
+ * @param alpha Slope of powerlaw.
+ * @param output Array for storing output values.
+ */
+void getPowerlaw(double *beta_arr, int n_beta, double alpha, double *output);
+
+/**
+ * Generate a powerlaw (relativistic nonthermal) distribution.
+ *
+ * @param beta Beta value at which to calculate distribution.
+ * @param alpha Slope of powerlaw.
+ * @param A Normalisation factor of powerlaw. Can be calculated outside hot section.
+ * @param output Double for storing output values.
+ */
+void getPowerlaw(double beta, double alpha, double A, double &output);
+
+/**
  * Generate a multi-electron scattering kernel using a Maxwell-Juttner distribution.
  *
  * @param s_arr Array of s-values over which to calculate distribution.
@@ -62,6 +82,17 @@ void getMaxwellJuttner(double beta, double Te, double &output);
  * @param output Array for storing output values.
  */
 void getMultiScatteringMJ(double *s_arr, int n_s, int n_beta, double Te, double *output);
+
+/**
+ * Generate a multi-electron scattering kernel using a powerlaw distribution.
+ *
+ * @param s_arr Array of s-values over which to calculate distribution.
+ * @param n_s Number of s values in array.
+ * @param n_beta Number of beta points to integrate over.
+ * @param alpha Slope of powerlaw.
+ * @param output Array for storing output values.
+ */
+void getMultiScatteringPL(double *s_arr, int n_s, int n_beta, double alpha, double *output);
 
 /**
  * Generate an isothermal-beta model, from an azimuth and elevation arrays.
