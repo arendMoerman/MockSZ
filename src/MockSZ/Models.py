@@ -19,10 +19,11 @@ class IsoBetaModel(object):
         return res
     
     def getIsoBetaCube(self, isobeta, nu_arr, Te, v_pec, n_s=500, n_beta=500, n_mu=500, no_CMB=False):
-        res_tSZ = MBind.getSinglePointing_tSZ(nu_arr, Te, n_s, n_beta, no_CMB)
-        res_kSZ = MBind.getSinglePointing_kSZ(nu_arr, v_pec, n_mu)
+        res_tSZ = MBind.getSinglePointing_tSZ(nu_arr, Te, tau_e=1, n_s=n_s, n_beta=n_beta, no_CMB=True)
+        res_kSZ = MBind.getSinglePointing_kSZ(nu_arr, v_pec, tau_e=1, n_mu=n_mu)
         
         res_SZ = res_tSZ + res_kSZ
+
 
         if len(isobeta.shape) == 1:
             shape = (isobeta.size, nu_arr.size)
@@ -35,7 +36,11 @@ class IsoBetaModel(object):
             for i in range(nu_arr.size):
                 res[:,:,i] = isobeta
 
+
         res *= res_SZ
+        
+        if no_CMB == False:
+            res += MBind.getCMB(nu_arr)
         
         return res
 
@@ -44,17 +49,17 @@ class SinglePointing(object):
     Class for generating a single pointing SZ signal.
 
     """
-    def getSingleSignal_tSZ(self, nu_arr, Te, n_s=500, n_beta=500, no_CMB=False):
-        res = MBind.getSinglePointing_tSZ(nu_arr, Te, n_s, n_beta, no_CMB)
+    def getSingleSignal_tSZ(self, nu_arr, Te, tau_e=0.01, n_s=500, n_beta=500, no_CMB=False):
+        res = MBind.getSinglePointing_tSZ(nu_arr, Te, tau_e, n_s, n_beta, no_CMB)
         return res
     
-    def getSingleSignal_ntSZ(self, nu_arr, alpha, n_s=500, n_beta=500, no_CMB=False):
-        res = MBind.getSinglePointing_ntSZ(nu_arr, alpha, n_s, n_beta, no_CMB)
+    def getSingleSignal_ntSZ(self, nu_arr, alpha, tau_e=0.01, n_s=500, n_beta=500, no_CMB=False):
+        res = MBind.getSinglePointing_ntSZ(nu_arr, alpha, tau_e, n_s, n_beta, no_CMB)
 
         return res
     
-    def getSingleSignal_kSZ(self, nu_arr, v_pec, n_mu=500):
-        res = MBind.getSinglePointing_kSZ(nu_arr, v_pec, n_mu)
+    def getSingleSignal_kSZ(self, nu_arr, v_pec, tau_e=0.01, n_mu=500):
+        res = MBind.getSinglePointing_kSZ(nu_arr, v_pec, tau_e, n_mu)
 
         return res
 
