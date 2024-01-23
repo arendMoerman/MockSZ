@@ -41,20 +41,23 @@ def loadMockSZlib():
     lib.MockSZ_getMultiScatteringPL.argtypes = [ctypes.POINTER(ctypes.c_double), ctypes.c_int, ctypes.c_double, 
                                       ctypes.POINTER(ctypes.c_double), ctypes.c_int]
     
-    lib.MockSZ_getSignal_tSZ.argtypes = [ctypes.POINTER(ctypes.c_double), ctypes.c_int, ctypes.c_double, 
+    lib.MockSZ_getSignal_tSZ.argtypes = [ctypes.POINTER(ctypes.c_double), ctypes.c_int, ctypes.c_double, ctypes.c_double, 
                                       ctypes.POINTER(ctypes.c_double), ctypes.c_int, ctypes.c_int, ctypes.c_bool]
     
-    lib.MockSZ_getSignal_ntSZ.argtypes = [ctypes.POINTER(ctypes.c_double), ctypes.c_int, ctypes.c_double, 
+    lib.MockSZ_getSignal_ntSZ.argtypes = [ctypes.POINTER(ctypes.c_double), ctypes.c_int, ctypes.c_double, ctypes.c_double, 
                                       ctypes.POINTER(ctypes.c_double), ctypes.c_int, ctypes.c_int, ctypes.c_bool]
     
-    lib.MockSZ_getSignal_kSZ.argtypes = [ctypes.POINTER(ctypes.c_double), ctypes.c_int, ctypes.c_double, ctypes.POINTER(ctypes.c_double), ctypes.c_int] 
+    lib.MockSZ_getSignal_kSZ.argtypes = [ctypes.POINTER(ctypes.c_double), ctypes.c_int, ctypes.c_double, ctypes.c_double, 
+                                         ctypes.POINTER(ctypes.c_double), ctypes.c_int] 
     
     lib.MockSZ_getIsoBeta.argtypes = [ctypes.POINTER(ctypes.c_double), ctypes.POINTER(ctypes.c_double), 
                                          ctypes.c_int, ctypes.c_int,
                                          ctypes.c_double, ctypes.c_double,
                                          ctypes.c_double, ctypes.c_double,
                                          ctypes.POINTER(ctypes.c_double), ctypes.c_bool] 
-    
+   
+    lib.MockSZ_getCMB.argtypes = [ctypes.POINTER(ctypes.c_double), ctypes.c_int, ctypes.POINTER(ctypes.c_double)]
+
     lib.MockSZ_getThomsonScatter.restype = None
     lib.MockSZ_getMaxwellJuttner.restype = None
     lib.MockSZ_getPowerlaw.restype = None
@@ -64,7 +67,7 @@ def loadMockSZlib():
     lib.MockSZ_getSignal_ntSZ.restype = None
     lib.MockSZ_getSignal_kSZ.restype = None
     lib.MockSZ_getIsoBeta.restype = None
-
+    lib.MockSZ_getCMB.restype = None
 
     return lib
 
@@ -210,7 +213,7 @@ def getMultiScatteringPL(s_arr, alpha, n_beta=500):
 
     return output
 
-def getSinglePointing_tSZ(nu_arr, Te, n_s=500, n_beta=500, no_CMB=False):
+def getSinglePointing_tSZ(nu_arr, Te, tau_e, n_s=500, n_beta=500, no_CMB=False):
     """!
     Binding for calculating relativistic powerlaw distribution over range of beta, given Te.
 
@@ -227,13 +230,14 @@ def getSinglePointing_tSZ(nu_arr, Te, n_s=500, n_beta=500, no_CMB=False):
     cnu_arr = (ctypes.c_double * nu_arr.size)(*(nu_arr.ravel().tolist()))
     cnum_nu = ctypes.c_int(nu_arr.size)
     cTe = ctypes.c_double(Te)
+    ctau_e = ctypes.c_double(tau_e)
     cn_s = ctypes.c_int(n_s)
     cn_beta = ctypes.c_int(n_beta)
     cno_CMB = ctypes.c_bool(no_CMB)
 
     coutput = (ctypes.c_double * nu_arr.size)(*(np.zeros(nu_arr.size).tolist()))
     
-    args = [cnu_arr, cnum_nu, cTe, coutput, cn_s, cn_beta, cno_CMB]
+    args = [cnu_arr, cnum_nu, cTe, ctau_e, coutput, cn_s, cn_beta, cno_CMB]
 
     mgr.new_thread(target=lib.MockSZ_getSignal_tSZ, args=args)
 
@@ -241,7 +245,7 @@ def getSinglePointing_tSZ(nu_arr, Te, n_s=500, n_beta=500, no_CMB=False):
 
     return output
 
-def getSinglePointing_ntSZ(nu_arr, alpha, n_s=500, n_beta=500, no_CMB=False):
+def getSinglePointing_ntSZ(nu_arr, alpha, tau_e=0.01, n_s=500, n_beta=500, no_CMB=False):
     """!
     Binding for calculating relativistic powerlaw distribution over range of beta, given Te.
 
@@ -258,13 +262,14 @@ def getSinglePointing_ntSZ(nu_arr, alpha, n_s=500, n_beta=500, no_CMB=False):
     cnu_arr = (ctypes.c_double * nu_arr.size)(*(nu_arr.ravel().tolist()))
     cnum_nu = ctypes.c_int(nu_arr.size)
     calpha = ctypes.c_double(alpha)
+    ctau_e = ctypes.c_double(tau_e)
     cn_s = ctypes.c_int(n_s)
     cn_beta = ctypes.c_int(n_beta)
     cno_CMB = ctypes.c_bool(no_CMB)
 
     coutput = (ctypes.c_double * nu_arr.size)(*(np.zeros(nu_arr.size).tolist()))
     
-    args = [cnu_arr, cnum_nu, calpha, coutput, cn_s, cn_beta, cno_CMB]
+    args = [cnu_arr, cnum_nu, calpha, ctau_e, coutput, cn_s, cn_beta, cno_CMB]
 
     mgr.new_thread(target=lib.MockSZ_getSignal_ntSZ, args=args)
 
@@ -272,7 +277,7 @@ def getSinglePointing_ntSZ(nu_arr, alpha, n_s=500, n_beta=500, no_CMB=False):
 
     return output
 
-def getSinglePointing_kSZ(nu_arr, v_pec, n_mu=500):
+def getSinglePointing_kSZ(nu_arr, v_pec, tau_e=0.01, n_mu=500):
     """!
     Binding for calculating relativistic powerlaw distribution over range of beta, given Te.
 
@@ -289,11 +294,12 @@ def getSinglePointing_kSZ(nu_arr, v_pec, n_mu=500):
     cnu_arr = (ctypes.c_double * nu_arr.size)(*(nu_arr.ravel().tolist()))
     cnum_nu = ctypes.c_int(nu_arr.size)
     cv_pec = ctypes.c_double(v_pec)
+    ctau_e = ctypes.c_double(tau_e)
     cn_mu = ctypes.c_int(n_mu)
 
     coutput = (ctypes.c_double * nu_arr.size)(*(np.zeros(nu_arr.size).tolist()))
     
-    args = [cnu_arr, cnum_nu, cv_pec, coutput, cn_mu]
+    args = [cnu_arr, cnum_nu, cv_pec, ctau_e, coutput, cn_mu]
 
     mgr.new_thread(target=lib.MockSZ_getSignal_kSZ, args=args)
 
@@ -339,5 +345,31 @@ def getIsoBeta(Az, El, ibeta, ne0, thetac, Da, grid):
     mgr.new_thread(target=lib.MockSZ_getIsoBeta, args=args)
     output = np.ctypeslib.as_array(coutput, shape=n_out).astype(np.float64)
     output = output.reshape(out_shape)
+
+    return output
+
+def getCMB(nu_arr):
+    """!
+    Binding for calculating relativistic powerlaw distribution over range of beta, given Te.
+
+    @param s_arr Array containing logarithmic frequency shifts over which to calculate scattering probability.
+    @param v_pec Cluster peculiar velocity, in km/s.
+    @param num_mu Number of direction cosines over which to calculate scattering probability.
+
+    @returns output Array containing scattering probabilities, for each s in s_arr, given beta.
+    """
+
+    lib = loadMockSZlib()
+    mgr = TManager.Manager()
+    
+    cnu_arr = (ctypes.c_double * nu_arr.size)(*(nu_arr.ravel().tolist()))
+    cnum_nu = ctypes.c_int(nu_arr.size)
+
+    coutput = (ctypes.c_double * nu_arr.size)(*(np.zeros(nu_arr.size).tolist()))
+    
+    args = [cnu_arr, cnum_nu, coutput]
+
+    mgr.new_thread(target=lib.MockSZ_getCMB, args=args)
+    output = np.ctypeslib.as_array(coutput, shape=nu_arr.shape).astype(np.float64)
 
     return output
