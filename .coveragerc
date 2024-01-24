@@ -9,6 +9,8 @@ omit =
     src/MockSZ/__init__.py
     src/MockSZ/*.swp
     src/MockSZ/__pycache__/*
+    src/MockSZ/include/*
+    src/MockSZ/cpp/*
     main.py
     shibokensupport/*
     pyscript

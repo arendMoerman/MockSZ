@@ -1,18 +1,13 @@
-"""
-@file
-Test constants in MockSZ.
-"""
-
 import numpy as np
 import unittest
+from nose2.tools import params
+
 import MockSZ.Constants as test_ct
 
 class TestConstants(unittest.TestCase):
-    def test_Constants(self):
-        self.assertTrue(hasattr(test_ct, "h"))
-        self.assertTrue(hasattr(test_ct, "k"))
-        self.assertTrue(hasattr(test_ct, "c"))
-        self.assertTrue(hasattr(test_ct, "me"))
+    @params("h", "k", "c", "me", "eV", "st", "Tcmb")
+    def test_Constants(self, attr):
+        self.assertTrue(hasattr(test_ct, attr))
 
 if __name__ == "__main__":
     import nose2
