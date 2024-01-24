@@ -1,3 +1,7 @@
+/*! \file Signal.cpp
+    \brief Implementations of the single-pointing SZ signals in Signal.h.
+*/
+
 #include "Signal.h"
 
 void calcSignal_tSZ(double *nu, int n_nu, double Te, double tau_e, double *output, int n_s, int n_beta, bool no_CMB) {

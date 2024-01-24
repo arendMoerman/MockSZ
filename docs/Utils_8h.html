@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.6"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>MockSZ User Manual: &lt;tt&gt;MockSZ&lt;/tt&gt; : A detailed look</title>
+<title>MockSZ User Manual: src/include/Utils.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -77,7 +77,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('deepdive.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('Utils_8h.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -102,22 +102,99 @@ $(document).ready(function(){initNavTree('deepdive.html',''); initResizable(); }
 </div>
 </div>
 
-<div><div class="header">
-  <div class="headertitle"><div class="title"><code>MockSZ</code> : A detailed look </div></div>
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Functions</a>  </div>
+  <div class="headertitle"><div class="title">Utils.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><h1><a class="anchor" id="deepdive_intro"></a>
-Introduction</h1>
-<p>This page contains notebooks that highlight and explain the theoretical underpinnings of <code>MockSZ</code>. They are arranged in a bottom-up fashion, starting from the single electron-photon scattering case and working up from there. Most of the information in these sections is taken from <a class="el" href="citelist.html#CITEREF_Birkinshaw1999">[1]</a>. However, we include the scripts necessary for generating the figures in the notebooks so that users can experiment as well.</p>
-<p><a href="demos/Scatterings.html">Scattering of photons from electrons</a></p>
-<p><a href="demos/SinglePointing.html">The SZ effect along a single line-of-sight</a></p>
-<p><a href="demos/IsoBetaMaps.html">The isothermal- \(\beta\) model</a> </p>
-</div></div><!-- contents -->
-</div><!-- PageDoc -->
+
+<p>Utility functions used throughout the program.  
+<a href="#details">More...</a></p>
+<div class="textblock"><code>#include &quot;math.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="Constants_8h_source.html">Constants.h</a>&quot;</code><br />
+</div>
+<p><a href="Utils_8h_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:acfde9ccd283ebe957de42e4bc5a27b9e"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Utils_8h.html#acfde9ccd283ebe957de42e4bc5a27b9e">get_min</a> (double *arr, int n_arr)</td></tr>
+<tr class="separator:acfde9ccd283ebe957de42e4bc5a27b9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7fd1773d5ae92fb188ed16ff9aa57334"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Utils_8h.html#a7fd1773d5ae92fb188ed16ff9aa57334">get_CMB</a> (double nu)</td></tr>
+<tr class="separator:a7fd1773d5ae92fb188ed16ff9aa57334"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Utility functions used throughout the program. </p>
+</div><h2 class="groupheader">Function Documentation</h2>
+<a id="a7fd1773d5ae92fb188ed16ff9aa57334" name="a7fd1773d5ae92fb188ed16ff9aa57334"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7fd1773d5ae92fb188ed16ff9aa57334">&#9670;&#160;</a></span>get_CMB()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double get_CMB </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>nu</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Obtain value of CMB intensity at some frequency.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">nu</td><td>Frequency in Hz.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>CMB intensity at nu. </dd></dl>
+
+</div>
+</div>
+<a id="acfde9ccd283ebe957de42e4bc5a27b9e" name="acfde9ccd283ebe957de42e4bc5a27b9e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acfde9ccd283ebe957de42e4bc5a27b9e">&#9670;&#160;</a></span>get_min()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double get_min </td>
+          <td>(</td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>arr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>n_arr</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Obtain minimum value in an array.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">arr</td><td>Array of doubles. </td></tr>
+    <tr><td class="paramname">n_arr</td><td>Size of array.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>min Minimum value in arr. </dd></dl>
+
+</div>
+</div>
+</div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_b0856f6b0d80ccb263b2f415c91f9e17.html">include</a></li><li class="navelem"><a class="el" href="Utils_8h.html">Utils.h</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6 </li>
   </ul>
 </div>

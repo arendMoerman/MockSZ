@@ -1,19 +1,72 @@
+/*! \file Conversions.h
+    \brief Functions for converting quantities.
+*/
+
 #include "Constants.h"
 #include "math.h"
 
 #ifndef __Conversions_h
 #define __Conversions_h
 
-double KeV_Temp(double energy_KeV);
+/**
+ * Convert electron temperature in keV to Kelvin.
+ *
+ * @param energy_keV Electron temperature in keV.
+ *
+ * @returns Temperature in Kelvin.
+ */
+double keV_Temp(double energy_keV);
+
+/**
+ * Convert distance in parsec to meter.
+ *
+ * @param l_pc Distance in parsec.
+ *
+ * @returns Distance in meters.
+ */
 double pc_m(double l_pc);
+
+/**
+ * Convert temperature in kelvin to dimensionless temperature.
+ *
+ * The dimension is removed by dividing by electron rest energy.
+ *
+ * @param Te Temperature in Kelvin.
+ *
+ * @returns Dimensionless temperature.
+ */
 double Te_theta(double Te);
+
+/**
+ * Convert velocity to dimensionless beta.
+ *
+ * @param velocity Velocity in m / s.
+ *
+ * @returns Dimensionless velocity.
+ */
 double v_beta(double velocity);
+
+/**
+ * Convert dimensionless beta velocity to Lorentz (gamma) factor.
+ *
+ * @param beta Dimensionless velocity
+ *
+ * @returns Gamma factor.
+ */
 double beta_gamma(double beta);
+
+/**
+ * Convert velocity to Lorentz (gamma) factor.
+ *
+ * @param velocity Velocity in m / s.
+ *
+ * @returns Gamma factor.
+ */
 double v_gamma(double velocity);
 
 
-inline double KeV_Temp(double energy_KeV) {
-    return energy_KeV * 1e3 / KB * EV;
+inline double keV_Temp(double energy_keV) {
+    return energy_keV * 1e3 / KB * EV;
 }
 
 inline double pc_m(double l_pc) {

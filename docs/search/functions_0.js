@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['freq_5fx_0',['freq_x',['../Conversions_8py.html#aaead8a2a04ef8cd8ae3427ef193f637d',1,'MockSZ::Conversions']]]
+  ['beta_5fgamma_0',['beta_gamma',['../Conversions_8h.html#ad7c255496a4b745231d1d5cc9fe36df3',1,'Conversions.h']]]
 ];
