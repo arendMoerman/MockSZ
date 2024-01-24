@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.16.3)
 
 project(MockSZ 
-    VERSION 0.2.1 
+    VERSION 0.2.2 
     DESCRIPTION "Mock SZ maps & signals"
     LANGUAGES CXX C)
 

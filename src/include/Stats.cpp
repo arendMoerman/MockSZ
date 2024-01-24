@@ -66,7 +66,7 @@ void getMaxwellJuttner(double *beta_arr, int n_beta, double Te, double *output) 
 }
 
 void getMaxwellJuttner(double beta, double Te, double &output) {
-    double theta = Te_theta(KeV_Temp(Te));
+    double theta = Te_theta(keV_Temp(Te));
     double gamma;
     double nominator, denominator;
 
