@@ -54,7 +54,7 @@ class IsoBetaModel(object):
         @returns res 2D or 3D grid (depending on dimensions of isobeta) containing SZ signal attenuated by optical depth in isobeta.
         """
 
-        res_tSZ = MBind.getSinglePointing_tSZ(nu_arr, Te, tau_e=1, n_s=n_s, n_beta=n_beta, no_CMB=True)
+        res_tSZ = MBind.getSinglePointing_t_ntSZ(nu_arr, Te, tau_e=1, dist=TSZ_LABEL, n_s=n_s, n_beta=n_beta, no_CMB=True)
         res_kSZ = MBind.getSinglePointing_kSZ(nu_arr, v_pec, tau_e=1, n_mu=n_mu)
         
         res_SZ = res_tSZ + res_kSZ

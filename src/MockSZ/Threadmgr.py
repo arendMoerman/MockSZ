@@ -32,11 +32,3 @@ class Manager(object):
     
         while t.is_alive(): # wait for the thread to exit
             t.join(.1)
-
-    def on_thread_finished(self):
-        """!
-        Run callback function upon thread finish.
-        """
-
-        if self.callback is not None:
-            self.callback()
