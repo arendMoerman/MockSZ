@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['loadmockszlib_0',['loadMockSZlib',['../Bindings_8py.html#af88c66a4754d6c422e724d91b4ab7ddb',1,'MockSZ::Bindings']]]
+  ['new_5fthread_0',['new_thread',['../classMockSZ_1_1Threadmgr_1_1Manager.html#a7e6ffbc5b5c0854cb7ee2a200cf2c2bf',1,'MockSZ::Threadmgr::Manager']]]
 ];

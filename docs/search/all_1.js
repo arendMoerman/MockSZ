@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['beta_5fgamma_0',['beta_gamma',['../Conversions_8py.html#a3179725b747cb3fa7c84baa0dd734016',1,'MockSZ::Conversions']]],
-  ['bibliography_1',['Bibliography',['../citelist.html',1,'']]],
-  ['bindings_2epy_2',['Bindings.py',['../Bindings_8py.html',1,'']]]
+  ['bibliography_0',['Bibliography',['../citelist.html',1,'']]],
+  ['bindings_2epy_1',['Bindings.py',['../Bindings_8py.html',1,'']]]
 ];
