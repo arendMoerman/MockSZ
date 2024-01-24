@@ -1,0 +1,5 @@
+graft src/include
+graft src/cpp
+include CMakeLists.txt
+
+global-exclude *.sw[po]
