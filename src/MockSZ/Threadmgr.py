@@ -1,6 +1,6 @@
-"""
+"""!
 @file 
-File containing the threadmanager class for TiEMPO2.
+File containing the threadmanager class for MockSZ.
 This class is responsible for launching heavy calculations on a separate daemon thread,
 preventing the program from becoming unresponsive.
 """
@@ -19,6 +19,13 @@ class Manager(object):
         self.callback = callback
     
     def new_thread(self, target, args):
+        """!
+        Spawn a daemon thread.
+
+        @param target Function to run in thread.
+        @param args Arguments to be passed to target function.
+        """
+
         t = threading.Thread(target=target, args=args)
         t.daemon = True
         t.start()
@@ -27,5 +34,9 @@ class Manager(object):
             t.join(.1)
 
     def on_thread_finished(self):
+        """!
+        Run callback function upon thread finish.
+        """
+
         if self.callback is not None:
             self.callback()

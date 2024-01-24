@@ -121,17 +121,182 @@ Inheritance diagram for MockSZ.Models.IsoBetaModel:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ab05d7ac9cd2fcbced0553945f0f1981a"><td class="memItemLeft" align="right" valign="top"><a id="ab05d7ac9cd2fcbced0553945f0f1981a" name="ab05d7ac9cd2fcbced0553945f0f1981a"></a>
-def&#160;</td><td class="memItemRight" valign="bottom"><b>getIsoBeta</b> (self, Az, El, ibeta, ne0, thetac, Da, grid=False)</td></tr>
+<tr class="memitem:ab05d7ac9cd2fcbced0553945f0f1981a"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMockSZ_1_1Models_1_1IsoBetaModel.html#ab05d7ac9cd2fcbced0553945f0f1981a">getIsoBeta</a> (self, Az, El, ibeta, ne0, thetac, Da, grid=False)</td></tr>
+<tr class="memdesc:ab05d7ac9cd2fcbced0553945f0f1981a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get an isothermal-beta optical depth screen.  <br /></td></tr>
 <tr class="separator:ab05d7ac9cd2fcbced0553945f0f1981a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acda47e679e7ad4a19d663bb291a54795"><td class="memItemLeft" align="right" valign="top"><a id="acda47e679e7ad4a19d663bb291a54795" name="acda47e679e7ad4a19d663bb291a54795"></a>
-def&#160;</td><td class="memItemRight" valign="bottom"><b>getIsoBetaCube</b> (self, isobeta, nu_arr, Te, v_pec, n_s=500, n_beta=500, n_mu=500, no_CMB=False)</td></tr>
+<tr class="memitem:acda47e679e7ad4a19d663bb291a54795"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMockSZ_1_1Models_1_1IsoBetaModel.html#acda47e679e7ad4a19d663bb291a54795">getIsoBetaCube</a> (self, isobeta, nu_arr, Te, v_pec, n_s=500, n_beta=500, n_mu=500, no_CMB=False)</td></tr>
+<tr class="memdesc:acda47e679e7ad4a19d663bb291a54795"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get an isothermal-beta model from an optical depth screen.  <br /></td></tr>
 <tr class="separator:acda47e679e7ad4a19d663bb291a54795"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Class representing an isothermal-beta model. </p>
 <p>Should be instantiated and serves as an interface for MockSZ when simulating these types of clusters. </p>
-</div><hr/>The documentation for this class was generated from the following file:<ul>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="ab05d7ac9cd2fcbced0553945f0f1981a" name="ab05d7ac9cd2fcbced0553945f0f1981a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab05d7ac9cd2fcbced0553945f0f1981a">&#9670;&#160;</a></span>getIsoBeta()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def MockSZ.Models.IsoBetaModel.getIsoBeta </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>Az</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>El</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>ibeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>ne0</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>thetac</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>Da</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>grid</em> = <code>False</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get an isothermal-beta optical depth screen. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Az</td><td>Numpy array containing the range of Azimuth co-ordinates, in arcseconds. </td></tr>
+    <tr><td class="paramname">El</td><td>Numpy array containing the range of Elevation co-ordinates, in arcseconds. </td></tr>
+    <tr><td class="paramname">ibeta</td><td>Beta parameter for isothermal model. </td></tr>
+    <tr><td class="paramname">ne0</td><td>Central electron number density, in number / cm**3. </td></tr>
+    <tr><td class="paramname">thetac</td><td>Angular cluster core radius, in arcseconds. </td></tr>
+    <tr><td class="paramname">Da</td><td>Angular diameter distance to cluster, in Megaparsec. </td></tr>
+    <tr><td class="paramname">grid</td><td>Whether or not to evaluate the model on a 2D grid spanned by Az and El, or on a 1D trace. If grid=True, the screen will be of size Az.size * El.size. If grid=False (default), it is required that Az.size == El.size, and the screen will be of size Az.size = El.size.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>res The optical depth screen. </dd></dl>
+
+</div>
+</div>
+<a id="acda47e679e7ad4a19d663bb291a54795" name="acda47e679e7ad4a19d663bb291a54795"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acda47e679e7ad4a19d663bb291a54795">&#9670;&#160;</a></span>getIsoBetaCube()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def MockSZ.Models.IsoBetaModel.getIsoBetaCube </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>isobeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>nu_arr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>Te</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>v_pec</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>n_s</em> = <code>500</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>n_beta</em> = <code>500</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>n_mu</em> = <code>500</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>no_CMB</em> = <code>False</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get an isothermal-beta model from an optical depth screen. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">isobeta</td><td>An optical depth screen generated by self.getIsoBeta. </td></tr>
+    <tr><td class="paramname">nu_arr</td><td>Numpy array of frequencies for SZ effect, in Hz. </td></tr>
+    <tr><td class="paramname">Te</td><td>Electron temperature, in keV. </td></tr>
+    <tr><td class="paramname">v_pec</td><td>Peculiar cluster velocity, in km / s. </td></tr>
+    <tr><td class="paramname">n_s</td><td>Number of logarithmic frequency shifts to include. </td></tr>
+    <tr><td class="paramname">n_beta</td><td>Number of dimensionless electron velocities to include. </td></tr>
+    <tr><td class="paramname">no_CMB</td><td>Whether to add CMB to SZ signal or not.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>res 2D or 3D grid (depending on dimensions of isobeta) containing SZ signal attenuated by optical depth in isobeta. </dd></dl>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
 <li>src/MockSZ/<a class="el" href="Models_8py.html">Models.py</a></li>
 </ul>
 </div><!-- contents -->

@@ -71,9 +71,9 @@ def loadMockSZlib():
 
     return lib
 
-def getThomsonScatter(s_arr, beta, num_mu):
+def getSingleScattering(s_arr, beta, num_mu):
     """!
-    Binding for calculating single electron scattering kernel.
+    Binding for calculating single electron scattering kernel, according to a Thomson scattering in the electron rest frame.
 
     @param s_arr Array containing logarithmic frequency shifts over which to calculate scattering probability.
     @param beta Dimensionless electron velocity.
@@ -100,15 +100,17 @@ def getThomsonScatter(s_arr, beta, num_mu):
 
     return output
 
-def getMaxwellJuttner(beta_arr, Te):
+def getElectronDistribution(beta_arr, parameter, dist):
     """!
-    Binding for calculating Maxwell-Juttner distribution over range of beta, given Te.
+    Binding for calculating an electron distribution.
 
-    @param s_arr Array containing logarithmic frequency shifts over which to calculate scattering probability.
-    @param beta Dimensionless electron velocity.
-    @param num_mu Number of direction cosines over which to calculate scattering probability.
+    Can choose between Maxwell-Juttner and Relativistic powerlaw.
 
-    @returns output Array containing scattering probabilities, for each s in s_arr, given beta.
+    @param beta_arr Numpy array of dimensionless electron velocities.
+    @param parameter Distribution parameter: electron temperature or powerlaw slope.
+    @param dist String specifying distribution to use. Choose between 'MaxwellJuttner' and 'RelativisticPowerlaw'.
+
+    @returns output Array containing electron distribution.
     """
 
     lib = loadMockSZlib()
@@ -116,54 +118,34 @@ def getMaxwellJuttner(beta_arr, Te):
 
     cbeta_arr = (ctypes.c_double * beta_arr.size)(*(beta_arr.ravel().tolist()))
     cnum_beta = ctypes.c_int(beta_arr.size)
-    cTe = ctypes.c_double(Te)
+    cparameter = ctypes.c_double(parameter)
 
     coutput = (ctypes.c_double * beta_arr.size)(*(np.zeros(beta_arr.size).tolist()))
     
-    args = [cbeta_arr, cnum_beta, cTe, coutput]
+    args = [cbeta_arr, cnum_beta, cparameter, coutput]
 
-    mgr.new_thread(target=lib.MockSZ_getMaxwellJuttner, args=args)
+    if dist == "MaxwellJuttner":
+        mgr.new_thread(target=lib.MockSZ_getMaxwellJuttner, args=args)
+    
+    elif dist == "RelativisticPowerlaw":
+        mgr.new_thread(target=lib.MockSZ_getPowerlaw, args=args)
 
     output = np.ctypeslib.as_array(coutput, shape=beta_arr.shape).astype(np.float64)
 
     return output
 
-def getPowerlaw(beta_arr, alpha):
+def getMultiScattering(s_arr, parameter, dist, n_beta=500):
     """!
-    Binding for calculating powerlaw distribution over range of beta, given alpha.
+    Binding for calculating a multi-electron scattering kernel.
 
-    @param beta_arr Array containing dimensionless velocities over which to calculate powerlaw.
-    @param alpha Slope of powerlaw.
+    Can choose between Maxwell-Juttner and Relativistic powerlaw as underlying electron distributions.
 
-    @returns output Array containing scattering probabilities, for each s in s_arr, given beta.
-    """
+    @param s_arr Numpy array of logarithmic frequency shifts s.
+    @param parameter Distribution parameter: electron temperature or powerlaw slope.
+    @param dist String specifying distribution to use. Choose between 'MaxwellJuttner' and 'RelativisticPowerlaw'.
+    @param n_beta Number of dimensionless electron velocities to include.
 
-    lib = loadMockSZlib()
-    mgr = TManager.Manager()
-
-    cbeta_arr = (ctypes.c_double * beta_arr.size)(*(beta_arr.ravel().tolist()))
-    cnum_beta = ctypes.c_int(beta_arr.size)
-    calpha = ctypes.c_double(alpha)
-
-    coutput = (ctypes.c_double * beta_arr.size)(*(np.zeros(beta_arr.size).tolist()))
-    
-    args = [cbeta_arr, cnum_beta, calpha, coutput]
-
-    mgr.new_thread(target=lib.MockSZ_getPowerlaw, args=args)
-
-    output = np.ctypeslib.as_array(coutput, shape=beta_arr.shape).astype(np.float64)
-
-    return output
-
-def getMultiScatteringMJ(s_arr, Te, n_beta=500):
-    """!
-    Binding for calculating relativistic thermal distribution over range of beta, given Te.
-
-    @param s_arr Array containing logarithmic frequency shifts over which to calculate scattering probability.
-    @param beta Dimensionless electron velocity.
-    @param num_mu Number of direction cosines over which to calculate scattering probability.
-
-    @returns output Array containing scattering probabilities, for each s in s_arr, given beta.
+    @returns output Array containing multi-electron scattering kernel.
     """
 
     lib = loadMockSZlib()
@@ -171,57 +153,36 @@ def getMultiScatteringMJ(s_arr, Te, n_beta=500):
 
     cs_arr = (ctypes.c_double * s_arr.size)(*(s_arr.ravel().tolist()))
     cnum_s = ctypes.c_int(s_arr.size)
-    cTe = ctypes.c_double(Te)
+    cparameter = ctypes.c_double(parameter)
     cn_beta = ctypes.c_int(n_beta)
 
     coutput = (ctypes.c_double * s_arr.size)(*(np.zeros(s_arr.size).tolist()))
     
-    args = [cs_arr, cnum_s, cTe, coutput, cn_beta]
-
-    mgr.new_thread(target=lib.MockSZ_getMultiScatteringMJ, args=args)
+    args = [cs_arr, cnum_s, cparameter, coutput, cn_beta]
+    
+    if dist == "MaxwellJuttner":
+        mgr.new_thread(target=lib.MockSZ_getMultiScatteringMJ, args=args)
+    
+    elif dist == "RelativisticPowerlaw":
+        mgr.new_thread(target=lib.MockSZ_getMultiScatteringPL, args=args)
 
     output = np.ctypeslib.as_array(coutput, shape=s_arr.shape).astype(np.float64)
 
     return output
 
-def getMultiScatteringPL(s_arr, alpha, n_beta=500):
+def getSinglePointing_t_ntSZ(nu_arr, parameter, tau_e, dist, n_s=500, n_beta=500, no_CMB=False):
     """!
-    Binding for calculating relativistic powerlaw distribution over range of beta, given Te.
+    Binding for calculating single-pointing tSZ or ntSZ signals.
 
-    @param s_arr Array containing logarithmic frequency shifts over which to calculate scattering probability.
-    @param beta Dimensionless electron velocity.
-    @param num_mu Number of direction cosines over which to calculate scattering probability.
-
-    @returns output Array containing scattering probabilities, for each s in s_arr, given beta.
-    """
-
-    lib = loadMockSZlib()
-    mgr = TManager.Manager()
-
-    cs_arr = (ctypes.c_double * s_arr.size)(*(s_arr.ravel().tolist()))
-    cnum_s = ctypes.c_int(s_arr.size)
-    calpha = ctypes.c_double(alpha)
-    cn_beta = ctypes.c_int(n_beta)
-
-    coutput = (ctypes.c_double * s_arr.size)(*(np.zeros(s_arr.size).tolist()))
+    @param nu_arr Numpy array of frequencies for tSZ effect, in Hz.
+    @param parameter Distribution parameter: electron temperature or powerlaw slope.
+    @param tau_e Optical depth along sightline.
+    @param dist String specifying distribution to use. Choose between 'MaxwellJuttner' and 'RelativisticPowerlaw'.
+    @param n_s Number of logarithmic frequency shifts to include.
+    @param n_beta Number of dimensionless electron velocities to include.
+    @param no_CMB Whether to add CMB to tSZ signal or not.
     
-    args = [cs_arr, cnum_s, calpha, coutput, cn_beta]
-
-    mgr.new_thread(target=lib.MockSZ_getMultiScatteringPL, args=args)
-
-    output = np.ctypeslib.as_array(coutput, shape=s_arr.shape).astype(np.float64)
-
-    return output
-
-def getSinglePointing_tSZ(nu_arr, Te, tau_e, n_s=500, n_beta=500, no_CMB=False):
-    """!
-    Binding for calculating relativistic powerlaw distribution over range of beta, given Te.
-
-    @param s_arr Array containing logarithmic frequency shifts over which to calculate scattering probability.
-    @param beta Dimensionless electron velocity.
-    @param num_mu Number of direction cosines over which to calculate scattering probability.
-
-    @returns output Array containing scattering probabilities, for each s in s_arr, given beta.
+    @returns output 1D array containing tSZ effect.
     """
 
     lib = loadMockSZlib()
@@ -229,7 +190,7 @@ def getSinglePointing_tSZ(nu_arr, Te, tau_e, n_s=500, n_beta=500, no_CMB=False):
     
     cnu_arr = (ctypes.c_double * nu_arr.size)(*(nu_arr.ravel().tolist()))
     cnum_nu = ctypes.c_int(nu_arr.size)
-    cTe = ctypes.c_double(Te)
+    cparameter = ctypes.c_double(parameter)
     ctau_e = ctypes.c_double(tau_e)
     cn_s = ctypes.c_int(n_s)
     cn_beta = ctypes.c_int(n_beta)
@@ -237,41 +198,13 @@ def getSinglePointing_tSZ(nu_arr, Te, tau_e, n_s=500, n_beta=500, no_CMB=False):
 
     coutput = (ctypes.c_double * nu_arr.size)(*(np.zeros(nu_arr.size).tolist()))
     
-    args = [cnu_arr, cnum_nu, cTe, ctau_e, coutput, cn_s, cn_beta, cno_CMB]
-
-    mgr.new_thread(target=lib.MockSZ_getSignal_tSZ, args=args)
-
-    output = np.ctypeslib.as_array(coutput, shape=nu_arr.shape).astype(np.float64)
-
-    return output
-
-def getSinglePointing_ntSZ(nu_arr, alpha, tau_e=0.01, n_s=500, n_beta=500, no_CMB=False):
-    """!
-    Binding for calculating relativistic powerlaw distribution over range of beta, given Te.
-
-    @param s_arr Array containing logarithmic frequency shifts over which to calculate scattering probability.
-    @param beta Dimensionless electron velocity.
-    @param num_mu Number of direction cosines over which to calculate scattering probability.
-
-    @returns output Array containing scattering probabilities, for each s in s_arr, given beta.
-    """
-
-    lib = loadMockSZlib()
-    mgr = TManager.Manager()
+    args = [cnu_arr, cnum_nu, cparameter, ctau_e, coutput, cn_s, cn_beta, cno_CMB]
     
-    cnu_arr = (ctypes.c_double * nu_arr.size)(*(nu_arr.ravel().tolist()))
-    cnum_nu = ctypes.c_int(nu_arr.size)
-    calpha = ctypes.c_double(alpha)
-    ctau_e = ctypes.c_double(tau_e)
-    cn_s = ctypes.c_int(n_s)
-    cn_beta = ctypes.c_int(n_beta)
-    cno_CMB = ctypes.c_bool(no_CMB)
-
-    coutput = (ctypes.c_double * nu_arr.size)(*(np.zeros(nu_arr.size).tolist()))
+    if dist == "MaxwellJuttner":
+        mgr.new_thread(target=lib.MockSZ_getSignal_tSZ, args=args)
     
-    args = [cnu_arr, cnum_nu, calpha, ctau_e, coutput, cn_s, cn_beta, cno_CMB]
-
-    mgr.new_thread(target=lib.MockSZ_getSignal_ntSZ, args=args)
+    elif dist == "RelativisticPowerlaw":
+        mgr.new_thread(target=lib.MockSZ_getSignal_ntSZ, args=args)
 
     output = np.ctypeslib.as_array(coutput, shape=nu_arr.shape).astype(np.float64)
 
@@ -279,13 +212,14 @@ def getSinglePointing_ntSZ(nu_arr, alpha, tau_e=0.01, n_s=500, n_beta=500, no_CM
 
 def getSinglePointing_kSZ(nu_arr, v_pec, tau_e=0.01, n_mu=500):
     """!
-    Binding for calculating relativistic powerlaw distribution over range of beta, given Te.
+    Binding for calculating single-pointing kSZ signals.
 
-    @param s_arr Array containing logarithmic frequency shifts over which to calculate scattering probability.
-    @param v_pec Cluster peculiar velocity, in km/s.
-    @param num_mu Number of direction cosines over which to calculate scattering probability.
-
-    @returns output Array containing scattering probabilities, for each s in s_arr, given beta.
+    @param nu_arr Numpy array of frequencies for tSZ effect, in Hz.
+    @param v_pec Peculiar velocity.
+    @param tau_e Optical depth along sightline.
+    @param n_mu Number of scattering direction cosines to include.
+    
+    @returns output 1D array containing kSZ effect.
     """
 
     lib = loadMockSZlib()
@@ -309,13 +243,19 @@ def getSinglePointing_kSZ(nu_arr, v_pec, tau_e=0.01, n_mu=500):
 
 def getIsoBeta(Az, El, ibeta, ne0, thetac, Da, grid):
     """!
-    Binding for calculating relativistic powerlaw distribution over range of beta, given Te.
+    Binding for calculating an isothermal-beta optical depth screen. 
 
-    @param s_arr Array containing logarithmic frequency shifts over which to calculate scattering probability.
-    @param v_pec Cluster peculiar velocity, in km/s.
-    @param num_mu Number of direction cosines over which to calculate scattering probability.
+    @param Az Numpy array containing the range of Azimuth co-ordinates, in arcseconds.
+    @param El Numpy array containing the range of Elevation co-ordinates, in arcseconds.
+    @param ibeta Beta parameter for isothermal model.
+    @param ne0 Central electron number density, in number / cm**3.
+    @param thetac Angular cluster core radius, in arcseconds.
+    @param Da Angular diameter distance to cluster, in Megaparsec.
+    @param grid Whether or not to evaluate the model on a 2D grid spanned by Az and El, or on a 1D trace.
+        If grid=True, the screen will be of size Az.size * El.size.
+        If grid=False (default), it is required that Az.size ==  El.size, and the screen will be of size Az.size = El.size.
 
-    @returns output Array containing scattering probabilities, for each s in s_arr, given beta.
+    @returns output The optical depth screen.
     """
 
     lib = loadMockSZlib()
@@ -350,13 +290,11 @@ def getIsoBeta(Az, El, ibeta, ne0, thetac, Da, grid):
 
 def getCMB(nu_arr):
     """!
-    Binding for calculating relativistic powerlaw distribution over range of beta, given Te.
+    Binding for calculating CMB blackbody.
 
-    @param s_arr Array containing logarithmic frequency shifts over which to calculate scattering probability.
-    @param v_pec Cluster peculiar velocity, in km/s.
-    @param num_mu Number of direction cosines over which to calculate scattering probability.
+    @param nu_arr Numpy array of frequencies for CMB, in Hz.
 
-    @returns output Array containing scattering probabilities, for each s in s_arr, given beta.
+    @returns output Array containing CMB.
     """
 
     lib = loadMockSZlib()

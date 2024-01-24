@@ -106,7 +106,7 @@ $(document).ready(function(){initNavTree('classMockSZ_1_1Models_1_1SinglePointin
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classMockSZ_1_1Models_1_1SinglePointing-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">MockSZ.Models.SinglePointing Class Reference</div></div>
+  <div class="headertitle"><div class="title">MockSZ.Models.SinglePointing Class Reference<div class="ingroups"><a class="el" href="group__clustermodels.html">Cluster Models</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -121,19 +121,224 @@ Inheritance diagram for MockSZ.Models.SinglePointing:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a2c2d874bb60447871f8166b7d2cbcc98"><td class="memItemLeft" align="right" valign="top"><a id="a2c2d874bb60447871f8166b7d2cbcc98" name="a2c2d874bb60447871f8166b7d2cbcc98"></a>
-def&#160;</td><td class="memItemRight" valign="bottom"><b>getSingleSignal_tSZ</b> (self, nu_arr, Te, n_s=500, n_beta=500, no_CMB=False)</td></tr>
-<tr class="separator:a2c2d874bb60447871f8166b7d2cbcc98"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a56736514d4f9a33a79fd4d01871c8db1"><td class="memItemLeft" align="right" valign="top"><a id="a56736514d4f9a33a79fd4d01871c8db1" name="a56736514d4f9a33a79fd4d01871c8db1"></a>
-def&#160;</td><td class="memItemRight" valign="bottom"><b>getSingleSignal_ntSZ</b> (self, nu_arr, alpha, n_s=500, n_beta=500, no_CMB=False)</td></tr>
-<tr class="separator:a56736514d4f9a33a79fd4d01871c8db1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9bb39e76fa556e12350230fb96bcbd22"><td class="memItemLeft" align="right" valign="top"><a id="a9bb39e76fa556e12350230fb96bcbd22" name="a9bb39e76fa556e12350230fb96bcbd22"></a>
-def&#160;</td><td class="memItemRight" valign="bottom"><b>getSingleSignal_kSZ</b> (self, nu_arr, v_pec, n_mu=500)</td></tr>
-<tr class="separator:a9bb39e76fa556e12350230fb96bcbd22"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a69f0d6e3353a40fa5cadb5c742870619"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMockSZ_1_1Models_1_1SinglePointing.html#a69f0d6e3353a40fa5cadb5c742870619">getSingleSignal_tSZ</a> (self, nu_arr, Te, tau_e=0.01, n_s=500, n_beta=500, no_CMB=False)</td></tr>
+<tr class="memdesc:a69f0d6e3353a40fa5cadb5c742870619"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a single pointing signal of the tSZ effect.  <br /></td></tr>
+<tr class="separator:a69f0d6e3353a40fa5cadb5c742870619"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1873c5c9d801cdef73960baf4a0014c"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMockSZ_1_1Models_1_1SinglePointing.html#ab1873c5c9d801cdef73960baf4a0014c">getSingleSignal_ntSZ</a> (self, nu_arr, alpha, tau_e=0.01, n_s=500, n_beta=500, no_CMB=False)</td></tr>
+<tr class="memdesc:ab1873c5c9d801cdef73960baf4a0014c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a single pointing signal of the ntSZ effect, according to a powerlaw.  <br /></td></tr>
+<tr class="separator:ab1873c5c9d801cdef73960baf4a0014c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0eb5a8a1d7775390a1cbda83d124f69d"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMockSZ_1_1Models_1_1SinglePointing.html#a0eb5a8a1d7775390a1cbda83d124f69d">getSingleSignal_kSZ</a> (self, nu_arr, v_pec, tau_e=0.01, n_mu=500)</td></tr>
+<tr class="memdesc:a0eb5a8a1d7775390a1cbda83d124f69d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a single pointing signal of the kSZ effect.  <br /></td></tr>
+<tr class="separator:a0eb5a8a1d7775390a1cbda83d124f69d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Class for generating a single pointing SZ signal. </p>
-</div><hr/>The documentation for this class was generated from the following file:<ul>
+<p>Can choose between tSZ, kSZ and ntSZ (powerlaw). </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a0eb5a8a1d7775390a1cbda83d124f69d" name="a0eb5a8a1d7775390a1cbda83d124f69d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0eb5a8a1d7775390a1cbda83d124f69d">&#9670;&#160;</a></span>getSingleSignal_kSZ()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def MockSZ.Models.SinglePointing.getSingleSignal_kSZ </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>nu_arr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>v_pec</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>tau_e</em> = <code>0.01</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>n_mu</em> = <code>500</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Generate a single pointing signal of the kSZ effect. </p>
+<p>Note that this method, in contrast to the other methods in this class, only returns the CMB distortion. The CMB can be added by adding the kSZ signal to a tSZ or ntSZ signal containing the CMB.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">nu_arr</td><td>Numpy array of frequencies for kSZ effect, in Hz. </td></tr>
+    <tr><td class="paramname">v_pec</td><td>Peculiar velocity. </td></tr>
+    <tr><td class="paramname">tau_e</td><td>Optical depth along sightline. </td></tr>
+    <tr><td class="paramname">n_mu</td><td>Number of scattering direction cosines to include.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>res 1D array containing kSZ effect. </dd></dl>
+
+</div>
+</div>
+<a id="ab1873c5c9d801cdef73960baf4a0014c" name="ab1873c5c9d801cdef73960baf4a0014c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab1873c5c9d801cdef73960baf4a0014c">&#9670;&#160;</a></span>getSingleSignal_ntSZ()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def MockSZ.Models.SinglePointing.getSingleSignal_ntSZ </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>nu_arr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>alpha</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>tau_e</em> = <code>0.01</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>n_s</em> = <code>500</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>n_beta</em> = <code>500</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>no_CMB</em> = <code>False</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Generate a single pointing signal of the ntSZ effect, according to a powerlaw. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">nu_arr</td><td>Numpy array of frequencies for ntSZ effect, in Hz. </td></tr>
+    <tr><td class="paramname">alpha</td><td>Slope of powerlaw. </td></tr>
+    <tr><td class="paramname">tau_e</td><td>Optical depth along sightline. </td></tr>
+    <tr><td class="paramname">n_s</td><td>Number of logarithmic frequency shifts to include. </td></tr>
+    <tr><td class="paramname">n_beta</td><td>Number of dimensionless electron velocities to include. </td></tr>
+    <tr><td class="paramname">no_CMB</td><td>Whether to add CMB to ntSZ signal or not.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>res 1D array containing ntSZ effect. </dd></dl>
+
+</div>
+</div>
+<a id="a69f0d6e3353a40fa5cadb5c742870619" name="a69f0d6e3353a40fa5cadb5c742870619"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a69f0d6e3353a40fa5cadb5c742870619">&#9670;&#160;</a></span>getSingleSignal_tSZ()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def MockSZ.Models.SinglePointing.getSingleSignal_tSZ </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>nu_arr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>Te</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>tau_e</em> = <code>0.01</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>n_s</em> = <code>500</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>n_beta</em> = <code>500</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>no_CMB</em> = <code>False</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Generate a single pointing signal of the tSZ effect. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">nu_arr</td><td>Numpy array of frequencies for tSZ effect, in Hz. </td></tr>
+    <tr><td class="paramname">Te</td><td>Electron temperature, in keV. </td></tr>
+    <tr><td class="paramname">tau_e</td><td>Optical depth along sightline. </td></tr>
+    <tr><td class="paramname">n_s</td><td>Number of logarithmic frequency shifts to include. </td></tr>
+    <tr><td class="paramname">n_beta</td><td>Number of dimensionless electron velocities to include. </td></tr>
+    <tr><td class="paramname">no_CMB</td><td>Whether to add CMB to tSZ signal or not.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>res 1D array containing tSZ effect. </dd></dl>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
 <li>src/MockSZ/<a class="el" href="Models_8py.html">Models.py</a></li>
 </ul>
 </div><!-- contents -->

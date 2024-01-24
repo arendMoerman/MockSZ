@@ -108,24 +108,27 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 <div class="contents">
 <div class="textblock"><h1><a class="anchor" id="intro_sec"></a>
 Introduction</h1>
-<p>These pages contain the software documentation for <code>MockSZ</code>, a Python package for simulating Sunyaev-Zeldovich (SZ) maps.</p>
+<p>These pages contain the software documentation for <code>MockSZ</code>, a Python package for simulating Sunyaev-Zeldovich (SZ) maps. The program is an implementation of the analytical equations found in <a class="el" href="citelist.html#CITEREF_Birkinshaw1999">[1]</a>. In contrast to the other widely accepted SZ simulator, <code>SZpack</code> <a class="el" href="citelist.html#CITEREF_Chluba2012">[2]</a> <a class="el" href="citelist.html#CITEREF_Chluba2013">[3]</a>, <code>MockSZ</code> provides a Python interface for running simulations. The actual calculations are off-loaded through a set of bindings to libraries written in C++.</p>
+<p><code>MockSZ</code> was designed as an easy interface, capable of quickly generating SZ spectra for forecasting simulations and fitting of measured signals.</p>
 <h1><a class="anchor" id="inst"></a>
 Installation</h1>
 <p>The prerequisites for installing <code>MockSZ</code> on any operating system are:</p><ul>
 <li>A working <a href="https://www.python.org/downloads/release/python-380/">Python installation of version 3.8 or higher</a>.</li>
 <li>A <a href="https://pip.pypa.io/en/stable/installation/">pip installation</a>.</li>
 </ul>
-<p>All other necessary prerequisites are fetched and installed upon installing <code>MockSZ</code>.</p>
+<p>All other Python prerequisites are fetched and installed upon installing <code>MockSZ</code>.</p>
+<p>Keep in mind that <code>MockSZ</code> needs the <a href="https://www.gnu.org/software/gsl/">GNU Scientific Library</a>, or GSL for short, for correct functioning. Please refer to the GSL webpage for installation instructions.</p>
 <h2><a class="anchor" id="pdist"></a>
 Install From PyPi</h2>
 <p><code>MockSZ</code> is on PyPi! Just pip install: </p><div class="fragment"><div class="line">pip install MockSZ</div>
-</div><!-- fragment --><p> and it should be good to go.</p>
+</div><!-- fragment --><p> and it should be good to go. Note that this does not install the latest version. However, it is guaranteed to be stable.</p>
 <h2><a class="anchor" id="sdist"></a>
 Install From Source</h2>
 <p>Wheel is required if building from source:: </p><div class="fragment"><div class="line">pip install wheel</div>
 </div><!-- fragment --><p>Then, clone into the git repo and pip install: </p><div class="fragment"><div class="line">git clone https:<span class="comment">//github.com/arend95/MockSZ</span></div>
 <div class="line">pip install .</div>
-</div><!-- fragment --><h2><a class="anchor" id="optdep"></a>
+</div><!-- fragment --><p>This way of installing ensures that the newest version is installed.</p>
+<h2><a class="anchor" id="optdep"></a>
 Optional Dependencies</h2>
 <p>The automated tests are run using the nose2 framework: </p><div class="fragment"><div class="line">pip install nose2</div>
 </div><!-- fragment --><p>Documentation in <code>MockSZ</code> is generated using <a href="https://www.doxygen.nl/index.html">Doxygen</a>. Please see their <a href="https://www.doxygen.nl/manual/install.html">installation page</a> for instructions regarding installation.</p>
@@ -134,7 +137,7 @@ License</h1>
 <p>This project is released under the <a href="https://opensource.org/licenses/MIT">MIT License</a>.</p>
 <h1><a class="anchor" id="contact"></a>
 Contact</h1>
-<p>For questions/support, please contact: A.Moerman-1(at)tudelft.nl </p>
+<p>For questions/support/remarks/coffee, please contact: A.Moerman-1(at)tudelft.nl </p>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
 </div><!-- doc-content -->
