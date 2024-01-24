@@ -49,6 +49,9 @@ pip install nose2
 Documentation in `MockSZ` is generated using [Doxygen](https://www.doxygen.nl/index.html).
 Please see their [installation page](https://www.doxygen.nl/manual/install.html) for instructions regarding installation.
 
+\section tuts Tutorials
+`MockSZ` comes with a couple of tutorials that showcase how to use the program. They can be found on the \ref tutorials "tutorials" page.
+
 \section license License
 This project is released under the [MIT License](https://opensource.org/licenses/MIT).
 

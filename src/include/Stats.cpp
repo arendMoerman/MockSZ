@@ -1,3 +1,7 @@
+/*! \file Stats.cpp
+    \brief Implementations of methods in Stats.h.
+*/
+
 #include "Stats.h"
 
 void getThomsonScatter(double *s_arr, int n_s, double beta, double *output, int num_mu) {

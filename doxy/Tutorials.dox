@@ -1,0 +1,18 @@
+/**
+\page tutorials `MockSZ` : Getting hands-on
+\section tutorials_intro Introduction
+This page contains tutorials for understanding/using `MockSZ`.
+They are arranged in a bottom-up fashion, starting from the single electron-photon scattering case and working up from there.
+Most of the information in these sections is taken from \cite Birkinshaw1999. 
+However, we include the scripts necessary for generating the figures in the notebooks so that users can experiment as well.
+
+After the more theoretical and less practical part about scattering kernels, the two subsequent notebooks are more practical. 
+The first shows how to generate single-pointing SZ signals for the tSZ, kSZ and ntSZ case. Additionally, it contains a few validation tests.
+The second notebook shows how to generate an isothermal-\f$\beta\f$ model, an important and simple model for galaxy clusters. 
+
+[Scattering of photons from electrons](demos/Scatterings.html)
+
+[The SZ effect along a single line-of-sight](demos/SinglePointing.html)
+
+[The isothermal-\f$\beta\f$ model](demos/IsoBetaMaps.html)
+*/

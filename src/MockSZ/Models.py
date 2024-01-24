@@ -82,7 +82,7 @@ class SinglePointing(object):
     """! 
     Class for generating a single pointing SZ signal. Can choose between tSZ, kSZ and ntSZ (powerlaw).
     
-    @ingroup clustermodels
+    @ingroup singlepointing
     """
 
     def getSingleSignal_tSZ(self, nu_arr, Te, tau_e=0.01, n_s=500, n_beta=500, no_CMB=False):

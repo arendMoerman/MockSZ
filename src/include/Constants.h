@@ -1,3 +1,7 @@
+/*! \file Constants.h
+    \brief Often used physical constants.
+*/
+
 #ifndef __Constants_h
 #define __Constants_h
 

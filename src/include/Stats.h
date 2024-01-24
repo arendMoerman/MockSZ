@@ -1,3 +1,7 @@
+/*! \file Stats.h
+    \brief Declarations of several statistical distributions used in MockSZ.
+*/
+
 #include "Constants.h"
 #include "Conversions.h"
 #include "Utils.h"
@@ -11,35 +15,35 @@
 /**
  * Generate probablity for a single electron at speed beta to generate a logarithmic frequency shift (given by s_arr).
  *
- * This function assumes an elastic scattering in electron rest-frame, and thus a Thomson cross section.
+ * This function assumes Thomson scattering in electron rest-frame.
  *
  * @param s_arr Array of doubles containing s-values over which to calculate probability.
  * @param n_s Number of s-values in array.
- * @param beta Single double containing beta factor of electron.
+ * @param beta Double containing beta factor of electron.
  * @param output Array of doubles for storing results.
- * @param num_mu Number of direction cosines to evaluate for scattering. Defaults to 1000, which should be enough.
+ * @param num_mu Number of direction cosines to evaluate for scattering. Defaults to 500, which should be enough.
  */
-void getThomsonScatter(double *s_arr, int n_s, double beta, double *output, int num_mu=100);
+void getThomsonScatter(double *s_arr, int n_s, double beta, double *output, int num_mu=500);
 
 /**
  * Generate probablity for a single electron at speed beta to generate a logarithmic frequency shift (given by s).
  *
- * This function assumes an elastic scattering in electron rest-frame, and thus a Thomson cross section.
+ * This function assumes Thomson scattering in electron rest-frame.
  * Overloaded for single-argument s-values.
  *
- * @param s_arr Double containing s-value at which to calculate probability.
- * @param beta Single double containing beta factor of electron.
- * @param output Doubles for storing result.
- * @param num_mu Number of direction cosines to evaluate for scattering. Defaults to 1000, which should be enough.
+ * @param s Double containing s-value at which to calculate probability.
+ * @param beta Double containing beta factor of electron.
+ * @param output Double for storing result.
+ * @param num_mu Number of direction cosines to evaluate for scattering. Defaults to 500, which should be enough.
  */
-void getThomsonScatter(double s, double beta, double &output, int num_mu=100);
+void getThomsonScatter(double s, double beta, double &output, int num_mu=500);
 
 /**
  * Generate a Maxwell-Juttner (relativistic thermal) distribution.
  *
  * @param beta_arr Array of beta values over which to calculate distribution.
  * @param n_beta Number of beta values in array.
- * @param Te Electron temperature in KeV.
+ * @param Te Electron temperature in keV.
  * @param output Array for storing output values.
  */
 void getMaxwellJuttner(double *beta_arr, int n_beta, double Te, double *output);
@@ -47,8 +51,10 @@ void getMaxwellJuttner(double *beta_arr, int n_beta, double Te, double *output);
 /**
  * Generate a Maxwell-Juttner (relativistic thermal) distribution.
  *
+ * Overloaded for single-argument beta-values
+ *
  * @param beta Beta value at which to calculate distribution.
- * @param Te Electron temperature in KeV.
+ * @param Te Electron temperature in keV.
  * @param output Double for storing output values.
  */
 void getMaxwellJuttner(double beta, double Te, double &output);
@@ -66,6 +72,8 @@ void getPowerlaw(double *beta_arr, int n_beta, double alpha, double *output);
 /**
  * Generate a powerlaw (relativistic nonthermal) distribution.
  *
+ * Overloaded for single-argument beta-values
+ *
  * @param beta Beta value at which to calculate distribution.
  * @param alpha Slope of powerlaw.
  * @param A Normalisation factor of powerlaw. Can be calculated outside hot section.
@@ -79,6 +87,7 @@ void getPowerlaw(double beta, double alpha, double A, double &output);
  * @param s_arr Array of s-values over which to calculate distribution.
  * @param n_s Number of s values in array.
  * @param n_beta Number of beta points to integrate over.
+ * @param Te Electron temperature in keV.
  * @param output Array for storing output values.
  */
 void getMultiScatteringMJ(double *s_arr, int n_s, int n_beta, double Te, double *output);
@@ -95,7 +104,7 @@ void getMultiScatteringMJ(double *s_arr, int n_s, int n_beta, double Te, double 
 void getMultiScatteringPL(double *s_arr, int n_s, int n_beta, double alpha, double *output);
 
 /**
- * Generate an isothermal-beta model, from an azimuth and elevation arrays.
+ * Generate an isothermal-beta model, from an azimuth and elevation array.
  *
  * Returns an array of shape azimuth * elevation, containing the optical depth for each pointing.
  *
@@ -113,8 +122,5 @@ void getMultiScatteringPL(double *s_arr, int n_s, int n_beta, double alpha, doub
  *      If grid=true, n_Az does not need to equal n_El, output should have size n_Az*n_El.
  */
 void getIsoBeta(double *Az, double *El, int n_Az, int n_El, double ibeta, double ne0, double thetac, double Da, double *output, bool grid);
-
-
-
 
 #endif

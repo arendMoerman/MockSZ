@@ -1,3 +1,7 @@
+/*! \file InterfaceCPU.cpp
+    \brief Implementations of ctypes bindings.
+*/
+
 #include "InterfaceCPU.h"
 
 MOCKSZ_DLL void MockSZ_getThomsonScatter(double *s_arr, int n_s, double beta, double *output, int num_mu) {
