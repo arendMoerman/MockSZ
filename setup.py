@@ -47,7 +47,7 @@ class build_ext(build_ext_orig):
 setup(
     name='MockSZ',
     license="MIT",
-    version='0.2.0',
+    version='0.2.2',
     author="Arend Moerman",
     install_requires = ["numpy", "wheel", "cmake"],
     package_dir = {'': 'src'},
