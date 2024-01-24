@@ -47,9 +47,9 @@ class build_ext(build_ext_orig):
 setup(
     name='MockSZ',
     license="MIT",
-    version='0.1.1',
+    version='0.1.2',
     author="Arend Moerman",
-    install_requires = ["numpy", "matplotlib", "scipy", "wheel", "cmake"],
+    install_requires = ["numpy", "wheel", "cmake"],
     package_dir = {'': 'src'},
     packages=['MockSZ'],
     ext_modules=[CMakeExtension(os.path.join("MockSZ", "libs"))],

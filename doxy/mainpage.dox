@@ -3,20 +3,28 @@
 
 \section intro_sec Introduction
 These pages contain the software documentation for `MockSZ`, a Python package for simulating Sunyaev-Zeldovich (SZ) maps.
+The program is an implementation of the analytical equations found in \cite Birkinshaw1999. 
+In contrast to the other widely accepted SZ simulator, `SZpack` \cite Chluba2012 \cite Chluba2013, `MockSZ` provides a Python interface for running simulations.
+The actual calculations are off-loaded through a set of bindings to libraries written in C++.
+
+`MockSZ` was designed as an easy interface, capable of quickly generating SZ spectra for forecasting simulations and fitting of measured signals.
 
 \section inst Installation
 The prerequisites for installing `MockSZ` on any operating system are:
 - A working [Python installation of version 3.8 or higher](https://www.python.org/downloads/release/python-380/).
 - A [pip installation](https://pip.pypa.io/en/stable/installation/).
 
-All other necessary prerequisites are fetched and installed upon installing `MockSZ`.
+All other Python prerequisites are fetched and installed upon installing `MockSZ`.
+
+Keep in mind that `MockSZ` needs the [GNU Scientific Library](https://www.gnu.org/software/gsl/), or GSL for short, for correct functioning.
+Please refer to the GSL webpage for installation instructions.
 
 \subsection pdist Install From PyPi
 `MockSZ` is on PyPi! Just pip install:
 ```
 pip install MockSZ
 ```
-and it should be good to go.
+and it should be good to go. Note that this does not install the latest version. However, it is guaranteed to be stable.
 
 \subsection sdist Install From Source
 Wheel is required if building from source::
@@ -30,6 +38,8 @@ git clone https://github.com/arend95/MockSZ
 pip install .
 ```
 
+This way of installing ensures that the newest version is installed.
+
 \subsection optdep Optional Dependencies
 The automated tests are run using the nose2 framework:
 ```
@@ -39,11 +49,10 @@ pip install nose2
 Documentation in `MockSZ` is generated using [Doxygen](https://www.doxygen.nl/index.html).
 Please see their [installation page](https://www.doxygen.nl/manual/install.html) for instructions regarding installation.
 
-
 \section license License
 This project is released under the [MIT License](https://opensource.org/licenses/MIT).
 
 \section contact Contact
-For questions/support, please contact:
+For questions/support/remarks/coffee, please contact:
 A.Moerman-1(at)tudelft.nl
 */
