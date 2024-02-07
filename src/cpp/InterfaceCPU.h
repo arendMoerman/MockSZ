@@ -19,8 +19,7 @@ extern "C"
     /**
      * Generate probablity for a single electron at speed beta to generate a logarithmic frequency shift (given by s_arr).
      *
-     * This function assumes Thomson scattering in electron rest-frame.
-     *
+     * This function assumes Thomson scattering in electron rest-frame.  *
      * @param s_arr Array of doubles containing s-values over which to calculate probability.
      * @param n_s Number of s-values in array.
      * @param beta Double containing beta factor of electron.
@@ -57,8 +56,9 @@ extern "C"
      * @param Te Electron temperature in keV.
      * @param output Array for storing output values.
      * @param n_beta Number of beta points to integrate over.
+     * @param nThreads Number of CPU threads to use for calculation.
      */
-    MOCKSZ_DLL void MockSZ_getMultiScatteringMJ(double *s_arr, int n_s, double Te, double *output, int n_beta);
+    MOCKSZ_DLL void MockSZ_getMultiScatteringMJ(double *s_arr, int n_s, double Te, double *output, int n_beta, int nThreads);
     
     /**
      * Generate a multi-electron scattering kernel using a powerlaw distribution.
@@ -68,8 +68,9 @@ extern "C"
      * @param alpha Slope of powerlaw.
      * @param output Array for storing output values.
      * @param n_beta Number of beta points to integrate over.
+     * @param nThreads Number of CPU threads to use for calculation.
      */
-    MOCKSZ_DLL void MockSZ_getMultiScatteringPL(double *s_arr, int n_s, double alpha, double *output, int n_beta);
+    MOCKSZ_DLL void MockSZ_getMultiScatteringPL(double *s_arr, int n_s, double alpha, double *output, int n_beta, int nThreads);
     
     /**
      * Single-pointing signal assuming thermal SZ effect.
@@ -82,8 +83,9 @@ extern "C"
      * @param n_s Number of logarithmic frequency shifts to include.
      * @param n_beta Number of dimensionless electron velocities to include.
      * @param no_CMB Whether to add CMB to tSZ signal or not.
+     * @param nThreads Number of CPU threads to use for calculation.
      */
-    MOCKSZ_DLL void MockSZ_getSignal_tSZ(double *nu, int n_nu, double Te, double tau_e, double *output, int n_s, int n_beta, bool no_CMB);
+    MOCKSZ_DLL void MockSZ_getSignal_tSZ(double *nu, int n_nu, double Te, double tau_e, double *output, int n_s, int n_beta, bool no_CMB, int nThreads);
     
     /**
      * Single-pointing signal assuming non-thermal SZ effect.
@@ -96,8 +98,9 @@ extern "C"
      * @param n_s Number of logarithmic frequency shifts to include.
      * @param n_beta Number of dimensionless electron velocities to include.
      * @param no_CMB Whether to add CMB to ntSZ signal or not.
+     * @param nThreads Number of CPU threads to use for calculation.
      */
-    MOCKSZ_DLL void MockSZ_getSignal_ntSZ(double *nu, int n_nu, double alpha, double tau_e, double *output, int n_s, int n_beta, bool no_CMB);
+    MOCKSZ_DLL void MockSZ_getSignal_ntSZ(double *nu, int n_nu, double alpha, double tau_e, double *output, int n_s, int n_beta, bool no_CMB, int nThreads);
 
     /**
      * Single-pointing signal assuming kinematic SZ effect.

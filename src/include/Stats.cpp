@@ -103,33 +103,34 @@ void getPowerlaw(double beta, double alpha, double A, double &output) {
     output = A * pow(gamma, -alpha) * beta * pow(1 - beta*beta, -1.5);
 }
 
-void getMultiScatteringMJ(double *s_arr, int n_s, int n_beta, double Te, double *output) {
-    double beta0;
-    double dbeta;
-    double beta;
-    double beta1 = 1 - DBL_EPSILON;
+void getMultiScatteringMJ(double *s_arr, int n_s, int n_beta, double Te, double *output, int nThreads) {
+    int step = ceil(n_s / nThreads);
+   
+    std::vector<std::thread> threadPool;
+    threadPool.resize(nThreads);
 
-    double output_scalar1, output_scalar2;
-    for(int i=0; i<n_s; i++) {
-        beta0 = (exp(abs(s_arr[i])) - 1) / (exp(abs(s_arr[i])) + 1); 
-        dbeta = (beta1 - beta0) / n_beta;
+    for(int n=0; n < nThreads; n++) {
+        int final_step; // Final step for 
         
-        output[i] = 0.;
-        for(int j=0; j<n_beta; j++) {
-            beta = beta0 + (j + 0.5) * dbeta;
-            getThomsonScatter(s_arr[i], beta, output_scalar1);
-            getMaxwellJuttner(beta, Te, output_scalar2);
+        if(n == (nThreads - 1)) {
+            final_step = n_s;
+        }
 
-            output[i] += output_scalar1 * output_scalar2 * dbeta;
+        else {
+            final_step = (n+1) * step;
+        }
+        threadPool[n] = std::thread(&__parallel_section_MJ, s_arr, n * step, final_step, n_beta, Te, output);
+    }
+
+    for (std::thread &t : threadPool) {
+        if (t.joinable()) {
+            t.join();
         }
     }
+    
 }
 
-void getMultiScatteringPL(double *s_arr, int n_s, int n_beta, double alpha, double *output) {
-    double beta0;
-    double dbeta;
-    double beta;
-    
+void getMultiScatteringPL(double *s_arr, int n_s, int n_beta, double alpha, double *output, int nThreads) {
     double A;
     double gamma2 = beta_gamma(1 - DBL_EPSILON);
 
@@ -141,8 +142,6 @@ void getMultiScatteringPL(double *s_arr, int n_s, int n_beta, double alpha, doub
     double min_beta0 = get_min(beta0_arr, n_s);
     double gamma1 = beta_gamma(min_beta0);
 
-    double output_scalar1, output_scalar2;
-
     if(alpha < 0) {
         A = log10(gamma2/gamma1);
         alpha = 1.;
@@ -150,17 +149,28 @@ void getMultiScatteringPL(double *s_arr, int n_s, int n_beta, double alpha, doub
     else {
         A = (1 - alpha) / (pow(gamma2, 1-alpha) - pow(gamma1, 1-alpha));
     }
+    
+    int step = ceil(n_s / nThreads);
+   
+    std::vector<std::thread> threadPool;
+    threadPool.resize(nThreads);
 
-    for(int i=0; i<n_s; i++) {
-        dbeta = (1 - DBL_EPSILON - beta0_arr[i]) / n_beta;
-        output[i] = 0.;
+    for(int n=0; n < nThreads; n++) {
+        int final_step; // Final step for 
+        
+        if(n == (nThreads - 1)) {
+            final_step = n_s;
+        }
 
-        for(int j=0; j<n_beta; j++) {
-            beta = beta0_arr[i] + (j + 0.5) * dbeta;
-            getThomsonScatter(s_arr[i], beta, output_scalar1);
-            getPowerlaw(beta, alpha, A, output_scalar2);
+        else {
+            final_step = (n+1) * step;
+        }
+        threadPool[n] = std::thread(&__parallel_section_PL, s_arr, n * step, final_step, n_beta, alpha, A, beta0_arr, output);
+    }
 
-            output[i] += output_scalar1 * output_scalar2 * dbeta;
+    for (std::thread &t : threadPool) {
+        if (t.joinable()) {
+            t.join();
         }
     }
     delete[] beta0_arr;
@@ -188,6 +198,49 @@ void getIsoBeta(double *Az, double *El, int n_Az, int n_El, double ibeta, double
         for(int i=0; i<n_Az; i++) {
             theta2 = Az[i]*Az[i] + El[i]*El[i];
             output[i] = te0*pow(1 + theta2/(thetac*thetac), 0.5-1.5*ibeta);
+        }
+    }
+}
+
+void __parallel_section_MJ(double *s_arr, int start, int stop, int n_beta, double Te, double *output) {
+    double beta0;
+    double dbeta;
+    double beta;
+    double beta1 = 1 - DBL_EPSILON;
+
+    double output_scalar1, output_scalar2;
+    
+    for(int i=start; i<stop; i++) {
+        beta0 = (exp(abs(s_arr[i])) - 1) / (exp(abs(s_arr[i])) + 1); 
+        dbeta = (beta1 - beta0) / n_beta;
+        
+        output[i] = 0.;
+        for(int j=0; j<n_beta; j++) {
+            beta = beta0 + (j + 0.5) * dbeta;
+            getThomsonScatter(s_arr[i], beta, output_scalar1);
+            getMaxwellJuttner(beta, Te, output_scalar2);
+
+            output[i] += output_scalar1 * output_scalar2 * dbeta;
+        }
+    }
+}
+void __parallel_section_PL(double *s_arr, int start, int stop, int n_beta, double alpha, double A, double *beta0_arr, double *output) {
+    double beta0;
+    double dbeta;
+    double beta;
+
+    double output_scalar1, output_scalar2;
+
+    for(int i=start; i<stop; i++) {
+        dbeta = (1 - DBL_EPSILON - beta0_arr[i]) / n_beta;
+        output[i] = 0.;
+
+        for(int j=0; j<n_beta; j++) {
+            beta = beta0_arr[i] + (j + 0.5) * dbeta;
+            getThomsonScatter(s_arr[i], beta, output_scalar1);
+            getPowerlaw(beta, alpha, A, output_scalar2);
+
+            output[i] += output_scalar1 * output_scalar2 * dbeta;
         }
     }
 }
