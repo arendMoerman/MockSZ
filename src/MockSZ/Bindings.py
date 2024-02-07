@@ -36,16 +36,16 @@ def loadMockSZlib():
                                       ctypes.POINTER(ctypes.c_double)]
     
     lib.MockSZ_getMultiScatteringMJ.argtypes = [ctypes.POINTER(ctypes.c_double), ctypes.c_int, ctypes.c_double, 
-                                      ctypes.POINTER(ctypes.c_double), ctypes.c_int]
+                                      ctypes.POINTER(ctypes.c_double), ctypes.c_int, ctypes.c_int]
     
     lib.MockSZ_getMultiScatteringPL.argtypes = [ctypes.POINTER(ctypes.c_double), ctypes.c_int, ctypes.c_double, 
-                                      ctypes.POINTER(ctypes.c_double), ctypes.c_int]
+                                      ctypes.POINTER(ctypes.c_double), ctypes.c_int, ctypes.c_int]
     
     lib.MockSZ_getSignal_tSZ.argtypes = [ctypes.POINTER(ctypes.c_double), ctypes.c_int, ctypes.c_double, ctypes.c_double, 
-                                      ctypes.POINTER(ctypes.c_double), ctypes.c_int, ctypes.c_int, ctypes.c_bool]
+                                      ctypes.POINTER(ctypes.c_double), ctypes.c_int, ctypes.c_int, ctypes.c_bool, ctypes.c_int]
     
     lib.MockSZ_getSignal_ntSZ.argtypes = [ctypes.POINTER(ctypes.c_double), ctypes.c_int, ctypes.c_double, ctypes.c_double, 
-                                      ctypes.POINTER(ctypes.c_double), ctypes.c_int, ctypes.c_int, ctypes.c_bool]
+                                      ctypes.POINTER(ctypes.c_double), ctypes.c_int, ctypes.c_int, ctypes.c_bool, ctypes.c_int]
     
     lib.MockSZ_getSignal_kSZ.argtypes = [ctypes.POINTER(ctypes.c_double), ctypes.c_int, ctypes.c_double, ctypes.c_double, 
                                          ctypes.POINTER(ctypes.c_double), ctypes.c_int] 
@@ -134,7 +134,7 @@ def getElectronDistribution(beta_arr, parameter, dist):
 
     return output
 
-def getMultiScattering(s_arr, parameter, dist, n_beta=500):
+def getMultiScattering(s_arr, parameter, dist, n_beta=500, nThreads=None):
     """!
     Binding for calculating a multi-electron scattering kernel.
 
@@ -144,9 +144,12 @@ def getMultiScattering(s_arr, parameter, dist, n_beta=500):
     @param parameter Distribution parameter: electron temperature or powerlaw slope.
     @param dist String specifying distribution to use. Choose between 'MaxwellJuttner' and 'RelativisticPowerlaw'.
     @param n_beta Number of dimensionless electron velocities to include.
+    @param nThreads Amount of CPU threads to use for calculation. 
 
     @returns output Array containing multi-electron scattering kernel.
     """
+
+    nThreads = os.cpu_count() if nThreads is None else nThreads
 
     lib = loadMockSZlib()
     mgr = TManager.Manager()
@@ -155,10 +158,11 @@ def getMultiScattering(s_arr, parameter, dist, n_beta=500):
     cnum_s = ctypes.c_int(s_arr.size)
     cparameter = ctypes.c_double(parameter)
     cn_beta = ctypes.c_int(n_beta)
+    cnThreads = ctypes.c_int(nThreads)
 
     coutput = (ctypes.c_double * s_arr.size)(*(np.zeros(s_arr.size).tolist()))
     
-    args = [cs_arr, cnum_s, cparameter, coutput, cn_beta]
+    args = [cs_arr, cnum_s, cparameter, coutput, cn_beta, cnThreads]
     
     if dist == "MaxwellJuttner":
         mgr.new_thread(target=lib.MockSZ_getMultiScatteringMJ, args=args)
@@ -170,7 +174,7 @@ def getMultiScattering(s_arr, parameter, dist, n_beta=500):
 
     return output
 
-def getSinglePointing_t_ntSZ(nu_arr, parameter, tau_e, dist, n_s=500, n_beta=500, no_CMB=False):
+def getSinglePointing_t_ntSZ(nu_arr, parameter, tau_e, dist, n_s=500, n_beta=500, no_CMB=False, nThreads=None):
     """!
     Binding for calculating single-pointing tSZ or ntSZ signals.
 
@@ -181,9 +185,11 @@ def getSinglePointing_t_ntSZ(nu_arr, parameter, tau_e, dist, n_s=500, n_beta=500
     @param n_s Number of logarithmic frequency shifts to include.
     @param n_beta Number of dimensionless electron velocities to include.
     @param no_CMB Whether to add CMB to tSZ signal or not.
+    @param nThreads Amount of CPU threads to use for calculation. 
     
     @returns output 1D array containing tSZ effect.
     """
+    nThreads = os.cpu_count() if nThreads is None else nThreads
 
     lib = loadMockSZlib()
     mgr = TManager.Manager()
@@ -195,10 +201,11 @@ def getSinglePointing_t_ntSZ(nu_arr, parameter, tau_e, dist, n_s=500, n_beta=500
     cn_s = ctypes.c_int(n_s)
     cn_beta = ctypes.c_int(n_beta)
     cno_CMB = ctypes.c_bool(no_CMB)
+    cnThreads = ctypes.c_int(nThreads)
 
     coutput = (ctypes.c_double * nu_arr.size)(*(np.zeros(nu_arr.size).tolist()))
     
-    args = [cnu_arr, cnum_nu, cparameter, ctau_e, coutput, cn_s, cn_beta, cno_CMB]
+    args = [cnu_arr, cnum_nu, cparameter, ctau_e, coutput, cn_s, cn_beta, cno_CMB, cnThreads]
     
     if dist == "MaxwellJuttner":
         mgr.new_thread(target=lib.MockSZ_getSignal_tSZ, args=args)

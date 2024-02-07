@@ -8,6 +8,8 @@
 
 #include <gsl/gsl_sf_bessel.h>
 #include <gsl/gsl_sf_gamma.h>
+#include <vector>
+#include <thread>
 
 #ifndef __Stats_h
 #define __Stats_h
@@ -89,8 +91,9 @@ void getPowerlaw(double beta, double alpha, double A, double &output);
  * @param n_beta Number of beta points to integrate over.
  * @param Te Electron temperature in keV.
  * @param output Array for storing output values.
+ * @param nThreads Number of CPU threads to use for calculation.
  */
-void getMultiScatteringMJ(double *s_arr, int n_s, int n_beta, double Te, double *output);
+void getMultiScatteringMJ(double *s_arr, int n_s, int n_beta, double Te, double *output, int nThreads);
 
 /**
  * Generate a multi-electron scattering kernel using a powerlaw distribution.
@@ -100,8 +103,9 @@ void getMultiScatteringMJ(double *s_arr, int n_s, int n_beta, double Te, double 
  * @param n_beta Number of beta points to integrate over.
  * @param alpha Slope of powerlaw.
  * @param output Array for storing output values.
+ * @param nThreads Number of CPU threads to use for calculation.
  */
-void getMultiScatteringPL(double *s_arr, int n_s, int n_beta, double alpha, double *output);
+void getMultiScatteringPL(double *s_arr, int n_s, int n_beta, double alpha, double *output, int nThreads);
 
 /**
  * Generate an isothermal-beta model, from an azimuth and elevation array.
@@ -123,4 +127,6 @@ void getMultiScatteringPL(double *s_arr, int n_s, int n_beta, double alpha, doub
  */
 void getIsoBeta(double *Az, double *El, int n_Az, int n_El, double ibeta, double ne0, double thetac, double Da, double *output, bool grid);
 
+void __parallel_section_MJ(double *s_arr, int start, int stop, int n_beta, double Te, double *output);
+void __parallel_section_PL(double *s_arr, int start, int stop, int n_beta, double alpha, double A, double *beta0_arr, double *output);
 #endif

@@ -5,11 +5,23 @@ Additionally, this file contains a class that is useful for investigating scatte
 """
 
 import numpy as np
+from time import time
 
 import MockSZ.Bindings as MBind
 
 TSZ_LABEL     = "MaxwellJuttner"
 NTSZ_LABEL    = "RelativisticPowerlaw"
+
+def timer_func(func): 
+    def wrap_func(*args, **kwargs): 
+        t1 = time() 
+        result = func(*args, **kwargs) 
+        t2 = time()
+        if kwargs.get("timer") is not None and kwargs.get("timer") == True:
+            return result, t2-t1
+            #print(f'Function {func.__name__!r} executed in {(t2-t1):.4f}s') 
+        return result 
+    return wrap_func
 
 class IsoBetaModel(object):
     """!
@@ -84,8 +96,9 @@ class SinglePointing(object):
     
     @ingroup singlepointing
     """
-
-    def getSingleSignal_tSZ(self, nu_arr, Te, tau_e=0.01, n_s=500, n_beta=500, no_CMB=False):
+    
+    @timer_func
+    def getSingleSignal_tSZ(self, nu_arr, Te, tau_e=0.01, n_s=500, n_beta=500, no_CMB=False, nThreads=None, timer=False):
         """!
         Generate a single pointing signal of the tSZ effect.
 
@@ -95,14 +108,17 @@ class SinglePointing(object):
         @param n_s Number of logarithmic frequency shifts to include.
         @param n_beta Number of dimensionless electron velocities to include.
         @param no_CMB Whether to add CMB to tSZ signal or not.
+        @param nThreads Amount of CPU threads to use for calculation. 
+        @param timer Time function execution. Used in decorator.
         
         @returns res 1D array containing tSZ effect.
         """
 
-        res = MBind.getSinglePointing_t_ntSZ(nu_arr, Te, tau_e, TSZ_LABEL, n_s, n_beta, no_CMB)
+        res = MBind.getSinglePointing_t_ntSZ(nu_arr, Te, tau_e, TSZ_LABEL, n_s, n_beta, no_CMB, nThreads)
         return res
     
-    def getSingleSignal_ntSZ(self, nu_arr, alpha, tau_e=0.01, n_s=500, n_beta=500, no_CMB=False):
+    @timer_func
+    def getSingleSignal_ntSZ(self, nu_arr, alpha, tau_e=0.01, n_s=500, n_beta=500, no_CMB=False, nThreads=None, timer=False):
         """!
         Generate a single pointing signal of the ntSZ effect, according to a powerlaw.
 
@@ -112,11 +128,13 @@ class SinglePointing(object):
         @param n_s Number of logarithmic frequency shifts to include.
         @param n_beta Number of dimensionless electron velocities to include.
         @param no_CMB Whether to add CMB to ntSZ signal or not.
+        @param nThreads Amount of CPU threads to use for calculation.
+        @param timer Time function execution. Used in decorator.
         
         @returns res 1D array containing ntSZ effect.
         """
 
-        res = MBind.getSinglePointing_t_ntSZ(nu_arr, alpha, tau_e, NTSZ_LABEL, n_s, n_beta, no_CMB)
+        res = MBind.getSinglePointing_t_ntSZ(nu_arr, alpha, tau_e, NTSZ_LABEL, n_s, n_beta, no_CMB, nThreads)
 
         return res
     
@@ -191,7 +209,7 @@ class ScatteringKernels(object):
 
         return res
     
-    def getMultiScatteringMJ(self, s_arr, Te, n_beta=500):
+    def getMultiScatteringMJ(self, s_arr, Te, n_beta=500, nThreads=None):
         """!
         Obtain multi-electron scattering kernel, for a range of beta.
         This kernel is calculated using a Maxwell-Juttner distribution.
@@ -199,15 +217,16 @@ class ScatteringKernels(object):
         @param s_arr Numpy array of logarithmic frequency shifts s.
         @param Te Electron temperature in keV.
         @param n_beta Number of dimensionless electron velocities to include.
+        @param nThreads Amount of CPU threads to use for calculation. 
 
         @returns res 1D array containing mulit-electron scattering probabilities.
         """
         
-        res = MBind.getMultiScattering(s_arr, Te, TSZ_LABEL, n_beta)
+        res = MBind.getMultiScattering(s_arr, Te, TSZ_LABEL, n_beta, nThreads)
 
         return res
     
-    def getMultiScatteringPL(self, s_arr, alpha, n_beta=500):
+    def getMultiScatteringPL(self, s_arr, alpha, n_beta=500, nThreads=None):
         """!
         Obtain multi-electron scattering kernel, for a range of beta.
         This kernel is calculated using a relativistic powerlaw distribution.
@@ -215,10 +234,11 @@ class ScatteringKernels(object):
         @param s_arr Numpy array of logarithmic frequency shifts s.
         @param alpha Slope of powerlaw.
         @param n_beta Number of dimensionless electron velocities to include.
+        @param nThreads Amount of CPU threads to use for calculation. 
 
         @returns res 1D array containing mulit-electron scattering probabilities.
         """
         
-        res = MBind.getMultiScattering(s_arr, alpha, NTSZ_LABEL, n_beta)
+        res = MBind.getMultiScattering(s_arr, alpha, NTSZ_LABEL, n_beta, nThreads)
 
         return res

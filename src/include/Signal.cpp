@@ -4,7 +4,7 @@
 
 #include "Signal.h"
 
-void calcSignal_tSZ(double *nu, int n_nu, double Te, double tau_e, double *output, int n_s, int n_beta, bool no_CMB) {
+void calcSignal_tSZ(double *nu, int n_nu, double Te, double tau_e, double *output, int n_s, int n_beta, bool no_CMB, int nThreads) {
     double s0 = -1.2;
     double s1 = 2.;
     
@@ -22,8 +22,8 @@ void calcSignal_tSZ(double *nu, int n_nu, double Te, double tau_e, double *outpu
     for(int i=0; i<n_s; i++) {
         s_arr[i] = s0 + (i + 0.5)*ds;
     }
-
-    getMultiScatteringMJ(s_arr, n_s, n_beta, Te, P1_arr);    
+    
+    getMultiScatteringMJ(s_arr, n_s, n_beta, Te, P1_arr, nThreads);    
 
     for(int i=0; i<n_nu; i++) {
         output[i] = CMB_factor * get_CMB(nu[i]);
@@ -36,7 +36,7 @@ void calcSignal_tSZ(double *nu, int n_nu, double Te, double tau_e, double *outpu
     delete[] P1_arr;
 }
 
-void calcSignal_ntSZ(double *nu, int n_nu, double alpha, double tau_e, double *output, int n_s, int n_beta, bool no_CMB) {
+void calcSignal_ntSZ(double *nu, int n_nu, double alpha, double tau_e, double *output, int n_s, int n_beta, bool no_CMB, int nThreads) {
     double s0 = -1.2;
     double s1 = 10.;
     
@@ -55,7 +55,7 @@ void calcSignal_ntSZ(double *nu, int n_nu, double alpha, double tau_e, double *o
         CMB_factor += 1;
     }
 
-    getMultiScatteringPL(s_arr, n_s, n_beta, alpha, P1_arr);    
+    getMultiScatteringPL(s_arr, n_s, n_beta, alpha, P1_arr, nThreads);    
 
     for(int i=0; i<n_nu; i++) {
         output[i] = CMB_factor * get_CMB(nu[i]);
@@ -94,3 +94,4 @@ void calcSignal_kSZ(double *nu, int n_nu, double v_pec, double tau_e, double *ou
         }
     }
 }
+
