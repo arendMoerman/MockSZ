@@ -4,6 +4,7 @@
 
 #include "Stats.h"
 #include "Signal.h"
+#include "Romberg.h"
 
 #ifdef _WIN32
 #   define MOCKSZ_DLL __declspec(dllexport)
@@ -19,14 +20,15 @@ extern "C"
     /**
      * Generate probablity for a single electron at speed beta to generate a logarithmic frequency shift (given by s_arr).
      *
-     * This function assumes Thomson scattering in electron rest-frame.  *
+     * This function assumes Thomson scattering in electron rest-frame.  
+     * 
      * @param s_arr Array of doubles containing s-values over which to calculate probability.
      * @param n_s Number of s-values in array.
      * @param beta Double containing beta factor of electron.
      * @param output Array of doubles for storing results.
-     * @param num_mu Number of direction cosines to evaluate for scattering.
+     * @param acc Accuracy of integrator.
      */
-    MOCKSZ_DLL void MockSZ_getThomsonScatter(double *s_arr, int n_s, double beta, double *output, int num_mu);
+    MOCKSZ_DLL void MockSZ_getThomsonScatter(double *s_arr, int n_s, double beta, double *output, double acc);
 
     /**
      * Generate a Maxwell-Juttner (relativistic thermal) distribution.
@@ -35,8 +37,10 @@ extern "C"
      * @param n_beta Number of beta values in array.
      * @param Te Electron temperature in keV.
      * @param output Array for storing output values.
+     * @param acc Accuracy of integrator. 
+     *      Note that this is only passed for homogenity in the bindings and ignored in the actual function
      */
-    MOCKSZ_DLL void MockSZ_getMaxwellJuttner(double *beta_arr, int n_beta, double Te, double *output); 
+    MOCKSZ_DLL void MockSZ_getMaxwellJuttner(double *beta_arr, int n_beta, double Te, double *output, double acc); 
     
     /**
      * Generate a powerlaw (relativistic nonthermal) distribution.
@@ -45,8 +49,9 @@ extern "C"
      * @param n_beta Number of beta values in array.
      * @param alpha Slope of powerlaw.
      * @param output Array for storing output values.
+     *      Note that this is only passed for homogenity in the bindings and ignored in the actual function
      */
-    MOCKSZ_DLL void MockSZ_getPowerlaw(double *beta_arr, int n_beta, double alpha, double *output);
+    MOCKSZ_DLL void MockSZ_getPowerlaw(double *beta_arr, int n_beta, double alpha, double *output, double acc);
     
     /**
      * Generate a multi-electron scattering kernel using a Maxwell-Juttner distribution.
@@ -55,10 +60,9 @@ extern "C"
      * @param n_s Number of s values in array.
      * @param Te Electron temperature in keV.
      * @param output Array for storing output values.
-     * @param n_beta Number of beta points to integrate over.
-     * @param nThreads Number of CPU threads to use for calculation.
+     * @param acc Accuracy of integrator.
      */
-    MOCKSZ_DLL void MockSZ_getMultiScatteringMJ(double *s_arr, int n_s, double Te, double *output, int n_beta, int nThreads);
+    MOCKSZ_DLL void MockSZ_getMultiScatteringMJ(double *s_arr, int n_s, double Te, double *output, double acc);
     
     /**
      * Generate a multi-electron scattering kernel using a powerlaw distribution.
@@ -67,10 +71,9 @@ extern "C"
      * @param n_s Number of s values in array.
      * @param alpha Slope of powerlaw.
      * @param output Array for storing output values.
-     * @param n_beta Number of beta points to integrate over.
-     * @param nThreads Number of CPU threads to use for calculation.
+     * @param acc Accuracy of integrator.
      */
-    MOCKSZ_DLL void MockSZ_getMultiScatteringPL(double *s_arr, int n_s, double alpha, double *output, int n_beta, int nThreads);
+    MOCKSZ_DLL void MockSZ_getMultiScatteringPL(double *s_arr, int n_s, double alpha, double *output, double acc);
     
     /**
      * Single-pointing signal assuming thermal SZ effect.
@@ -80,12 +83,10 @@ extern "C"
      * @param Te Electron temperature in keV.
      * @param tau_e Optical depth along sightline.
      * @param output Array for storing output.
-     * @param n_s Number of logarithmic frequency shifts to include.
-     * @param n_beta Number of dimensionless electron velocities to include.
      * @param no_CMB Whether to add CMB to tSZ signal or not.
-     * @param nThreads Number of CPU threads to use for calculation.
+     * @param acc Accuracy of integrator.
      */
-    MOCKSZ_DLL void MockSZ_getSignal_tSZ(double *nu, int n_nu, double Te, double tau_e, double *output, int n_s, int n_beta, bool no_CMB, int nThreads);
+    MOCKSZ_DLL void MockSZ_getSignal_tSZ(double *nu, int n_nu, double Te, double tau_e, double *output, bool no_CMB, double acc);
     
     /**
      * Single-pointing signal assuming non-thermal SZ effect.
@@ -95,12 +96,10 @@ extern "C"
      * @param alpha Slope of powerlaw.
      * @param tau_e Optical depth along sightline.
      * @param output Array for storing output.
-     * @param n_s Number of logarithmic frequency shifts to include.
-     * @param n_beta Number of dimensionless electron velocities to include.
      * @param no_CMB Whether to add CMB to ntSZ signal or not.
-     * @param nThreads Number of CPU threads to use for calculation.
+     * @param acc Accuracy of integrator.
      */
-    MOCKSZ_DLL void MockSZ_getSignal_ntSZ(double *nu, int n_nu, double alpha, double tau_e, double *output, int n_s, int n_beta, bool no_CMB, int nThreads);
+    MOCKSZ_DLL void MockSZ_getSignal_ntSZ(double *nu, int n_nu, double alpha, double tau_e, double *output, bool no_CMB, double acc);
 
     /**
      * Single-pointing signal assuming kinematic SZ effect.
@@ -110,9 +109,10 @@ extern "C"
      * @param v_pec Peculiar velocity in km /s.
      * @param tau_e Optical depth along sightline.
      * @param output Array for storing output.
-     * @param n_mu Number of scattering direction cosines to include.
+     * @param no_CMB Whether to add CMB or not.
+     * @param acc Accuracy of integrator.
      */
-    MOCKSZ_DLL void MockSZ_getSignal_kSZ(double *nu, int n_nu, double v_pec, double tau_e, double *output, int n_mu);
+    MOCKSZ_DLL void MockSZ_getSignal_kSZ(double *nu, int n_nu, double v_pec, double tau_e, double *output, bool no_CMB, double acc);
 
     /**
      * Generate an isothermal-beta model, from an azimuth and elevation array.
@@ -138,6 +138,8 @@ extern "C"
      * Obtain value of CMB intensity at a range of frequencies.
      *
      * @param nu Array of frequencies in Hz.
+     * @param n_nu Number of frequencies in nu.
+     * @param output Array for storing outputs.
      *
      * @returns CMB intensities.
      */

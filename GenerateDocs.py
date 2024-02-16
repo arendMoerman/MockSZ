@@ -12,7 +12,9 @@ import argparse
 
 def GenerateDocs():
     docPath = os.path.join(os.path.dirname(os.path.realpath(__file__)), "docs")
-    demoPath = os.path.join(os.path.dirname(os.path.realpath(__file__)), os.path.join("etc", "demos"))
+    tutPath = os.path.join(os.path.dirname(os.path.realpath(__file__)), os.path.join("etc", "tutorials"))
+    valPath = os.path.join(os.path.dirname(os.path.realpath(__file__)), os.path.join("etc", "validations"))
+    ddPath = os.path.join(os.path.dirname(os.path.realpath(__file__)), os.path.join("etc", "deepdives"))
     doxyPath = os.path.join(os.path.dirname(os.path.realpath(__file__)), "doxy")
     try:
         try:
@@ -20,16 +22,50 @@ def GenerateDocs():
         except Exception as err:
             print(traceback.format_exc())
 
-        # Convert demos to html format for inclusion in the documentation.
-        for (dirpath, dirnames, filenames) in os.walk(demoPath):
-            destPath = os.path.join(docPath, "demos")
+        # Convert tutorials to html format for inclusion in the documentation.
+        for (dirpath, dirnames, filenames) in os.walk(tutPath):
+            destPath = os.path.join(docPath, "tutorials")
             os.makedirs(destPath)
             for file in filenames:
                 if file.split('.')[1] != "ipynb":
                     continue
 
-                _path = os.path.join(demoPath, file)
-                htmlPath = os.path.join(demoPath, f"{file.split('.')[0]}.html")
+                _path = os.path.join(tutPath, file)
+                htmlPath = os.path.join(tutPath, f"{file.split('.')[0]}.html")
+                html_destPath = os.path.join(destPath, f"{file.split('.')[0]}.html")
+
+                os.system(f"jupyter nbconvert --to html --template lab --theme dark {_path}")
+                os.rename(htmlPath, html_destPath)
+            
+            break
+        
+        # Convert validations to html format for inclusion in the documentation.
+        for (dirpath, dirnames, filenames) in os.walk(valPath):
+            destPath = os.path.join(docPath, "validations")
+            os.makedirs(destPath)
+            for file in filenames:
+                if file.split('.')[1] != "ipynb":
+                    continue
+
+                _path = os.path.join(valPath, file)
+                htmlPath = os.path.join(valPath, f"{file.split('.')[0]}.html")
+                html_destPath = os.path.join(destPath, f"{file.split('.')[0]}.html")
+
+                os.system(f"jupyter nbconvert --to html --template lab --theme dark {_path}")
+                os.rename(htmlPath, html_destPath)
+            
+            break
+        
+        # Convert deep dives to html format for inclusion in the documentation.
+        for (dirpath, dirnames, filenames) in os.walk(ddPath):
+            destPath = os.path.join(docPath, "deepdives")
+            os.makedirs(destPath)
+            for file in filenames:
+                if file.split('.')[1] != "ipynb":
+                    continue
+
+                _path = os.path.join(ddPath, file)
+                htmlPath = os.path.join(ddPath, f"{file.split('.')[0]}.html")
                 html_destPath = os.path.join(destPath, f"{file.split('.')[0]}.html")
 
                 os.system(f"jupyter nbconvert --to html --template lab --theme dark {_path}")

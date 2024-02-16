@@ -105,6 +105,7 @@ $(document).ready(function(){initNavTree('classMockSZ_1_1Models_1_1IsoBetaModel.
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="classMockSZ_1_1Models_1_1IsoBetaModel-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">MockSZ.Models.IsoBetaModel Class Reference<div class="ingroups"><a class="el" href="group__clustermodels.html">Cluster Models</a></div></div></div>
 </div><!--header-->
@@ -121,12 +122,21 @@ Inheritance diagram for MockSZ.Models.IsoBetaModel:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:a3319d40aa59e77a02f3001e4a42c343e"><td class="memItemLeft" align="right" valign="top"><a id="a3319d40aa59e77a02f3001e4a42c343e" name="a3319d40aa59e77a02f3001e4a42c343e"></a>
+def&#160;</td><td class="memItemRight" valign="bottom"><b>__init__</b> (self)</td></tr>
+<tr class="separator:a3319d40aa59e77a02f3001e4a42c343e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab05d7ac9cd2fcbced0553945f0f1981a"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMockSZ_1_1Models_1_1IsoBetaModel.html#ab05d7ac9cd2fcbced0553945f0f1981a">getIsoBeta</a> (self, Az, El, ibeta, ne0, thetac, Da, grid=False)</td></tr>
 <tr class="memdesc:ab05d7ac9cd2fcbced0553945f0f1981a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get an isothermal-beta optical depth screen.  <br /></td></tr>
 <tr class="separator:ab05d7ac9cd2fcbced0553945f0f1981a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acda47e679e7ad4a19d663bb291a54795"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMockSZ_1_1Models_1_1IsoBetaModel.html#acda47e679e7ad4a19d663bb291a54795">getIsoBetaCube</a> (self, isobeta, nu_arr, Te, v_pec, n_s=500, n_beta=500, n_mu=500, no_CMB=False)</td></tr>
-<tr class="memdesc:acda47e679e7ad4a19d663bb291a54795"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get an isothermal-beta model from an optical depth screen.  <br /></td></tr>
-<tr class="separator:acda47e679e7ad4a19d663bb291a54795"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a18e54cbe0adc41874e9baabe23c73372"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMockSZ_1_1Models_1_1IsoBetaModel.html#a18e54cbe0adc41874e9baabe23c73372">getIsoBetaCube</a> (self, isobeta, nu_arr, Te, v_pec, no_CMB=False, acc=1e-6)</td></tr>
+<tr class="memdesc:a18e54cbe0adc41874e9baabe23c73372"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get an isothermal-beta model from an optical depth screen.  <br /></td></tr>
+<tr class="separator:a18e54cbe0adc41874e9baabe23c73372"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:ad6dbd31115580995eb3fdf0d2072b724"><td class="memItemLeft" align="right" valign="top"><a id="ad6dbd31115580995eb3fdf0d2072b724" name="ad6dbd31115580995eb3fdf0d2072b724"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>clib</b></td></tr>
+<tr class="separator:ad6dbd31115580995eb3fdf0d2072b724"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Class representing an isothermal-beta model. </p>
@@ -211,8 +221,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="acda47e679e7ad4a19d663bb291a54795" name="acda47e679e7ad4a19d663bb291a54795"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acda47e679e7ad4a19d663bb291a54795">&#9670;&#160;</a></span>getIsoBetaCube()</h2>
+<a id="a18e54cbe0adc41874e9baabe23c73372" name="a18e54cbe0adc41874e9baabe23c73372"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a18e54cbe0adc41874e9baabe23c73372">&#9670;&#160;</a></span>getIsoBetaCube()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -251,25 +261,13 @@ Public Member Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>n_s</em> = <code>500</code>, </td>
+          <td class="paramname"><em>no_CMB</em> = <code>False</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>n_beta</em> = <code>500</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>n_mu</em> = <code>500</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>no_CMB</em> = <code>False</code>&#160;</td>
+          <td class="paramname"><em>acc</em> = <code>1e-6</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -286,9 +284,8 @@ Public Member Functions</h2></td></tr>
     <tr><td class="paramname">nu_arr</td><td>Numpy array of frequencies for SZ effect, in Hz. </td></tr>
     <tr><td class="paramname">Te</td><td>Electron temperature, in keV. </td></tr>
     <tr><td class="paramname">v_pec</td><td>Peculiar cluster velocity, in km / s. </td></tr>
-    <tr><td class="paramname">n_s</td><td>Number of logarithmic frequency shifts to include. </td></tr>
-    <tr><td class="paramname">n_beta</td><td>Number of dimensionless electron velocities to include. </td></tr>
-    <tr><td class="paramname">no_CMB</td><td>Whether to add CMB to SZ signal or not.</td></tr>
+    <tr><td class="paramname">no_CMB</td><td>Whether to add CMB to SZ signal or not. </td></tr>
+    <tr><td class="paramname">acc</td><td>Required relative accuracy of integration.</td></tr>
   </table>
   </dd>
 </dl>

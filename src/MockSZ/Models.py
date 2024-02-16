@@ -1,6 +1,6 @@
 """!
 @file
-Cluster/single pointing models for making SZ maps.
+Cluster/single-pointing models for making SZ maps.
 Additionally, this file contains a class that is useful for investigating scattering kernels and electron distributions.
 """
 
@@ -8,11 +8,15 @@ import numpy as np
 from time import time
 
 import MockSZ.Bindings as MBind
-
-TSZ_LABEL     = "MaxwellJuttner"
-NTSZ_LABEL    = "RelativisticPowerlaw"
+import MockSZ.Constants as MConst
+import MockSZ.Conversions as MConv
 
 def timer_func(func): 
+    """!
+    Decorator for timing functions in MockSZ.
+    Useful for estimating performance.
+    """
+
     def wrap_func(*args, **kwargs): 
         t1 = time() 
         result = func(*args, **kwargs) 
@@ -26,10 +30,16 @@ def timer_func(func):
 class IsoBetaModel(object):
     """!
     Class representing an isothermal-beta model.
-    Should be instantiated and serves as an interface for MockSZ when simulating these types of clusters.
+    Serves as an interface for MockSZ when simulating these types of clusters.
+
+    Attributes:
+        clib Library containing backend functions.
 
     @ingroup clustermodels
     """
+    
+    def __init__(self):
+        self.clib = MBind.loadMockSZlib()
     
     def getIsoBeta(self, Az, El, ibeta, ne0, thetac, Da, grid=False):
         """!
@@ -51,7 +61,7 @@ class IsoBetaModel(object):
         res = MBind.getIsoBeta(Az, El, ibeta, ne0, thetac, Da, grid)
         return res
     
-    def getIsoBetaCube(self, isobeta, nu_arr, Te, v_pec, n_s=500, n_beta=500, n_mu=500, no_CMB=False):
+    def getIsoBetaCube(self, isobeta, nu_arr, Te, v_pec, no_CMB=False, acc=1e-6):
         """!
         Get an isothermal-beta model from an optical depth screen.
 
@@ -59,15 +69,18 @@ class IsoBetaModel(object):
         @param nu_arr Numpy array of frequencies for SZ effect, in Hz.
         @param Te Electron temperature, in keV.
         @param v_pec Peculiar cluster velocity, in km / s.
-        @param n_s Number of logarithmic frequency shifts to include.
-        @param n_beta Number of dimensionless electron velocities to include.
         @param no_CMB Whether to add CMB to SZ signal or not.
+        @param acc Required relative accuracy of integration.
         
         @returns res 2D or 3D grid (depending on dimensions of isobeta) containing SZ signal attenuated by optical depth in isobeta.
         """
 
-        res_tSZ = MBind.getSinglePointing_t_ntSZ(nu_arr, Te, tau_e=1, dist=TSZ_LABEL, n_s=n_s, n_beta=n_beta, no_CMB=True)
-        res_kSZ = MBind.getSinglePointing_kSZ(nu_arr, v_pec, tau_e=1, n_mu=n_mu)
+        tau_e_1 = 1
+
+        res_kSZ = MBind.getDistributionTwoParam(nu_arr, v_pec, tau_e_1, no_CMB, acc, 
+                                            func=self.clib.MockSZ_getSignal_kSZ)
+        res_tSZ = MBind.getDistributionTwoParam(nu_arr, Te, tau_e_1, no_CMB, acc, 
+                                            func=self.clib.MockSZ_getSignal_tSZ)
         
         res_SZ = res_tSZ + res_kSZ
 
@@ -93,67 +106,73 @@ class IsoBetaModel(object):
 class SinglePointing(object):
     """! 
     Class for generating a single pointing SZ signal. Can choose between tSZ, kSZ and ntSZ (powerlaw).
+
+    Attributes:
+        clib Library containing backend functions.
     
     @ingroup singlepointing
     """
+    def __init__(self):
+        self.clib = MBind.loadMockSZlib()
     
     @timer_func
-    def getSingleSignal_tSZ(self, nu_arr, Te, tau_e=0.01, n_s=500, n_beta=500, no_CMB=False, nThreads=None, timer=False):
+    def getSingleSignal_tSZ(self, nu_arr, Te, tau_e, no_CMB=False, timer=False, acc=1e-6):
         """!
         Generate a single pointing signal of the tSZ effect.
 
         @param nu_arr Numpy array of frequencies for tSZ effect, in Hz.
         @param Te Electron temperature, in keV.
         @param tau_e Optical depth along sightline.
-        @param n_s Number of logarithmic frequency shifts to include.
-        @param n_beta Number of dimensionless electron velocities to include.
         @param no_CMB Whether to add CMB to tSZ signal or not.
-        @param nThreads Amount of CPU threads to use for calculation. 
         @param timer Time function execution. Used in decorator.
+        @param acc Required relative accuracy of integration.
         
         @returns res 1D array containing tSZ effect.
         """
 
-        res = MBind.getSinglePointing_t_ntSZ(nu_arr, Te, tau_e, TSZ_LABEL, n_s, n_beta, no_CMB, nThreads)
+        res = MBind.getDistributionTwoParam(nu_arr, Te, tau_e, no_CMB, acc, 
+                                            func=self.clib.MockSZ_getSignal_tSZ)
         return res
     
     @timer_func
-    def getSingleSignal_ntSZ(self, nu_arr, alpha, tau_e=0.01, n_s=500, n_beta=500, no_CMB=False, nThreads=None, timer=False):
+    def getSingleSignal_ntSZ(self, nu_arr, alpha, tau_e, no_CMB=False, timer=False, acc=1e-6):
         """!
         Generate a single pointing signal of the ntSZ effect, according to a powerlaw.
 
         @param nu_arr Numpy array of frequencies for ntSZ effect, in Hz.
         @param alpha Slope of powerlaw.
         @param tau_e Optical depth along sightline.
-        @param n_s Number of logarithmic frequency shifts to include.
-        @param n_beta Number of dimensionless electron velocities to include.
         @param no_CMB Whether to add CMB to ntSZ signal or not.
-        @param nThreads Amount of CPU threads to use for calculation.
         @param timer Time function execution. Used in decorator.
+        @param acc Required relative accuracy of integration.
         
         @returns res 1D array containing ntSZ effect.
         """
 
-        res = MBind.getSinglePointing_t_ntSZ(nu_arr, alpha, tau_e, NTSZ_LABEL, n_s, n_beta, no_CMB, nThreads)
+        res = MBind.getDistributionTwoParam(nu_arr, alpha, tau_e, no_CMB, acc, 
+                                            func=self.clib.MockSZ_getSignal_ntSZ)
 
         return res
     
-    def getSingleSignal_kSZ(self, nu_arr, v_pec, tau_e=0.01, n_mu=500):
+    @timer_func
+    def getSingleSignal_kSZ(self, nu_arr, v_pec, tau_e, no_CMB=False, timer=False, acc=1e-6):
         """!
         Generate a single pointing signal of the kSZ effect.
 
-        Note that this method, in contrast to the other methods in this class, only returns the CMB distortion.
         The CMB can be added by adding the kSZ signal to a tSZ or ntSZ signal containing the CMB.
 
         @param nu_arr Numpy array of frequencies for kSZ effect, in Hz.
         @param v_pec Peculiar velocity.
         @param tau_e Optical depth along sightline.
-        @param n_mu Number of scattering direction cosines to include.
+        @param no_CMB Whether to add CMB to ntSZ signal or not.
+        @param timer Time function execution. Used in decorator.
+        @param acc Required relative accuracy of integration.
         
         @returns res 1D array containing kSZ effect.
         """
 
-        res = MBind.getSinglePointing_kSZ(nu_arr, v_pec, tau_e, n_mu)
+        res = MBind.getDistributionTwoParam(nu_arr, v_pec, tau_e, no_CMB, acc, 
+                                            func=self.clib.MockSZ_getSignal_kSZ)
 
         return res
 
@@ -163,21 +182,29 @@ class ScatteringKernels(object):
     It is not to be used per se for simulations, but it provides a nice overview of available distributions.
     In addition, it is helpful for troubleshooting and debugging to have access to the scattering kernels directly.
     So, it is mostly informative, and not meant to be used during actual simulations.
-    """
 
-    def getSingleScattering(self, s_arr, beta, num_mu=1000):
+    Attributes:
+        clib Library containing backend functions.
+
+    @ingroup scatteringkernels
+    """
+    
+    def __init__(self):
+        self.clib = MBind.loadMockSZlib()
+
+    def getSingleScattering(self, s_arr, beta, acc=1e-6):
         """!
         Obtain single-electron scattering kernel, for a range of s and a single beta.
         This method assumes a Thomson scattering in the electron rest frame.
 
         @param s_arr Numpy array of logarithmic frequency shifts s.
         @param beta Dimensionless electron velocity.
-        @param n_mu Number of scattering direction cosines to include.
+        @param acc Required relative accuracy of integration.
 
         @returns res 1D array containing single-electron scattering probabilities.
         """
         
-        res = MBind.getSingleScattering(s_arr, beta, num_mu)
+        res = MBind.getDistributionSingleParam(s_arr, beta, acc, func=self.clib.MockSZ_getThomsonScatter)
 
         return res
     
@@ -191,7 +218,8 @@ class ScatteringKernels(object):
         @returns res 1D array containing Maxwell-Juttner distribution.
         """
         
-        res = MBind.getElectronDistribution(beta_arr, Te, TSZ_LABEL)
+        res = MBind.getDistributionSingleParam(beta_arr, Te, acc=1e-6, 
+                                               func=self.clib.MockSZ_getMaxwellJuttner)
 
         return res
     
@@ -205,40 +233,41 @@ class ScatteringKernels(object):
         @returns res 1D array containing relativistic powerlaw distribution.
         """
         
-        res = MBind.getElectronDistribution(beta_arr, alpha, NTSZ_LABEL)
+        res = MBind.getDistributionSingleParam(beta_arr, alpha, acc=1e-6, 
+                                               func=self.clib.MockSZ_getPowerlaw)
 
         return res
     
-    def getMultiScatteringMJ(self, s_arr, Te, n_beta=500, nThreads=None):
+    def getMultiScatteringMJ(self, s_arr, Te, acc=1e-6):
         """!
         Obtain multi-electron scattering kernel, for a range of beta.
         This kernel is calculated using a Maxwell-Juttner distribution.
 
         @param s_arr Numpy array of logarithmic frequency shifts s.
         @param Te Electron temperature in keV.
-        @param n_beta Number of dimensionless electron velocities to include.
-        @param nThreads Amount of CPU threads to use for calculation. 
+        @param acc Required relative accuracy of integration.
 
         @returns res 1D array containing mulit-electron scattering probabilities.
         """
         
-        res = MBind.getMultiScattering(s_arr, Te, TSZ_LABEL, n_beta, nThreads)
+        res = MBind.getDistributionSingleParam(s_arr, Te, acc, 
+                                               func=self.clib.MockSZ_getMultiScatteringMJ)
 
         return res
     
-    def getMultiScatteringPL(self, s_arr, alpha, n_beta=500, nThreads=None):
+    def getMultiScatteringPL(self, s_arr, alpha, acc=1e-6):
         """!
         Obtain multi-electron scattering kernel, for a range of beta.
         This kernel is calculated using a relativistic powerlaw distribution.
 
         @param s_arr Numpy array of logarithmic frequency shifts s.
         @param alpha Slope of powerlaw.
-        @param n_beta Number of dimensionless electron velocities to include.
-        @param nThreads Amount of CPU threads to use for calculation. 
+        @param acc Required relative accuracy of integration.
 
         @returns res 1D array containing mulit-electron scattering probabilities.
         """
         
-        res = MBind.getMultiScattering(s_arr, alpha, NTSZ_LABEL, n_beta, nThreads)
+        res = MBind.getDistributionSingleParam(s_arr, alpha, acc, 
+                                               func=self.clib.MockSZ_getMultiScatteringPL)
 
         return res

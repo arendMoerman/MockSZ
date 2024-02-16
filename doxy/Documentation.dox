@@ -10,6 +10,8 @@ This list acts as a reference for general users and is structured in groups for 
 
 \subpage clustermodels
 
+\subpage scatteringkernels
+
 \section fulldocs Full Software Documentation
 This page contains the entire documented source code. 
 

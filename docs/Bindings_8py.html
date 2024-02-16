@@ -117,21 +117,12 @@ Functions</h2></td></tr>
 <tr class="memitem:af88c66a4754d6c422e724d91b4ab7ddb"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Bindings_8py.html#af88c66a4754d6c422e724d91b4ab7ddb">MockSZ.Bindings.loadMockSZlib</a> ()</td></tr>
 <tr class="memdesc:af88c66a4754d6c422e724d91b4ab7ddb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load the MockSZ shared library.  <br /></td></tr>
 <tr class="separator:af88c66a4754d6c422e724d91b4ab7ddb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2597c1536a68c3574f0d8c83e4c32184"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Bindings_8py.html#a2597c1536a68c3574f0d8c83e4c32184">MockSZ.Bindings.getSingleScattering</a> (s_arr, beta, num_mu)</td></tr>
-<tr class="memdesc:a2597c1536a68c3574f0d8c83e4c32184"><td class="mdescLeft">&#160;</td><td class="mdescRight">Binding for calculating single electron scattering kernel, according to a Thomson scattering in the electron rest frame.  <br /></td></tr>
-<tr class="separator:a2597c1536a68c3574f0d8c83e4c32184"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7fdef328a2f0daafbf8828dd27a67c4d"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Bindings_8py.html#a7fdef328a2f0daafbf8828dd27a67c4d">MockSZ.Bindings.getElectronDistribution</a> (beta_arr, parameter, dist)</td></tr>
-<tr class="memdesc:a7fdef328a2f0daafbf8828dd27a67c4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Binding for calculating an electron distribution.  <br /></td></tr>
-<tr class="separator:a7fdef328a2f0daafbf8828dd27a67c4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa15c6b25bb78b93a859404e2470ea963"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Bindings_8py.html#aa15c6b25bb78b93a859404e2470ea963">MockSZ.Bindings.getMultiScattering</a> (s_arr, parameter, dist, n_beta=500)</td></tr>
-<tr class="memdesc:aa15c6b25bb78b93a859404e2470ea963"><td class="mdescLeft">&#160;</td><td class="mdescRight">Binding for calculating a multi-electron scattering kernel.  <br /></td></tr>
-<tr class="separator:aa15c6b25bb78b93a859404e2470ea963"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a65ac35f6e6875433606be6d3fd3b9829"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Bindings_8py.html#a65ac35f6e6875433606be6d3fd3b9829">MockSZ.Bindings.getSinglePointing_t_ntSZ</a> (nu_arr, parameter, tau_e, dist, n_s=500, n_beta=500, no_CMB=False)</td></tr>
-<tr class="memdesc:a65ac35f6e6875433606be6d3fd3b9829"><td class="mdescLeft">&#160;</td><td class="mdescRight">Binding for calculating single-pointing tSZ or ntSZ signals.  <br /></td></tr>
-<tr class="separator:a65ac35f6e6875433606be6d3fd3b9829"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa7adf9a866438a67ccaeb3e68f9cfdef"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Bindings_8py.html#aa7adf9a866438a67ccaeb3e68f9cfdef">MockSZ.Bindings.getSinglePointing_kSZ</a> (nu_arr, v_pec, tau_e=0.01, n_mu=500)</td></tr>
-<tr class="memdesc:aa7adf9a866438a67ccaeb3e68f9cfdef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Binding for calculating single-pointing kSZ signals.  <br /></td></tr>
-<tr class="separator:aa7adf9a866438a67ccaeb3e68f9cfdef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a49d7a3a7899152707bbc8b80e7870a57"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Bindings_8py.html#a49d7a3a7899152707bbc8b80e7870a57">MockSZ.Bindings.getDistributionSingleParam</a> (x_arr, param, acc, func)</td></tr>
+<tr class="memdesc:a49d7a3a7899152707bbc8b80e7870a57"><td class="mdescLeft">&#160;</td><td class="mdescRight">Binding for evaluating various single-parameter distributions used in MockSZ.  <br /></td></tr>
+<tr class="separator:a49d7a3a7899152707bbc8b80e7870a57"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a59d727fc68b5e9a3a551f93835c2d0aa"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Bindings_8py.html#a59d727fc68b5e9a3a551f93835c2d0aa">MockSZ.Bindings.getDistributionTwoParam</a> (x_arr, param1, param2, no_CMB, acc, func)</td></tr>
+<tr class="memdesc:a59d727fc68b5e9a3a551f93835c2d0aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Binding for evaluating various two-parameter distributions used in MockSZ.  <br /></td></tr>
+<tr class="separator:a59d727fc68b5e9a3a551f93835c2d0aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a09ddd0c34577c13a88638c674a72c635"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Bindings_8py.html#a09ddd0c34577c13a88638c674a72c635">MockSZ.Bindings.getIsoBeta</a> (Az, El, ibeta, ne0, thetac, Da, grid)</td></tr>
 <tr class="memdesc:a09ddd0c34577c13a88638c674a72c635"><td class="mdescLeft">&#160;</td><td class="mdescRight">Binding for calculating an isothermal-beta optical depth screen.  <br /></td></tr>
 <tr class="separator:a09ddd0c34577c13a88638c674a72c635"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -169,29 +160,35 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a7fdef328a2f0daafbf8828dd27a67c4d" name="a7fdef328a2f0daafbf8828dd27a67c4d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7fdef328a2f0daafbf8828dd27a67c4d">&#9670;&#160;</a></span>getElectronDistribution()</h2>
+<a id="a49d7a3a7899152707bbc8b80e7870a57" name="a49d7a3a7899152707bbc8b80e7870a57"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a49d7a3a7899152707bbc8b80e7870a57">&#9670;&#160;</a></span>getDistributionSingleParam()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">def MockSZ.Bindings.getElectronDistribution </td>
+          <td class="memname">def MockSZ.Bindings.getDistributionSingleParam </td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>beta_arr</em>, </td>
+          <td class="paramname"><em>x_arr</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>parameter</em>, </td>
+          <td class="paramname"><em>param</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>dist</em>&#160;</td>
+          <td class="paramname"><em>acc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>func</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -201,17 +198,83 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Binding for calculating an electron distribution. </p>
-<p>Can choose between Maxwell-Juttner and Relativistic powerlaw.</p>
+<p>Binding for evaluating various single-parameter distributions used in MockSZ. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">beta_arr</td><td>Numpy array of dimensionless electron velocities. </td></tr>
-    <tr><td class="paramname">parameter</td><td>Distribution parameter: electron temperature or powerlaw slope. </td></tr>
-    <tr><td class="paramname">dist</td><td>String specifying distribution to use. Choose between 'MaxwellJuttner' and 'RelativisticPowerlaw'.</td></tr>
+    <tr><td class="paramname">x_arr</td><td>Array of independent variables. </td></tr>
+    <tr><td class="paramname">param</td><td>Parameter defining distribution. </td></tr>
+    <tr><td class="paramname">acc</td><td>Accuracy of evaluation of distribution. Note: if the distribution does not involve integration, acc is ignored. </td></tr>
+    <tr><td class="paramname">func</td><td>Function from library.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>output Array containing electron distribution. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>output Array containing distribution. </dd></dl>
+
+</div>
+</div>
+<a id="a59d727fc68b5e9a3a551f93835c2d0aa" name="a59d727fc68b5e9a3a551f93835c2d0aa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a59d727fc68b5e9a3a551f93835c2d0aa">&#9670;&#160;</a></span>getDistributionTwoParam()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def MockSZ.Bindings.getDistributionTwoParam </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>x_arr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>param1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>param2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>no_CMB</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>acc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>func</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Binding for evaluating various two-parameter distributions used in MockSZ. </p>
+<p>These include the actual tSZ, ntSZ and kSZ signal.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x_arr</td><td>Array of independent variables. </td></tr>
+    <tr><td class="paramname">param1</td><td>Parameter 1 defining distribution. </td></tr>
+    <tr><td class="paramname">param2</td><td>Parameter 2 defining distribution. </td></tr>
+    <tr><td class="paramname">acc</td><td>Accuracy of evaluation of distribution. </td></tr>
+    <tr><td class="paramname">func</td><td>Function from library.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>output Array containing distribution. </dd></dl>
 
 </div>
 </div>
@@ -285,229 +348,6 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>output The optical depth screen. </dd></dl>
-
-</div>
-</div>
-<a id="aa15c6b25bb78b93a859404e2470ea963" name="aa15c6b25bb78b93a859404e2470ea963"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa15c6b25bb78b93a859404e2470ea963">&#9670;&#160;</a></span>getMultiScattering()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">def MockSZ.Bindings.getMultiScattering </td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>s_arr</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>parameter</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>dist</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>n_beta</em> = <code>500</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Binding for calculating a multi-electron scattering kernel. </p>
-<p>Can choose between Maxwell-Juttner and Relativistic powerlaw as underlying electron distributions.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">s_arr</td><td>Numpy array of logarithmic frequency shifts s. </td></tr>
-    <tr><td class="paramname">parameter</td><td>Distribution parameter: electron temperature or powerlaw slope. </td></tr>
-    <tr><td class="paramname">dist</td><td>String specifying distribution to use. Choose between 'MaxwellJuttner' and 'RelativisticPowerlaw'. </td></tr>
-    <tr><td class="paramname">n_beta</td><td>Number of dimensionless electron velocities to include.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>output Array containing multi-electron scattering kernel. </dd></dl>
-
-</div>
-</div>
-<a id="aa7adf9a866438a67ccaeb3e68f9cfdef" name="aa7adf9a866438a67ccaeb3e68f9cfdef"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa7adf9a866438a67ccaeb3e68f9cfdef">&#9670;&#160;</a></span>getSinglePointing_kSZ()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">def MockSZ.Bindings.getSinglePointing_kSZ </td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>nu_arr</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>v_pec</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>tau_e</em> = <code>0.01</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>n_mu</em> = <code>500</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Binding for calculating single-pointing kSZ signals. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">nu_arr</td><td>Numpy array of frequencies for tSZ effect, in Hz. </td></tr>
-    <tr><td class="paramname">v_pec</td><td>Peculiar velocity. </td></tr>
-    <tr><td class="paramname">tau_e</td><td>Optical depth along sightline. </td></tr>
-    <tr><td class="paramname">n_mu</td><td>Number of scattering direction cosines to include.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>output 1D array containing kSZ effect. </dd></dl>
-
-</div>
-</div>
-<a id="a65ac35f6e6875433606be6d3fd3b9829" name="a65ac35f6e6875433606be6d3fd3b9829"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a65ac35f6e6875433606be6d3fd3b9829">&#9670;&#160;</a></span>getSinglePointing_t_ntSZ()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">def MockSZ.Bindings.getSinglePointing_t_ntSZ </td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>nu_arr</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>parameter</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>tau_e</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>dist</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>n_s</em> = <code>500</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>n_beta</em> = <code>500</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>no_CMB</em> = <code>False</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Binding for calculating single-pointing tSZ or ntSZ signals. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">nu_arr</td><td>Numpy array of frequencies for tSZ effect, in Hz. </td></tr>
-    <tr><td class="paramname">parameter</td><td>Distribution parameter: electron temperature or powerlaw slope. </td></tr>
-    <tr><td class="paramname">tau_e</td><td>Optical depth along sightline. </td></tr>
-    <tr><td class="paramname">dist</td><td>String specifying distribution to use. Choose between 'MaxwellJuttner' and 'RelativisticPowerlaw'. </td></tr>
-    <tr><td class="paramname">n_s</td><td>Number of logarithmic frequency shifts to include. </td></tr>
-    <tr><td class="paramname">n_beta</td><td>Number of dimensionless electron velocities to include. </td></tr>
-    <tr><td class="paramname">no_CMB</td><td>Whether to add CMB to tSZ signal or not.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>output 1D array containing tSZ effect. </dd></dl>
-
-</div>
-</div>
-<a id="a2597c1536a68c3574f0d8c83e4c32184" name="a2597c1536a68c3574f0d8c83e4c32184"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2597c1536a68c3574f0d8c83e4c32184">&#9670;&#160;</a></span>getSingleScattering()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">def MockSZ.Bindings.getSingleScattering </td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>s_arr</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>beta</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>num_mu</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Binding for calculating single electron scattering kernel, according to a Thomson scattering in the electron rest frame. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">s_arr</td><td>Array containing logarithmic frequency shifts over which to calculate scattering probability. </td></tr>
-    <tr><td class="paramname">beta</td><td>Dimensionless electron velocity. </td></tr>
-    <tr><td class="paramname">num_mu</td><td>Number of direction cosines over which to calculate scattering probability.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>output Array containing scattering probabilities, for each s in s_arr, given beta. </dd></dl>
 
 </div>
 </div>

@@ -26,37 +26,55 @@ def loadMockSZlib():
         except:
             lib = ctypes.CDLL(os.path.join(path_cur, "libmocksz.dylib"))
     
-    lib.MockSZ_getThomsonScatter.argtypes = [ctypes.POINTER(ctypes.c_double), ctypes.c_int, ctypes.c_double, 
-                                      ctypes.POINTER(ctypes.c_double), ctypes.c_int]
+    lib.MockSZ_getThomsonScatter.argtypes = [ctypes.POINTER(ctypes.c_double), 
+                                             ctypes.c_int, ctypes.c_double, 
+                                             ctypes.POINTER(ctypes.c_double), 
+                                             ctypes.c_double]
     
-    lib.MockSZ_getMaxwellJuttner.argtypes = [ctypes.POINTER(ctypes.c_double), ctypes.c_int, ctypes.c_double, 
-                                      ctypes.POINTER(ctypes.c_double)]
+    lib.MockSZ_getMaxwellJuttner.argtypes = [ctypes.POINTER(ctypes.c_double), 
+                                             ctypes.c_int, ctypes.c_double, 
+                                             ctypes.POINTER(ctypes.c_double), 
+                                             ctypes.c_double]
     
-    lib.MockSZ_getPowerlaw.argtypes = [ctypes.POINTER(ctypes.c_double), ctypes.c_int, ctypes.c_double, 
-                                      ctypes.POINTER(ctypes.c_double)]
+    lib.MockSZ_getPowerlaw.argtypes = [ctypes.POINTER(ctypes.c_double), 
+                                       ctypes.c_int, ctypes.c_double, 
+                                       ctypes.POINTER(ctypes.c_double), 
+                                       ctypes.c_double]
     
-    lib.MockSZ_getMultiScatteringMJ.argtypes = [ctypes.POINTER(ctypes.c_double), ctypes.c_int, ctypes.c_double, 
-                                      ctypes.POINTER(ctypes.c_double), ctypes.c_int, ctypes.c_int]
+    lib.MockSZ_getMultiScatteringMJ.argtypes = [ctypes.POINTER(ctypes.c_double), 
+                                                ctypes.c_int, ctypes.c_double, 
+                                                ctypes.POINTER(ctypes.c_double), 
+                                                ctypes.c_double]
     
-    lib.MockSZ_getMultiScatteringPL.argtypes = [ctypes.POINTER(ctypes.c_double), ctypes.c_int, ctypes.c_double, 
-                                      ctypes.POINTER(ctypes.c_double), ctypes.c_int, ctypes.c_int]
+    lib.MockSZ_getMultiScatteringPL.argtypes = [ctypes.POINTER(ctypes.c_double), 
+                                                ctypes.c_int, ctypes.c_double, 
+                                                ctypes.POINTER(ctypes.c_double), 
+                                                ctypes.c_double]
     
-    lib.MockSZ_getSignal_tSZ.argtypes = [ctypes.POINTER(ctypes.c_double), ctypes.c_int, ctypes.c_double, ctypes.c_double, 
-                                      ctypes.POINTER(ctypes.c_double), ctypes.c_int, ctypes.c_int, ctypes.c_bool, ctypes.c_int]
+    lib.MockSZ_getSignal_tSZ.argtypes = [ctypes.POINTER(ctypes.c_double), 
+                                         ctypes.c_int, ctypes.c_double, ctypes.c_double, 
+                                         ctypes.POINTER(ctypes.c_double), 
+                                         ctypes.c_bool, ctypes.c_double]
     
-    lib.MockSZ_getSignal_ntSZ.argtypes = [ctypes.POINTER(ctypes.c_double), ctypes.c_int, ctypes.c_double, ctypes.c_double, 
-                                      ctypes.POINTER(ctypes.c_double), ctypes.c_int, ctypes.c_int, ctypes.c_bool, ctypes.c_int]
+    lib.MockSZ_getSignal_ntSZ.argtypes = [ctypes.POINTER(ctypes.c_double), 
+                                          ctypes.c_int, ctypes.c_double, ctypes.c_double, 
+                                          ctypes.POINTER(ctypes.c_double), 
+                                          ctypes.c_bool, ctypes.c_double]
     
-    lib.MockSZ_getSignal_kSZ.argtypes = [ctypes.POINTER(ctypes.c_double), ctypes.c_int, ctypes.c_double, ctypes.c_double, 
-                                         ctypes.POINTER(ctypes.c_double), ctypes.c_int] 
+    lib.MockSZ_getSignal_kSZ.argtypes = [ctypes.POINTER(ctypes.c_double), 
+                                         ctypes.c_int, ctypes.c_double, ctypes.c_double, 
+                                         ctypes.POINTER(ctypes.c_double), 
+                                         ctypes.c_bool, ctypes.c_double] 
     
-    lib.MockSZ_getIsoBeta.argtypes = [ctypes.POINTER(ctypes.c_double), ctypes.POINTER(ctypes.c_double), 
-                                         ctypes.c_int, ctypes.c_int,
-                                         ctypes.c_double, ctypes.c_double,
-                                         ctypes.c_double, ctypes.c_double,
-                                         ctypes.POINTER(ctypes.c_double), ctypes.c_bool] 
+    lib.MockSZ_getIsoBeta.argtypes = [ctypes.POINTER(ctypes.c_double), 
+                                      ctypes.POINTER(ctypes.c_double), 
+                                      ctypes.c_int, ctypes.c_int,
+                                      ctypes.c_double, ctypes.c_double,
+                                      ctypes.c_double, ctypes.c_double,
+                                      ctypes.POINTER(ctypes.c_double), ctypes.c_bool] 
    
-    lib.MockSZ_getCMB.argtypes = [ctypes.POINTER(ctypes.c_double), ctypes.c_int, ctypes.POINTER(ctypes.c_double)]
+    lib.MockSZ_getCMB.argtypes = [ctypes.POINTER(ctypes.c_double), 
+                                  ctypes.c_int, ctypes.POINTER(ctypes.c_double)]
 
     lib.MockSZ_getThomsonScatter.restype = None
     lib.MockSZ_getMaxwellJuttner.restype = None
@@ -71,180 +89,67 @@ def loadMockSZlib():
 
     return lib
 
-def getSingleScattering(s_arr, beta, num_mu):
+def getDistributionSingleParam(x_arr, param, acc, func):
     """!
-    Binding for calculating single electron scattering kernel, according to a Thomson scattering in the electron rest frame.
+    Binding for evaluating various single-parameter distributions used in MockSZ.
 
-    @param s_arr Array containing logarithmic frequency shifts over which to calculate scattering probability.
-    @param beta Dimensionless electron velocity.
-    @param num_mu Number of direction cosines over which to calculate scattering probability.
+    @param x_arr Array of independent variables.
+    @param param Parameter defining distribution.
+    @param acc Accuracy of evaluation of distribution. 
+        Note: if the distribution does not involve integration, acc is ignored.
+    @param func Function from library.
 
-    @returns output Array containing scattering probabilities, for each s in s_arr, given beta.
+    @returns output Array containing distribution.
     """
-
-    lib = loadMockSZlib()
-    mgr = TManager.Manager()
-
-    cs_arr = (ctypes.c_double * s_arr.size)(*(s_arr.ravel().tolist()))
-    cnum_s = ctypes.c_int(s_arr.size)
-    cbeta = ctypes.c_double(beta)
-    cnum_mu = ctypes.c_int(num_mu)
-
-    coutput = (ctypes.c_double * s_arr.size)(*(np.zeros(s_arr.size).tolist()))
     
-    args = [cs_arr, cnum_s, cbeta, coutput, cnum_mu]
+    mgr = TManager.Manager()
+    
+    cx_arr = (ctypes.c_double * x_arr.size)(*(x_arr.ravel().tolist()))
+    cnum_x = ctypes.c_int(x_arr.size)
+    cparam = ctypes.c_double(param)
 
-    mgr.new_thread(target=lib.MockSZ_getThomsonScatter, args=args)
+    coutput = (ctypes.c_double * x_arr.size)(*(np.zeros(x_arr.size).tolist()))
+    
+    cacc = ctypes.c_double(acc)
+    
+    args = [cx_arr, cnum_x, cparam, coutput, cacc]
 
-    output = np.ctypeslib.as_array(coutput, shape=s_arr.shape).astype(np.float64)
+    mgr.new_thread(target=func, args=args)
+
+    output = np.ctypeslib.as_array(coutput, shape=x_arr.shape).astype(np.float64)
 
     return output
 
-def getElectronDistribution(beta_arr, parameter, dist):
+def getDistributionTwoParam(x_arr, param1, param2, no_CMB, acc, func):
     """!
-    Binding for calculating an electron distribution.
+    Binding for evaluating various two-parameter distributions used in MockSZ.
+    These include the actual tSZ, ntSZ and kSZ signal.
 
-    Can choose between Maxwell-Juttner and Relativistic powerlaw.
+    @param x_arr Array of independent variables.
+    @param param1 Parameter 1 defining distribution.
+    @param param2 Parameter 2 defining distribution.
+    @param acc Accuracy of evaluation of distribution. 
+    @param func Function from library.
 
-    @param beta_arr Numpy array of dimensionless electron velocities.
-    @param parameter Distribution parameter: electron temperature or powerlaw slope.
-    @param dist String specifying distribution to use. Choose between 'MaxwellJuttner' and 'RelativisticPowerlaw'.
-
-    @returns output Array containing electron distribution.
+    @returns output Array containing distribution.
     """
-
-    lib = loadMockSZlib()
-    mgr = TManager.Manager()
-
-    cbeta_arr = (ctypes.c_double * beta_arr.size)(*(beta_arr.ravel().tolist()))
-    cnum_beta = ctypes.c_int(beta_arr.size)
-    cparameter = ctypes.c_double(parameter)
-
-    coutput = (ctypes.c_double * beta_arr.size)(*(np.zeros(beta_arr.size).tolist()))
     
-    args = [cbeta_arr, cnum_beta, cparameter, coutput]
-
-    if dist == "MaxwellJuttner":
-        mgr.new_thread(target=lib.MockSZ_getMaxwellJuttner, args=args)
-    
-    elif dist == "RelativisticPowerlaw":
-        mgr.new_thread(target=lib.MockSZ_getPowerlaw, args=args)
-
-    output = np.ctypeslib.as_array(coutput, shape=beta_arr.shape).astype(np.float64)
-
-    return output
-
-def getMultiScattering(s_arr, parameter, dist, n_beta=500, nThreads=None):
-    """!
-    Binding for calculating a multi-electron scattering kernel.
-
-    Can choose between Maxwell-Juttner and Relativistic powerlaw as underlying electron distributions.
-
-    @param s_arr Numpy array of logarithmic frequency shifts s.
-    @param parameter Distribution parameter: electron temperature or powerlaw slope.
-    @param dist String specifying distribution to use. Choose between 'MaxwellJuttner' and 'RelativisticPowerlaw'.
-    @param n_beta Number of dimensionless electron velocities to include.
-    @param nThreads Amount of CPU threads to use for calculation. 
-
-    @returns output Array containing multi-electron scattering kernel.
-    """
-
-    nThreads = os.cpu_count() if nThreads is None else nThreads
-
-    lib = loadMockSZlib()
-    mgr = TManager.Manager()
-
-    cs_arr = (ctypes.c_double * s_arr.size)(*(s_arr.ravel().tolist()))
-    cnum_s = ctypes.c_int(s_arr.size)
-    cparameter = ctypes.c_double(parameter)
-    cn_beta = ctypes.c_int(n_beta)
-    cnThreads = ctypes.c_int(nThreads)
-
-    coutput = (ctypes.c_double * s_arr.size)(*(np.zeros(s_arr.size).tolist()))
-    
-    args = [cs_arr, cnum_s, cparameter, coutput, cn_beta, cnThreads]
-    
-    if dist == "MaxwellJuttner":
-        mgr.new_thread(target=lib.MockSZ_getMultiScatteringMJ, args=args)
-    
-    elif dist == "RelativisticPowerlaw":
-        mgr.new_thread(target=lib.MockSZ_getMultiScatteringPL, args=args)
-
-    output = np.ctypeslib.as_array(coutput, shape=s_arr.shape).astype(np.float64)
-
-    return output
-
-def getSinglePointing_t_ntSZ(nu_arr, parameter, tau_e, dist, n_s=500, n_beta=500, no_CMB=False, nThreads=None):
-    """!
-    Binding for calculating single-pointing tSZ or ntSZ signals.
-
-    @param nu_arr Numpy array of frequencies for tSZ effect, in Hz.
-    @param parameter Distribution parameter: electron temperature or powerlaw slope.
-    @param tau_e Optical depth along sightline.
-    @param dist String specifying distribution to use. Choose between 'MaxwellJuttner' and 'RelativisticPowerlaw'.
-    @param n_s Number of logarithmic frequency shifts to include.
-    @param n_beta Number of dimensionless electron velocities to include.
-    @param no_CMB Whether to add CMB to tSZ signal or not.
-    @param nThreads Amount of CPU threads to use for calculation. 
-    
-    @returns output 1D array containing tSZ effect.
-    """
-    nThreads = os.cpu_count() if nThreads is None else nThreads
-
-    lib = loadMockSZlib()
     mgr = TManager.Manager()
     
-    cnu_arr = (ctypes.c_double * nu_arr.size)(*(nu_arr.ravel().tolist()))
-    cnum_nu = ctypes.c_int(nu_arr.size)
-    cparameter = ctypes.c_double(parameter)
-    ctau_e = ctypes.c_double(tau_e)
-    cn_s = ctypes.c_int(n_s)
-    cn_beta = ctypes.c_int(n_beta)
+    cx_arr = (ctypes.c_double * x_arr.size)(*(x_arr.ravel().tolist()))
+    cnum_x = ctypes.c_int(x_arr.size)
+    cparam1 = ctypes.c_double(param1)
+    cparam2 = ctypes.c_double(param2)
     cno_CMB = ctypes.c_bool(no_CMB)
-    cnThreads = ctypes.c_int(nThreads)
+    cacc = ctypes.c_double(acc)
 
-    coutput = (ctypes.c_double * nu_arr.size)(*(np.zeros(nu_arr.size).tolist()))
+    coutput = (ctypes.c_double * x_arr.size)(*(np.zeros(x_arr.size).tolist()))
     
-    args = [cnu_arr, cnum_nu, cparameter, ctau_e, coutput, cn_s, cn_beta, cno_CMB, cnThreads]
+    args = [cx_arr, cnum_x, cparam1, cparam2, coutput, cno_CMB, cacc]
     
-    if dist == "MaxwellJuttner":
-        mgr.new_thread(target=lib.MockSZ_getSignal_tSZ, args=args)
-    
-    elif dist == "RelativisticPowerlaw":
-        mgr.new_thread(target=lib.MockSZ_getSignal_ntSZ, args=args)
+    mgr.new_thread(target=func, args=args)
 
-    output = np.ctypeslib.as_array(coutput, shape=nu_arr.shape).astype(np.float64)
-
-    return output
-
-def getSinglePointing_kSZ(nu_arr, v_pec, tau_e=0.01, n_mu=500):
-    """!
-    Binding for calculating single-pointing kSZ signals.
-
-    @param nu_arr Numpy array of frequencies for tSZ effect, in Hz.
-    @param v_pec Peculiar velocity.
-    @param tau_e Optical depth along sightline.
-    @param n_mu Number of scattering direction cosines to include.
-    
-    @returns output 1D array containing kSZ effect.
-    """
-
-    lib = loadMockSZlib()
-    mgr = TManager.Manager()
-    
-    cnu_arr = (ctypes.c_double * nu_arr.size)(*(nu_arr.ravel().tolist()))
-    cnum_nu = ctypes.c_int(nu_arr.size)
-    cv_pec = ctypes.c_double(v_pec)
-    ctau_e = ctypes.c_double(tau_e)
-    cn_mu = ctypes.c_int(n_mu)
-
-    coutput = (ctypes.c_double * nu_arr.size)(*(np.zeros(nu_arr.size).tolist()))
-    
-    args = [cnu_arr, cnum_nu, cv_pec, ctau_e, coutput, cn_mu]
-
-    mgr.new_thread(target=lib.MockSZ_getSignal_kSZ, args=args)
-
-    output = np.ctypeslib.as_array(coutput, shape=nu_arr.shape).astype(np.float64)
+    output = np.ctypeslib.as_array(coutput, shape=x_arr.shape).astype(np.float64)
 
     return output
 

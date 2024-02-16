@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['si_5fjysr_0',['SI_JySr',['../Conversions_8py.html#a200d8828eb34cf980e67e859fa1e8909',1,'MockSZ::Conversions']]],
-  ['si_5ftemp_1',['SI_Temp',['../Conversions_8py.html#ac57785425bc4ee6e3712337d84eb4206',1,'MockSZ::Conversions']]]
+  ['romberg_5fread_0',['romberg_read',['../Romberg_8cpp.html#a6f2e70c98181772c569ab00cc9609b3f',1,'romberg_read(double(*f)(double, double *), double a, double b, double *args, double *read_arr, size_t n_eval):&#160;Romberg.cpp'],['../Romberg_8h.html#a6f2e70c98181772c569ab00cc9609b3f',1,'romberg_read(double(*f)(double, double *), double a, double b, double *args, double *read_arr, size_t n_eval):&#160;Romberg.cpp']]],
+  ['romberg_5fwrite_1',['romberg_write',['../Romberg_8cpp.html#ac425e792d9368ac256c69a265071da64',1,'romberg_write(double(*f)(double(*g)(double, void *), double, double), double(*gg)(double, void *), double a, double b, double arg, double *write_arr, size_t max_steps, double acc):&#160;Romberg.cpp'],['../Romberg_8h.html#a0629b24627a4a847e0501e0250694eee',1,'romberg_write(double(*f)(double(*g)(double, void *), double, double), double(*g)(double, void *), double a, double b, double arg, double *write_arr, size_t max_steps, double acc):&#160;Romberg.cpp']]]
 ];

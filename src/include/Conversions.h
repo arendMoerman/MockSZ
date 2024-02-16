@@ -64,6 +64,14 @@ double beta_gamma(double beta);
  */
 double v_gamma(double velocity);
 
+/**
+ * Convert frequency nu in Hertz to dimensionless frequency.
+ *
+ * @param nu Frequency in Hertz.
+ *
+ * @returns x Dimensionless frequency.
+ */
+double nu_x(double nu);
 
 inline double keV_Temp(double energy_keV) {
     return energy_keV * 1e3 / KB * EV;
@@ -87,5 +95,9 @@ inline double beta_gamma(double beta) {
 
 inline double v_gamma(double velocity) {
     return beta_gamma(v_beta(velocity)); 
+}
+
+inline double nu_x(double nu) {
+    return CH * nu / KB / TCMB; 
 }
 #endif

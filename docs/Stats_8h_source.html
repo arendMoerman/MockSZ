@@ -112,135 +112,127 @@ $(document).ready(function(){initNavTree('Stats_8h_source.html',''); initResizab
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;<a class="code" href="Constants_8h.html">Constants.h</a>&quot;</span></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;<a class="code" href="Conversions_8h.html">Conversions.h</a>&quot;</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;<a class="code" href="Utils_8h.html">Utils.h</a>&quot;</span></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;gsl/gsl_sf_bessel.h&gt;</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;gsl/gsl_sf_gamma.h&gt;</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#ifndef __Stats_h</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#define __Stats_h</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment"></span> </div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">/**</span></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment"> * Generate probablity for a single electron at speed beta to generate a logarithmic frequency shift (given by s_arr).</span></div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment"> *</span></div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment"> * This function assumes Thomson scattering in electron rest-frame.</span></div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment"> *</span></div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment"> * @param s_arr Array of doubles containing s-values over which to calculate probability.</span></div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment"> * @param n_s Number of s-values in array.</span></div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment"> * @param beta Double containing beta factor of electron.</span></div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment"> * @param output Array of doubles for storing results.</span></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment"> * @param num_mu Number of direction cosines to evaluate for scattering. Defaults to 500, which should be enough.</span></div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment"> */</span></div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="keywordtype">void</span> <a class="code hl_function" href="Stats_8h.html#a42dcfc3235300444a645ea3a9df6bc6a">getThomsonScatter</a>(<span class="keywordtype">double</span> *s_arr, <span class="keywordtype">int</span> n_s, <span class="keywordtype">double</span> beta, <span class="keywordtype">double</span> *output, <span class="keywordtype">int</span> num_mu=500);</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment"></span> </div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment">/**</span></div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment"> * Generate probablity for a single electron at speed beta to generate a logarithmic frequency shift (given by s).</span></div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment"> *</span></div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment"> * This function assumes Thomson scattering in electron rest-frame.</span></div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment"> * Overloaded for single-argument s-values.</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;gsl/gsl_sf_bessel.h&gt;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;gsl/gsl_sf_gamma.h&gt;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;gsl/gsl_integration.h&gt;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &lt;gsl/gsl_math.h&gt;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &lt;cstdio&gt;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#ifndef __Stats_h</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#define __Stats_h</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="structthom__params.html">   18</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structthom__params.html">thom_params</a> { <span class="keywordtype">double</span> s; <span class="keywordtype">double</span> beta; };</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="structMS__params.html">   19</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structMS__params.html">MS_params</a> { <span class="keywordtype">double</span> s; <span class="keywordtype">double</span> param; };</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment"></span> </div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment"> * Calculate integration limits for integral over Thomson scattering cross section.</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment"> * @param s Logarithmic frequency shift.</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment"> * @param beta Dimensionless electron velocity.</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment"> * @param mu1 Double for storing lower integration limit.</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment"> * @param mu2 Double for storing upper integration limit.</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment"> */</span> </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="keywordtype">void</span> <a class="code hl_function" href="Stats_8h.html#a9e1ac1cdcbce80ba216fb7805c7be836">get_lims_mu</a>(<span class="keywordtype">double</span> s, <span class="keywordtype">double</span> beta, <span class="keywordtype">double</span> &amp;mu1, <span class="keywordtype">double</span> &amp;mu2);</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment"></span> </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment"> * Calculate probability for a scattering to give frequency shift s, given beta.</span></div>
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment"> *</span></div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment"> * @param s Double containing s-value at which to calculate probability.</span></div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment"> * @param beta Double containing beta factor of electron.</span></div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment"> * @param output Double for storing result.</span></div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment"> * @param num_mu Number of direction cosines to evaluate for scattering. Defaults to 500, which should be enough.</span></div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment"> */</span></div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="keywordtype">void</span> <a class="code hl_function" href="Stats_8h.html#a42dcfc3235300444a645ea3a9df6bc6a">getThomsonScatter</a>(<span class="keywordtype">double</span> s, <span class="keywordtype">double</span> beta, <span class="keywordtype">double</span> &amp;output, <span class="keywordtype">int</span> num_mu=500);</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment"></span> </div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment">/**</span></div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="comment"> * Generate a Maxwell-Juttner (relativistic thermal) distribution.</span></div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="comment"> *</span></div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment"> * @param beta_arr Array of beta values over which to calculate distribution.</span></div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment"> * @param n_beta Number of beta values in array.</span></div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment"> * @param Te Electron temperature in keV.</span></div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment"> * @param output Array for storing output values.</span></div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="comment"> */</span></div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="keywordtype">void</span> <a class="code hl_function" href="Stats_8h.html#ae7a8331a2e772e8e47fe248b5eb8796e">getMaxwellJuttner</a>(<span class="keywordtype">double</span> *beta_arr, <span class="keywordtype">int</span> n_beta, <span class="keywordtype">double</span> Te, <span class="keywordtype">double</span> *output);</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="comment"></span> </div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="comment">/**</span></div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment"> * Generate a Maxwell-Juttner (relativistic thermal) distribution.</span></div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="comment"> *</span></div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="comment"> * Overloaded for single-argument beta-values</span></div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="comment"> *</span></div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="comment"> * @param beta Beta value at which to calculate distribution.</span></div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="comment"> * @param Te Electron temperature in keV.</span></div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="comment"> * @param output Double for storing output values.</span></div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="comment"> */</span></div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="keywordtype">void</span> <a class="code hl_function" href="Stats_8h.html#ae7a8331a2e772e8e47fe248b5eb8796e">getMaxwellJuttner</a>(<span class="keywordtype">double</span> beta, <span class="keywordtype">double</span> Te, <span class="keywordtype">double</span> &amp;output);</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="comment"></span> </div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="comment">/**</span></div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="comment"> * Generate a powerlaw (relativistic nonthermal) distribution.</span></div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="comment"> *</span></div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="comment"> * @param beta_arr Array of beta values over which to calculate distribution.</span></div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="comment"> * @param n_beta Number of beta values in array.</span></div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="comment"> * @param alpha Slope of powerlaw.</span></div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="comment"> * @param output Array for storing output values.</span></div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="comment"> */</span></div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="keywordtype">void</span> <a class="code hl_function" href="Stats_8h.html#a233851c6a6d6b1562f178ace76f59b3b">getPowerlaw</a>(<span class="keywordtype">double</span> *beta_arr, <span class="keywordtype">int</span> n_beta, <span class="keywordtype">double</span> alpha, <span class="keywordtype">double</span> *output);</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="comment"></span> </div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="comment">/**</span></div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="comment"> * Generate a powerlaw (relativistic nonthermal) distribution.</span></div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="comment"> *</span></div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="comment"> * Overloaded for single-argument beta-values</span></div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="comment"> *</span></div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="comment"> * @param beta Beta value at which to calculate distribution.</span></div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="comment"> * @param alpha Slope of powerlaw.</span></div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="comment"> * @param A Normalisation factor of powerlaw. Can be calculated outside hot section.</span></div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="comment"> * @param output Double for storing output values.</span></div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="comment"> */</span></div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="keywordtype">void</span> <a class="code hl_function" href="Stats_8h.html#a233851c6a6d6b1562f178ace76f59b3b">getPowerlaw</a>(<span class="keywordtype">double</span> beta, <span class="keywordtype">double</span> alpha, <span class="keywordtype">double</span> A, <span class="keywordtype">double</span> &amp;output);</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="comment"></span> </div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="comment">/**</span></div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="comment"> * Generate a multi-electron scattering kernel using a Maxwell-Juttner distribution.</span></div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="comment"> *</span></div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span><span class="comment"> * @param s_arr Array of s-values over which to calculate distribution.</span></div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span><span class="comment"> * @param n_s Number of s values in array.</span></div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="comment"> * @param n_beta Number of beta points to integrate over.</span></div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="comment"> * @param Te Electron temperature in keV.</span></div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="comment"> * @param output Array for storing output values.</span></div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="comment"> */</span></div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="keywordtype">void</span> <a class="code hl_function" href="Stats_8h.html#af3f27b5948c5f675dbcc4d4e0212897a">getMultiScatteringMJ</a>(<span class="keywordtype">double</span> *s_arr, <span class="keywordtype">int</span> n_s, <span class="keywordtype">int</span> n_beta, <span class="keywordtype">double</span> Te, <span class="keywordtype">double</span> *output);</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="comment"></span> </div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span><span class="comment">/**</span></div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span><span class="comment"> * Generate a multi-electron scattering kernel using a powerlaw distribution.</span></div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="comment"> *</span></div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span><span class="comment"> * @param s_arr Array of s-values over which to calculate distribution.</span></div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span><span class="comment"> * @param n_s Number of s values in array.</span></div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span><span class="comment"> * @param n_beta Number of beta points to integrate over.</span></div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span><span class="comment"> * @param alpha Slope of powerlaw.</span></div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span><span class="comment"> * @param output Array for storing output values.</span></div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span><span class="comment"> */</span></div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span><span class="keywordtype">void</span> <a class="code hl_function" href="Stats_8h.html#a240109b63e3dc0c669c1ee0ab2a99168">getMultiScatteringPL</a>(<span class="keywordtype">double</span> *s_arr, <span class="keywordtype">int</span> n_s, <span class="keywordtype">int</span> n_beta, <span class="keywordtype">double</span> alpha, <span class="keywordtype">double</span> *output);</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span><span class="comment"></span> </div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span><span class="comment">/**</span></div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span><span class="comment"> * Generate an isothermal-beta model, from an azimuth and elevation array.</span></div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span><span class="comment"> *</span></div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span><span class="comment"> * Returns an array of shape azimuth * elevation, containing the optical depth for each pointing.</span></div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span><span class="comment"> *</span></div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span><span class="comment"> * @param Az Array containing azimuth points in arcsec.</span></div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span><span class="comment"> * @param El Array containing elevation points in arcsec.</span></div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span><span class="comment"> * @param n_Az Number of azimuth points.</span></div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span><span class="comment"> * @param n_El Number of elevation points.</span></div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span><span class="comment"> * @param ibeta Beta parameter of isothermal model.</span></div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span><span class="comment"> * @param ne0 Central electron number density, in electrons / cm**3.</span></div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span><span class="comment"> * @param thetac Core radius of cluster in arcsec.</span></div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span><span class="comment"> * @param Da Angular diameter distance in Megaparsec.</span></div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span><span class="comment"> * @param output Array for storing outputs.</span></div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span><span class="comment"> * @param grid Whether or not to evaluate on Az-El grid, or along Az-El trace.</span></div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span><span class="comment"> *      Note: if grid=false, n_Az must equal n_El, and output must equal either one.</span></div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span><span class="comment"> *      If grid=true, n_Az does not need to equal n_El, output should have size n_Az*n_El.</span></div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span><span class="comment"> */</span></div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span><span class="keywordtype">void</span> <a class="code hl_function" href="Stats_8h.html#a50a4edc0d8495c5bc3a6b07698d72c24">getIsoBeta</a>(<span class="keywordtype">double</span> *Az, <span class="keywordtype">double</span> *El, <span class="keywordtype">int</span> n_Az, <span class="keywordtype">int</span> n_El, <span class="keywordtype">double</span> ibeta, <span class="keywordtype">double</span> ne0, <span class="keywordtype">double</span> thetac, <span class="keywordtype">double</span> Da, <span class="keywordtype">double</span> *output, <span class="keywordtype">bool</span> grid);</div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span> </div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span><span class="preprocessor">#endif</span></div>
-<div class="ttc" id="aConstants_8h_html"><div class="ttname"><a href="Constants_8h.html">Constants.h</a></div><div class="ttdoc">Often used physical constants.</div></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment"> * The probability is calculated by integrating over all direction cosines.</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment"> * This function assumes Thomson scattering in electron rest-frame.</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment"> * @param mu Direction cosine (integration variable).</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment"> * @param args Pointer to struct containing s and beta.</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment"> * @returns Probability for a scattering to give a frequency shift s, for a given beta.</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="keywordtype">double</span> <a class="code hl_function" href="Stats_8h.html#ac12ab02a2ddc92925591ff0641c24cb5">getThomsonScatter</a>(<span class="keywordtype">double</span> mu, <span class="keywordtype">void</span> *args);</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="comment"></span> </div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment"> * Generate a Maxwell-Juttner (relativistic thermal) distribution.</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment"> * @param beta Beta value at which to calculate distribution.</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="comment"> * @param Te Electron temperature in keV.</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="comment"> * @returns Probability for an electron to have velocity beta, given temperature.</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="keywordtype">double</span> <a class="code hl_function" href="Stats_8h.html#a683662a0ac89e372116ee8c120c22f19">getMaxwellJuttner</a>(<span class="keywordtype">double</span> beta, <span class="keywordtype">double</span> Te);</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="comment"></span> </div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="comment"> * Generate a powerlaw (relativistic nonthermal) distribution.</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="comment"> * @param beta Beta value at which to calculate distribution.</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="comment"> * @param alpha Slope of powerlaw.</span></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="comment"> * @param A Normalisation factor of powerlaw. Can be calculated outside hot section.</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="comment"> * @returns Probability for an electron to have velocity beta, given alpha.</span></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="keywordtype">double</span> <a class="code hl_function" href="Stats_8h.html#a960642bf4d9112163f1089f916478ae9">getPowerlaw</a>(<span class="keywordtype">double</span> beta, <span class="keywordtype">double</span> alpha, <span class="keywordtype">double</span> A);</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="comment"></span> </div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="comment"> * Generate a multi-electron scattering kernel using a Maxwell-Juttner distribution.</span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="comment"> * @param beta Dimensionless electron velocity (integration variable).</span></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="comment"> * @param args Pointer to struct containing s and Te.</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="comment"> * @returns Probability for frequency shift s, given an electron temperature.</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="keywordtype">double</span> <a class="code hl_function" href="Stats_8h.html#a3c1be6e784d10035d1b0d449106f89a9">getMultiScatteringMJ</a>(<span class="keywordtype">double</span> beta, <span class="keywordtype">void</span> *args);</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="comment"></span> </div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="comment"> * Generate a multi-electron scattering kernel using a relativistic powerlaw distribution.</span></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="comment"> * @param beta Dimensionless electron velocity (integration variable).</span></div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="comment"> * @param args Pointer to struct containing s and alpha.</span></div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="comment"> * @returns Probability for frequency shift s, given an alpha.</span></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="keywordtype">double</span> <a class="code hl_function" href="Stats_8h.html#ae91d761dbc606a9a13eca0e623f3f0fc">getMultiScatteringPL</a>(<span class="keywordtype">double</span> beta, <span class="keywordtype">void</span> *args);</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="comment"></span> </div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="comment"> * Generate an isothermal-beta model, from an azimuth and elevation array.</span></div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span><span class="comment"> * Returns an array of shape azimuth * elevation, containing the optical depth for each pointing.</span></div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="comment"> * @param Az Array containing azimuth points in arcsec.</span></div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="comment"> * @param El Array containing elevation points in arcsec.</span></div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="comment"> * @param n_Az Number of azimuth points.</span></div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="comment"> * @param n_El Number of elevation points.</span></div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="comment"> * @param ibeta Beta parameter of isothermal model.</span></div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span><span class="comment"> * @param ne0 Central electron number density, in electrons / cm**3.</span></div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span><span class="comment"> * @param thetac Core radius of cluster in arcsec.</span></div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="comment"> * @param Da Angular diameter distance in Megaparsec.</span></div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span><span class="comment"> * @param output Array for storing outputs.</span></div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span><span class="comment"> * @param grid Whether or not to evaluate on Az-El grid, or along Az-El trace.</span></div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span><span class="comment"> *      Note: if grid=false, n_Az must equal n_El, and output must equal either one.</span></div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span><span class="comment"> *      If grid=true, n_Az does not need to equal n_El, output should have size n_Az*n_El.</span></div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span><span class="keywordtype">void</span> <a class="code hl_function" href="Stats_8h.html#a50a4edc0d8495c5bc3a6b07698d72c24">getIsoBeta</a>(<span class="keywordtype">double</span> *Az, <span class="keywordtype">double</span> *El, <span class="keywordtype">int</span> n_Az, <span class="keywordtype">int</span> n_El, <span class="keywordtype">double</span> ibeta, <span class="keywordtype">double</span> ne0, <span class="keywordtype">double</span> thetac, <span class="keywordtype">double</span> Da, <span class="keywordtype">double</span> *output, <span class="keywordtype">bool</span> grid);</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span><span class="comment"></span> </div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span><span class="comment"> * Calculate normalisation constant for powerlaw distribution.</span></div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span><span class="comment"> * @param gamma1 Lower limit on domain for powerlaw.</span></div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span><span class="comment"> * @param gamma2 Upper limit on domain for powerlaw. </span></div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span><span class="comment"> * @param alpha Slope of powerlaw.</span></div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span><span class="comment"> * @param A Double for storing normalisation constant.</span></div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span><span class="keywordtype">void</span> <a class="code hl_function" href="Stats_8h.html#a592658fe44ddb2472b0762499d0696fe">getNormPL</a>(<span class="keywordtype">double</span> &amp;gamma1, <span class="keywordtype">double</span> &amp;gamma2, <span class="keywordtype">double</span> &amp;alpha, <span class="keywordtype">double</span> &amp;A);</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span> </div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aConstants_8h_html"><div class="ttname"><a href="Constants_8h.html">Constants.h</a></div><div class="ttdoc">Often used physical constants. Also contains other constants used in MockSZ.</div></div>
 <div class="ttc" id="aConversions_8h_html"><div class="ttname"><a href="Conversions_8h.html">Conversions.h</a></div><div class="ttdoc">Functions for converting quantities.</div></div>
-<div class="ttc" id="aStats_8h_html_a233851c6a6d6b1562f178ace76f59b3b"><div class="ttname"><a href="Stats_8h.html#a233851c6a6d6b1562f178ace76f59b3b">getPowerlaw</a></div><div class="ttdeci">void getPowerlaw(double *beta_arr, int n_beta, double alpha, double *output)</div><div class="ttdef"><b>Definition:</b> Stats.cpp:79</div></div>
-<div class="ttc" id="aStats_8h_html_a240109b63e3dc0c669c1ee0ab2a99168"><div class="ttname"><a href="Stats_8h.html#a240109b63e3dc0c669c1ee0ab2a99168">getMultiScatteringPL</a></div><div class="ttdeci">void getMultiScatteringPL(double *s_arr, int n_s, int n_beta, double alpha, double *output)</div><div class="ttdef"><b>Definition:</b> Stats.cpp:128</div></div>
-<div class="ttc" id="aStats_8h_html_a42dcfc3235300444a645ea3a9df6bc6a"><div class="ttname"><a href="Stats_8h.html#a42dcfc3235300444a645ea3a9df6bc6a">getThomsonScatter</a></div><div class="ttdeci">void getThomsonScatter(double *s_arr, int n_s, double beta, double *output, int num_mu=500)</div><div class="ttdef"><b>Definition:</b> Stats.cpp:7</div></div>
-<div class="ttc" id="aStats_8h_html_a50a4edc0d8495c5bc3a6b07698d72c24"><div class="ttname"><a href="Stats_8h.html#a50a4edc0d8495c5bc3a6b07698d72c24">getIsoBeta</a></div><div class="ttdeci">void getIsoBeta(double *Az, double *El, int n_Az, int n_El, double ibeta, double ne0, double thetac, double Da, double *output, bool grid)</div><div class="ttdef"><b>Definition:</b> Stats.cpp:169</div></div>
-<div class="ttc" id="aStats_8h_html_ae7a8331a2e772e8e47fe248b5eb8796e"><div class="ttname"><a href="Stats_8h.html#ae7a8331a2e772e8e47fe248b5eb8796e">getMaxwellJuttner</a></div><div class="ttdeci">void getMaxwellJuttner(double *beta_arr, int n_beta, double Te, double *output)</div><div class="ttdef"><b>Definition:</b> Stats.cpp:57</div></div>
-<div class="ttc" id="aStats_8h_html_af3f27b5948c5f675dbcc4d4e0212897a"><div class="ttname"><a href="Stats_8h.html#af3f27b5948c5f675dbcc4d4e0212897a">getMultiScatteringMJ</a></div><div class="ttdeci">void getMultiScatteringMJ(double *s_arr, int n_s, int n_beta, double Te, double *output)</div><div class="ttdef"><b>Definition:</b> Stats.cpp:106</div></div>
-<div class="ttc" id="aUtils_8h_html"><div class="ttname"><a href="Utils_8h.html">Utils.h</a></div><div class="ttdoc">Utility functions used throughout the program.</div></div>
+<div class="ttc" id="aStats_8h_html_a3c1be6e784d10035d1b0d449106f89a9"><div class="ttname"><a href="Stats_8h.html#a3c1be6e784d10035d1b0d449106f89a9">getMultiScatteringMJ</a></div><div class="ttdeci">double getMultiScatteringMJ(double beta, void *args)</div><div class="ttdef"><b>Definition:</b> Stats.cpp:56</div></div>
+<div class="ttc" id="aStats_8h_html_a50a4edc0d8495c5bc3a6b07698d72c24"><div class="ttname"><a href="Stats_8h.html#a50a4edc0d8495c5bc3a6b07698d72c24">getIsoBeta</a></div><div class="ttdeci">void getIsoBeta(double *Az, double *El, int n_Az, int n_El, double ibeta, double ne0, double thetac, double Da, double *output, bool grid)</div><div class="ttdef"><b>Definition:</b> Stats.cpp:110</div></div>
+<div class="ttc" id="aStats_8h_html_a592658fe44ddb2472b0762499d0696fe"><div class="ttname"><a href="Stats_8h.html#a592658fe44ddb2472b0762499d0696fe">getNormPL</a></div><div class="ttdeci">void getNormPL(double &amp;gamma1, double &amp;gamma2, double &amp;alpha, double &amp;A)</div><div class="ttdef"><b>Definition:</b> Stats.cpp:136</div></div>
+<div class="ttc" id="aStats_8h_html_a683662a0ac89e372116ee8c120c22f19"><div class="ttname"><a href="Stats_8h.html#a683662a0ac89e372116ee8c120c22f19">getMaxwellJuttner</a></div><div class="ttdeci">double getMaxwellJuttner(double beta, double Te)</div><div class="ttdef"><b>Definition:</b> Stats.cpp:39</div></div>
+<div class="ttc" id="aStats_8h_html_a960642bf4d9112163f1089f916478ae9"><div class="ttname"><a href="Stats_8h.html#a960642bf4d9112163f1089f916478ae9">getPowerlaw</a></div><div class="ttdeci">double getPowerlaw(double beta, double alpha, double A)</div><div class="ttdef"><b>Definition:</b> Stats.cpp:51</div></div>
+<div class="ttc" id="aStats_8h_html_a9e1ac1cdcbce80ba216fb7805c7be836"><div class="ttname"><a href="Stats_8h.html#a9e1ac1cdcbce80ba216fb7805c7be836">get_lims_mu</a></div><div class="ttdeci">void get_lims_mu(double s, double beta, double &amp;mu1, double &amp;mu2)</div><div class="ttdef"><b>Definition:</b> Stats.cpp:7</div></div>
+<div class="ttc" id="aStats_8h_html_ac12ab02a2ddc92925591ff0641c24cb5"><div class="ttname"><a href="Stats_8h.html#ac12ab02a2ddc92925591ff0641c24cb5">getThomsonScatter</a></div><div class="ttdeci">double getThomsonScatter(double mu, void *args)</div><div class="ttdef"><b>Definition:</b> Stats.cpp:18</div></div>
+<div class="ttc" id="aStats_8h_html_ae91d761dbc606a9a13eca0e623f3f0fc"><div class="ttname"><a href="Stats_8h.html#ae91d761dbc606a9a13eca0e623f3f0fc">getMultiScatteringPL</a></div><div class="ttdeci">double getMultiScatteringPL(double beta, void *args)</div><div class="ttdef"><b>Definition:</b> Stats.cpp:80</div></div>
+<div class="ttc" id="astructMS__params_html"><div class="ttname"><a href="structMS__params.html">MS_params</a></div><div class="ttdef"><b>Definition:</b> Stats.h:19</div></div>
+<div class="ttc" id="astructthom__params_html"><div class="ttname"><a href="structthom__params.html">thom_params</a></div><div class="ttdef"><b>Definition:</b> Stats.h:18</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

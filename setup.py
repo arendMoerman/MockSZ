@@ -4,6 +4,8 @@ import pathlib
 from setuptools import setup, Extension, find_packages
 from setuptools.command.build_ext import build_ext as build_ext_orig
 
+__version__ = "0.2.4"
+
 class CMakeExtension(Extension):
 
     def __init__(self, name):
@@ -47,7 +49,7 @@ class build_ext(build_ext_orig):
 setup(
     name='MockSZ',
     license="MIT",
-    version='0.2.2',
+    version=__version__,
     author="Arend Moerman",
     install_requires = ["numpy", "wheel", "cmake"],
     package_dir = {'': 'src'},

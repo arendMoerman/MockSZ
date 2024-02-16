@@ -1,0 +1,30 @@
+/**
+\page resources `MockSZ` : Getting hands-on
+\section resources_intro Introduction
+This page contains resources for understanding/using `MockSZ`.
+
+\section resources_tuts Tutorials
+These tutorials, consisting of Jupyter notebooks, are very applied and to the point. They show how to start generating SZ signals using `MockSZ`.
+This is a great starting place if you just want to use the program and are looking for some examples on how to use it.
+
+[The SZ effect along a single line-of-sight](tutorials/SinglePointing.html)
+
+[The isothermal-\f$\beta\f$ model](tutorials/IsoBetaMaps.html)
+
+\section resources_vals Validations
+Here, you can find validations for `MockSZ`. 
+Because it is important to be aware of how reliable the model is that you are using, these validations are included as part of the documentation.
+They can be reviewed and checked and, of course, added to by more validation tests.
+
+[Validations of tSZ effect using analytical equations](validations/ValidateBirkinshaw.html)
+
+[Validations of tSZ and kSZ effect using `SZpack`](validations/ValidateSZpack.html)
+
+\section resources_dds Deep dives
+This set of resources are meant to provide a deeper understanding of the physics and machinery behind `MockSZ`.
+In addition, topics such as performance are discussed here.
+Because of this, this section is aimed at people who are interested in deeply understanding `MockSZ`.
+Unlike the previous resources, the deep dives consist of both notebooks and plain, written documents.
+
+[The scattering kernels of `MockSZ`](deepdives/Scatterings.html)
+*/

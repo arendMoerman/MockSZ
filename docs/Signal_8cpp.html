@@ -109,63 +109,41 @@ $(document).ready(function(){initNavTree('Signal_8cpp.html',''); initResizable()
 </div><!--header-->
 <div class="contents">
 
-<p>Implementations of the single-pointing SZ signals in <a class="el" href="Signal_8h.html" title="Declarations of the single-pointing SZ signals in MockSZ.">Signal.h</a>.  
+<p>Implementations of the single-pointing SZ signals in <a class="el" href="Signal_8h.html" title="Declarations of the single-pointing kSZ signal and utility functions for tSZ and ntSZ signals in Mock...">Signal.h</a>.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="Signal_8h_source.html">Signal.h</a>&quot;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a99b6a3ce01bd082718e0498ddd8026d4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Signal_8cpp.html#a99b6a3ce01bd082718e0498ddd8026d4">calcSignal_tSZ</a> (double *nu, int n_nu, double Te, double tau_e, double *output, int n_s, int n_beta, bool no_CMB)</td></tr>
-<tr class="separator:a99b6a3ce01bd082718e0498ddd8026d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a892a8c8cfae5a3c1c193cf65820d2583"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Signal_8cpp.html#a892a8c8cfae5a3c1c193cf65820d2583">calcSignal_ntSZ</a> (double *nu, int n_nu, double alpha, double tau_e, double *output, int n_s, int n_beta, bool no_CMB)</td></tr>
-<tr class="separator:a892a8c8cfae5a3c1c193cf65820d2583"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a628a1de1bee3d9be3b5b551ed5b7b10e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Signal_8cpp.html#a628a1de1bee3d9be3b5b551ed5b7b10e">calcSignal_kSZ</a> (double *nu, int n_nu, double v_pec, double tau_e, double *output, int n_mu)</td></tr>
-<tr class="separator:a628a1de1bee3d9be3b5b551ed5b7b10e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ed8eaf41e0f475664001811dbfb3294"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Signal_8cpp.html#a5ed8eaf41e0f475664001811dbfb3294">calcSignal_kSZ</a> (double mu, void *args)</td></tr>
+<tr class="separator:a5ed8eaf41e0f475664001811dbfb3294"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7fd1773d5ae92fb188ed16ff9aa57334"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Signal_8cpp.html#a7fd1773d5ae92fb188ed16ff9aa57334">get_CMB</a> (double nu)</td></tr>
+<tr class="separator:a7fd1773d5ae92fb188ed16ff9aa57334"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec42ac3c5eae212fc292aaece0f8040d"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Signal_8cpp.html#aec42ac3c5eae212fc292aaece0f8040d">get_n_eval</a> (double(*func)(double, void *), double s, double arg)</td></tr>
+<tr class="separator:aec42ac3c5eae212fc292aaece0f8040d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28ac666b79f1a45d3af79fef60af17e4"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Signal_8cpp.html#a28ac666b79f1a45d3af79fef60af17e4">conv_CMB_scatt</a> (double s, double *args)</td></tr>
+<tr class="separator:a28ac666b79f1a45d3af79fef60af17e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Implementations of the single-pointing SZ signals in <a class="el" href="Signal_8h.html" title="Declarations of the single-pointing SZ signals in MockSZ.">Signal.h</a>. </p>
+<div class="textblock"><p>Implementations of the single-pointing SZ signals in <a class="el" href="Signal_8h.html" title="Declarations of the single-pointing kSZ signal and utility functions for tSZ and ntSZ signals in Mock...">Signal.h</a>. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="a628a1de1bee3d9be3b5b551ed5b7b10e" name="a628a1de1bee3d9be3b5b551ed5b7b10e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a628a1de1bee3d9be3b5b551ed5b7b10e">&#9670;&#160;</a></span>calcSignal_kSZ()</h2>
+<a id="a5ed8eaf41e0f475664001811dbfb3294" name="a5ed8eaf41e0f475664001811dbfb3294"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ed8eaf41e0f475664001811dbfb3294">&#9670;&#160;</a></span>calcSignal_kSZ()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void calcSignal_kSZ </td>
+          <td class="memname">double calcSignal_kSZ </td>
           <td>(</td>
-          <td class="paramtype">double *&#160;</td>
-          <td class="paramname"><em>nu</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>n_nu</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
           <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>v_pec</em>, </td>
+          <td class="paramname"><em>mu</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>tau_e</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double *&#160;</td>
-          <td class="paramname"><em>output</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>n_mu</em>&#160;</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>args</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -177,71 +155,32 @@ Functions</h2></td></tr>
 <p>Single-pointing signal assuming kinematic SZ effect.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">nu</td><td>Array with frequencies at which to calculate tSZ signal, in Hz. </td></tr>
-    <tr><td class="paramname">n_nu</td><td>Number of frequencies in nu. </td></tr>
-    <tr><td class="paramname">v_pec</td><td>Peculiar velocity in km /s. </td></tr>
-    <tr><td class="paramname">tau_e</td><td>Optical depth along sightline. </td></tr>
-    <tr><td class="paramname">output</td><td>Array for storing output. </td></tr>
-    <tr><td class="paramname">n_mu</td><td>Number of scattering direction cosines to include. </td></tr>
+    <tr><td class="paramname">mu</td><td>direction cosine between electron and photon (integration variable). </td></tr>
+    <tr><td class="paramname">args</td><td>Struct containing nu, v_pec and tau_e.</td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>Integrated kSZ signal at frequency nu. </dd></dl>
 
 </div>
 </div>
-<a id="a892a8c8cfae5a3c1c193cf65820d2583" name="a892a8c8cfae5a3c1c193cf65820d2583"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a892a8c8cfae5a3c1c193cf65820d2583">&#9670;&#160;</a></span>calcSignal_ntSZ()</h2>
+<a id="a28ac666b79f1a45d3af79fef60af17e4" name="a28ac666b79f1a45d3af79fef60af17e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a28ac666b79f1a45d3af79fef60af17e4">&#9670;&#160;</a></span>conv_CMB_scatt()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void calcSignal_ntSZ </td>
+          <td class="memname">double conv_CMB_scatt </td>
           <td>(</td>
-          <td class="paramtype">double *&#160;</td>
-          <td class="paramname"><em>nu</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>n_nu</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
           <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>alpha</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>tau_e</em>, </td>
+          <td class="paramname"><em>s</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">double *&#160;</td>
-          <td class="paramname"><em>output</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>n_s</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>n_beta</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>no_CMB</em>&#160;</td>
+          <td class="paramname"><em>args</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -250,76 +189,67 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Single-pointing signal assuming non-thermal SZ effect.</p>
+<p>Wrapper routine for romberg integration of CMB-scattering kernel convolution.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">nu</td><td>Array with frequencies at which to calculate ntSZ signal, in Hz. </td></tr>
-    <tr><td class="paramname">n_nu</td><td>Number of frequencies in nu. </td></tr>
-    <tr><td class="paramname">alpha</td><td>Slope of powerlaw. </td></tr>
-    <tr><td class="paramname">tau_e</td><td>Optical depth along sightline. </td></tr>
-    <tr><td class="paramname">output</td><td>Array for storing output. </td></tr>
-    <tr><td class="paramname">n_s</td><td>Number of logarithmic frequency shifts to include. </td></tr>
-    <tr><td class="paramname">n_beta</td><td>Number of dimensionless electron velocities to include. </td></tr>
-    <tr><td class="paramname">no_CMB</td><td>Whether to add CMB to ntSZ signal or not. </td></tr>
+    <tr><td class="paramname">s</td><td>Logarithmic frequency shift (integration variable). </td></tr>
+    <tr><td class="paramname">args</td><td>Extra arguments, contains nu and tau_e.</td></tr>
+    <tr><td class="paramname">returns</td><td>Integrated (n)tSZ signal at frequency nu. </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<a id="a99b6a3ce01bd082718e0498ddd8026d4" name="a99b6a3ce01bd082718e0498ddd8026d4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a99b6a3ce01bd082718e0498ddd8026d4">&#9670;&#160;</a></span>calcSignal_tSZ()</h2>
+<a id="a7fd1773d5ae92fb188ed16ff9aa57334" name="a7fd1773d5ae92fb188ed16ff9aa57334"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7fd1773d5ae92fb188ed16ff9aa57334">&#9670;&#160;</a></span>get_CMB()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void calcSignal_tSZ </td>
+          <td class="memname">double get_CMB </td>
           <td>(</td>
-          <td class="paramtype">double *&#160;</td>
-          <td class="paramname"><em>nu</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>nu</em></td><td>)</td>
           <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>n_nu</em>, </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Obtain CMB intensity at frequency nu.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">nu</td><td>Frequency at which to calculate CMB.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>CMB intensity at frequency nu. </dd></dl>
+
+</div>
+</div>
+<a id="aec42ac3c5eae212fc292aaece0f8040d" name="aec42ac3c5eae212fc292aaece0f8040d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec42ac3c5eae212fc292aaece0f8040d">&#9670;&#160;</a></span>get_n_eval()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double get_n_eval </td>
+          <td>(</td>
+          <td class="paramtype">double(*)(double, void *)&#160;</td>
+          <td class="paramname"><em>func</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>Te</em>, </td>
+          <td class="paramname"><em>s</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>tau_e</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double *&#160;</td>
-          <td class="paramname"><em>output</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>n_s</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>n_beta</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>no_CMB</em>&#160;</td>
+          <td class="paramname"><em>arg</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -328,20 +258,17 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Single-pointing signal assuming thermal SZ effect.</p>
+<p>Calculate number of s-points necessary for integrating scattering kernel.</p>
+<p>This function should be passed to the romberg integrator, which returns (number of) function evaluations.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">nu</td><td>Array with frequencies at which to calculate tSZ signal, in Hz. </td></tr>
-    <tr><td class="paramname">n_nu</td><td>Number of frequencies in nu. </td></tr>
-    <tr><td class="paramname">Te</td><td>Electron temperature in keV. </td></tr>
-    <tr><td class="paramname">tau_e</td><td>Optical depth along sightline. </td></tr>
-    <tr><td class="paramname">output</td><td>Array for storing output. </td></tr>
-    <tr><td class="paramname">n_s</td><td>Number of logarithmic frequency shifts to include. </td></tr>
-    <tr><td class="paramname">n_beta</td><td>Number of dimensionless electron velocities to include. </td></tr>
-    <tr><td class="paramname">no_CMB</td><td>Whether to add CMB to tSZ signal or not. </td></tr>
+    <tr><td class="paramname">func</td><td>Pointer to function (either getMultiScatteringMJ, or getMultiScatteringPL) that calculates scattering kernel. </td></tr>
+    <tr><td class="paramname">s</td><td>Logarithmic frequency shift. </td></tr>
+    <tr><td class="paramname">arg</td><td>Extra argument for func, either Te or alpha depending on scattering kernel.</td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>integrated value (integrated over s) of scattering kernel. </dd></dl>
 
 </div>
 </div>

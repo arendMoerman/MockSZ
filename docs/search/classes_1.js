@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['manager_0',['Manager',['../classMockSZ_1_1Threadmgr_1_1Manager.html',1,'MockSZ::Threadmgr']]]
+  ['ksz_5fparams_0',['kSZ_params',['../structkSZ__params.html',1,'']]]
 ];
