@@ -66,12 +66,14 @@ double v_gamma(double velocity);
 
 /**
  * Convert frequency nu in Hertz to dimensionless frequency.
+ * Note that the conversion is done w.r.t. the electron temperature, not the CMB temperature, which is the form for the conversion in the Python conversions.
  *
  * @param nu Frequency in Hertz.
+ * @param T Elektron temperature in K.
  *
  * @returns x Dimensionless frequency.
  */
-double nu_x(double nu);
+double nu_x(double nu, double T);
 
 inline double keV_Temp(double energy_keV) {
     return energy_keV * 1e3 / KB * EV;
@@ -97,7 +99,7 @@ inline double v_gamma(double velocity) {
     return beta_gamma(v_beta(velocity)); 
 }
 
-inline double nu_x(double nu) {
-    return CH * nu / KB / TCMB; 
+inline double nu_x(double nu, double T) {
+    return CH * nu / KB / T; 
 }
 #endif
