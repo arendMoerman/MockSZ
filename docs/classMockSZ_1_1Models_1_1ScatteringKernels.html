@@ -105,8 +105,9 @@ $(document).ready(function(){initNavTree('classMockSZ_1_1Models_1_1ScatteringKer
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="classMockSZ_1_1Models_1_1ScatteringKernels-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">MockSZ.Models.ScatteringKernels Class Reference</div></div>
+  <div class="headertitle"><div class="title">MockSZ.Models.ScatteringKernels Class Reference<div class="ingroups"><a class="el" href="group__scatteringkernels.html">Scattering kernels &amp; distributions</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -121,21 +122,30 @@ Inheritance diagram for MockSZ.Models.ScatteringKernels:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a87a1aaf45217cc6d604ca6014a4cdf6e"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMockSZ_1_1Models_1_1ScatteringKernels.html#a87a1aaf45217cc6d604ca6014a4cdf6e">getSingleScattering</a> (self, s_arr, beta, num_mu=1000)</td></tr>
-<tr class="memdesc:a87a1aaf45217cc6d604ca6014a4cdf6e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain single-electron scattering kernel, for a range of s and a single beta.  <br /></td></tr>
-<tr class="separator:a87a1aaf45217cc6d604ca6014a4cdf6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4b91506efc23c1deda9d8063ef4112e"><td class="memItemLeft" align="right" valign="top"><a id="af4b91506efc23c1deda9d8063ef4112e" name="af4b91506efc23c1deda9d8063ef4112e"></a>
+def&#160;</td><td class="memItemRight" valign="bottom"><b>__init__</b> (self)</td></tr>
+<tr class="separator:af4b91506efc23c1deda9d8063ef4112e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af48fbd5efa2f9c9be1fd6b97415d6cf3"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMockSZ_1_1Models_1_1ScatteringKernels.html#af48fbd5efa2f9c9be1fd6b97415d6cf3">getSingleScattering</a> (self, s_arr, beta, acc=1e-6)</td></tr>
+<tr class="memdesc:af48fbd5efa2f9c9be1fd6b97415d6cf3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain single-electron scattering kernel, for a range of s and a single beta.  <br /></td></tr>
+<tr class="separator:af48fbd5efa2f9c9be1fd6b97415d6cf3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a88449531f1d8c1d4d889464f39aab102"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMockSZ_1_1Models_1_1ScatteringKernels.html#a88449531f1d8c1d4d889464f39aab102">getMaxwellJuttner</a> (self, beta_arr, Te)</td></tr>
 <tr class="memdesc:a88449531f1d8c1d4d889464f39aab102"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain a Maxwell-Juttner distribution.  <br /></td></tr>
 <tr class="separator:a88449531f1d8c1d4d889464f39aab102"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2e27c7ce86068133229c2babb15eef8d"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMockSZ_1_1Models_1_1ScatteringKernels.html#a2e27c7ce86068133229c2babb15eef8d">getPowerlaw</a> (self, beta_arr, alpha)</td></tr>
 <tr class="memdesc:a2e27c7ce86068133229c2babb15eef8d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain a relativistic powerlaw distribution.  <br /></td></tr>
 <tr class="separator:a2e27c7ce86068133229c2babb15eef8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7e671d3738019b42c1fbd886ede0eb99"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMockSZ_1_1Models_1_1ScatteringKernels.html#a7e671d3738019b42c1fbd886ede0eb99">getMultiScatteringMJ</a> (self, s_arr, Te, n_beta=500)</td></tr>
-<tr class="memdesc:a7e671d3738019b42c1fbd886ede0eb99"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain multi-electron scattering kernel, for a range of beta.  <br /></td></tr>
-<tr class="separator:a7e671d3738019b42c1fbd886ede0eb99"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3df16bf715f47ba56854e99f8dfab6ab"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMockSZ_1_1Models_1_1ScatteringKernels.html#a3df16bf715f47ba56854e99f8dfab6ab">getMultiScatteringPL</a> (self, s_arr, alpha, n_beta=500)</td></tr>
-<tr class="memdesc:a3df16bf715f47ba56854e99f8dfab6ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain multi-electron scattering kernel, for a range of beta.  <br /></td></tr>
-<tr class="separator:a3df16bf715f47ba56854e99f8dfab6ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd50b0f1e6c0e4c7d32dae202a824b1c"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMockSZ_1_1Models_1_1ScatteringKernels.html#abd50b0f1e6c0e4c7d32dae202a824b1c">getMultiScatteringMJ</a> (self, s_arr, Te, acc=1e-6)</td></tr>
+<tr class="memdesc:abd50b0f1e6c0e4c7d32dae202a824b1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain multi-electron scattering kernel, for a range of beta.  <br /></td></tr>
+<tr class="separator:abd50b0f1e6c0e4c7d32dae202a824b1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad87c96ae1fa8b900b6d6afe81b484c83"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMockSZ_1_1Models_1_1ScatteringKernels.html#ad87c96ae1fa8b900b6d6afe81b484c83">getMultiScatteringPL</a> (self, s_arr, alpha, acc=1e-6)</td></tr>
+<tr class="memdesc:ad87c96ae1fa8b900b6d6afe81b484c83"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain multi-electron scattering kernel, for a range of beta.  <br /></td></tr>
+<tr class="separator:ad87c96ae1fa8b900b6d6afe81b484c83"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:aacb63d44a658d39b0fd1d58f3a1870fa"><td class="memItemLeft" align="right" valign="top"><a id="aacb63d44a658d39b0fd1d58f3a1870fa" name="aacb63d44a658d39b0fd1d58f3a1870fa"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>clib</b></td></tr>
+<tr class="separator:aacb63d44a658d39b0fd1d58f3a1870fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Class for investigating the scattering kernels. </p>
@@ -185,8 +195,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a7e671d3738019b42c1fbd886ede0eb99" name="a7e671d3738019b42c1fbd886ede0eb99"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7e671d3738019b42c1fbd886ede0eb99">&#9670;&#160;</a></span>getMultiScatteringMJ()</h2>
+<a id="abd50b0f1e6c0e4c7d32dae202a824b1c" name="abd50b0f1e6c0e4c7d32dae202a824b1c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abd50b0f1e6c0e4c7d32dae202a824b1c">&#9670;&#160;</a></span>getMultiScatteringMJ()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -213,7 +223,7 @@ Public Member Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>n_beta</em> = <code>500</code>&#160;</td>
+          <td class="paramname"><em>acc</em> = <code>1e-6</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -229,7 +239,7 @@ Public Member Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">s_arr</td><td>Numpy array of logarithmic frequency shifts s. </td></tr>
     <tr><td class="paramname">Te</td><td>Electron temperature in keV. </td></tr>
-    <tr><td class="paramname">n_beta</td><td>Number of dimensionless electron velocities to include.</td></tr>
+    <tr><td class="paramname">acc</td><td>Required relative accuracy of integration.</td></tr>
   </table>
   </dd>
 </dl>
@@ -237,8 +247,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a3df16bf715f47ba56854e99f8dfab6ab" name="a3df16bf715f47ba56854e99f8dfab6ab"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3df16bf715f47ba56854e99f8dfab6ab">&#9670;&#160;</a></span>getMultiScatteringPL()</h2>
+<a id="ad87c96ae1fa8b900b6d6afe81b484c83" name="ad87c96ae1fa8b900b6d6afe81b484c83"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad87c96ae1fa8b900b6d6afe81b484c83">&#9670;&#160;</a></span>getMultiScatteringPL()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -265,7 +275,7 @@ Public Member Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>n_beta</em> = <code>500</code>&#160;</td>
+          <td class="paramname"><em>acc</em> = <code>1e-6</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -281,7 +291,7 @@ Public Member Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">s_arr</td><td>Numpy array of logarithmic frequency shifts s. </td></tr>
     <tr><td class="paramname">alpha</td><td>Slope of powerlaw. </td></tr>
-    <tr><td class="paramname">n_beta</td><td>Number of dimensionless electron velocities to include.</td></tr>
+    <tr><td class="paramname">acc</td><td>Required relative accuracy of integration.</td></tr>
   </table>
   </dd>
 </dl>
@@ -333,8 +343,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a87a1aaf45217cc6d604ca6014a4cdf6e" name="a87a1aaf45217cc6d604ca6014a4cdf6e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a87a1aaf45217cc6d604ca6014a4cdf6e">&#9670;&#160;</a></span>getSingleScattering()</h2>
+<a id="af48fbd5efa2f9c9be1fd6b97415d6cf3" name="af48fbd5efa2f9c9be1fd6b97415d6cf3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af48fbd5efa2f9c9be1fd6b97415d6cf3">&#9670;&#160;</a></span>getSingleScattering()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -361,7 +371,7 @@ Public Member Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>num_mu</em> = <code>1000</code>&#160;</td>
+          <td class="paramname"><em>acc</em> = <code>1e-6</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -377,7 +387,7 @@ Public Member Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">s_arr</td><td>Numpy array of logarithmic frequency shifts s. </td></tr>
     <tr><td class="paramname">beta</td><td>Dimensionless electron velocity. </td></tr>
-    <tr><td class="paramname">n_mu</td><td>Number of scattering direction cosines to include.</td></tr>
+    <tr><td class="paramname">acc</td><td>Required relative accuracy of integration.</td></tr>
   </table>
   </dd>
 </dl>

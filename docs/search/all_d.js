@@ -1,12 +1,7 @@
 var searchData=
 [
-  ['scatteringkernels_0',['ScatteringKernels',['../classMockSZ_1_1Models_1_1ScatteringKernels.html',1,'MockSZ::Models']]],
-  ['si_5fjysr_1',['SI_JySr',['../Conversions_8py.html#a200d8828eb34cf980e67e859fa1e8909',1,'MockSZ::Conversions']]],
-  ['si_5ftemp_2',['SI_Temp',['../Conversions_8py.html#ac57785425bc4ee6e3712337d84eb4206',1,'MockSZ::Conversions']]],
-  ['signal_2ecpp_3',['Signal.cpp',['../Signal_8cpp.html',1,'']]],
-  ['signal_2eh_4',['Signal.h',['../Signal_8h.html',1,'']]],
-  ['single_2dpointings_5',['Single-Pointings',['../group__singlepointing.html',1,'']]],
-  ['singlepointing_6',['SinglePointing',['../classMockSZ_1_1Models_1_1SinglePointing.html',1,'MockSZ::Models']]],
-  ['stats_2ecpp_7',['Stats.cpp',['../Stats_8cpp.html',1,'']]],
-  ['stats_2eh_8',['Stats.h',['../Stats_8h.html',1,'']]]
+  ['romberg_2ecpp_0',['Romberg.cpp',['../Romberg_8cpp.html',1,'']]],
+  ['romberg_2eh_1',['Romberg.h',['../Romberg_8h.html',1,'']]],
+  ['romberg_5fread_2',['romberg_read',['../Romberg_8cpp.html#a6f2e70c98181772c569ab00cc9609b3f',1,'romberg_read(double(*f)(double, double *), double a, double b, double *args, double *read_arr, size_t n_eval):&#160;Romberg.cpp'],['../Romberg_8h.html#a6f2e70c98181772c569ab00cc9609b3f',1,'romberg_read(double(*f)(double, double *), double a, double b, double *args, double *read_arr, size_t n_eval):&#160;Romberg.cpp']]],
+  ['romberg_5fwrite_3',['romberg_write',['../Romberg_8cpp.html#ac425e792d9368ac256c69a265071da64',1,'romberg_write(double(*f)(double(*g)(double, void *), double, double), double(*gg)(double, void *), double a, double b, double arg, double *write_arr, size_t max_steps, double acc):&#160;Romberg.cpp'],['../Romberg_8h.html#a0629b24627a4a847e0501e0250694eee',1,'romberg_write(double(*f)(double(*g)(double, void *), double, double), double(*g)(double, void *), double a, double b, double arg, double *write_arr, size_t max_steps, double acc):&#160;Romberg.cpp']]]
 ];

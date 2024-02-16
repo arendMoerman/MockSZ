@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['scatteringkernels_0',['ScatteringKernels',['../classMockSZ_1_1Models_1_1ScatteringKernels.html',1,'MockSZ::Models']]],
-  ['singlepointing_1',['SinglePointing',['../classMockSZ_1_1Models_1_1SinglePointing.html',1,'MockSZ::Models']]]
+  ['manager_0',['Manager',['../classMockSZ_1_1Threadmgr_1_1Manager.html',1,'MockSZ::Threadmgr']]],
+  ['ms_5fparams_1',['MS_params',['../structMS__params.html',1,'']]]
 ];

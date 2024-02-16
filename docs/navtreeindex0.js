@@ -8,9 +8,9 @@ var NAVTREEINDEX0 =
 "index.html#license":[0,3],
 "index.html#optdep":[0,1,2],
 "index.html#pdist":[0,1,0],
+"index.html#resources":[0,2],
 "index.html#sdist":[0,1,1],
-"index.html#tuts":[0,2],
 "mockszdocs.html":[2],
 "pages.html":[],
-"tutorials.html":[1]
+"resources.html":[1]
 };

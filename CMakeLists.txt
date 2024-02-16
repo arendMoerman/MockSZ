@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.16.3)
 
 project(MockSZ 
-    VERSION 0.2.2 
+    VERSION 0.2.4 
     DESCRIPTION "Mock SZ maps & signals"
     LANGUAGES CXX C)
 
@@ -17,10 +17,13 @@ target_include_directories(electronstats PUBLIC src/include)
 add_library(signal SHARED src/include/Signal.cpp)
 target_include_directories(signal PUBLIC src/include)
 
+add_library(romb SHARED src/include/Romberg.cpp)
+target_include_directories(romb PUBLIC src/include)
+
 add_library(mocksz SHARED src/cpp/InterfaceCPU.cpp)
-target_link_libraries(mocksz PRIVATE electronstats GSL::gsl signal)
+target_link_libraries(mocksz PRIVATE electronstats GSL::gsl signal romb)
 
 if(NOT WIN32)
-    target_compile_options(mocksz PRIVATE -pthread)
+    target_compile_options(mocksz PRIVATE)
 endif()
 

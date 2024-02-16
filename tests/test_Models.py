@@ -29,6 +29,8 @@ class TestModels(unittest.TestCase):
         cls.beta = 0.1
         cls.beta_arr = np.linspace(0, 0.9, cls.n_test)
 
+        cls.tau_e = 0.01
+
     @params(True, False)
     def test_IsoBetaModel(self, CMB):
         isobObj = test_md.IsoBetaModel()
@@ -60,13 +62,13 @@ class TestModels(unittest.TestCase):
     def test_SinglePointing(self, CMB):
         spObj = test_md.SinglePointing()
 
-        tSZ = spObj.getSingleSignal_tSZ(self.nu_arr, self.Te, no_CMB=CMB)
+        tSZ = spObj.getSingleSignal_tSZ(self.nu_arr, self.Te, self.tau_e, no_CMB=CMB)
         self.assertEqual(tSZ.shape, self.nu_arr.shape)
         
-        ntSZ = spObj.getSingleSignal_ntSZ(self.nu_arr, self.alpha, no_CMB=CMB)
+        ntSZ = spObj.getSingleSignal_ntSZ(self.nu_arr, self.alpha, self.tau_e, no_CMB=CMB)
         self.assertEqual(ntSZ.shape, self.nu_arr.shape)
         
-        kSZ = spObj.getSingleSignal_kSZ(self.nu_arr, self.v_pec)
+        kSZ = spObj.getSingleSignal_kSZ(self.nu_arr, self.v_pec, self.tau_e, no_CMB=CMB)
         self.assertEqual(kSZ.shape, self.nu_arr.shape)
 
     def test_ScatteringKernels(self):

@@ -1,0 +1,8 @@
+/**
+\defgroup scatteringkernels Scattering kernels & distributions
+\brief This section contains the public API methods available for plotting the scattering kernels and electro distribution.
+
+In this respect, these functions are not as 'public' as the single-pointing or cluster models.
+Nevertheless, for visualisation and development it is beneficial to have direct access to these methods, hence this public API page.
+*/
+
