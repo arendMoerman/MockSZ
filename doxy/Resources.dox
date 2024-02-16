@@ -27,4 +27,6 @@ Because of this, this section is aimed at people who are interested in deeply un
 Unlike the previous resources, the deep dives consist of both notebooks and plain, written documents.
 
 [The scattering kernels of `MockSZ`](deepdives/Scatterings.html)
+
+[Notes on performance of `MockSZ`](deepdives/PerformanceInternal.html)
 */
