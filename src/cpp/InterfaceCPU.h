@@ -88,6 +88,11 @@ extern "C"
      */
     MOCKSZ_DLL void MockSZ_getSignal_tSZ(double *nu, int n_nu, double Te, double tau_e, double *output, bool no_CMB, double acc);
     
+    MOCKSZ_DLL void MockSZ_getSignal_tSZ_beta2(double *nu, int n_nu, double Te, double tau_e, double *output, bool no_CMB, double beta);
+    
+    MOCKSZ_DLL void MockSZ_getSignal_kSZ_betatheta(double *nu, int n_nu, double Te, double tau_e, double *output, bool no_CMB, double prefac);
+    MOCKSZ_DLL void MockSZ_getSignal_kSZ_betat2heta(double *nu, int n_nu, double Te, double tau_e, double *output, bool no_CMB, double prefac);
+    
     /**
      * Single-pointing signal assuming non-thermal SZ effect.
      *

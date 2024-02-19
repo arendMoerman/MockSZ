@@ -98,6 +98,24 @@ MOCKSZ_DLL void MockSZ_getSignal_tSZ(double *nu, int n_nu, double Te, double tau
     delete[] func_evals;
 }
 
+MOCKSZ_DLL void MockSZ_getSignal_tSZ_beta2(double *nu, int n_nu, double Te, double tau_e, double *output, bool no_CMB, double beta) {
+    for(int i=0; i<n_nu; i++) {
+        output[i] = tau_e * calcSignal_tSZ_beta2(nu[i], Te, beta);
+    }
+}
+
+MOCKSZ_DLL void MockSZ_getSignal_kSZ_betatheta(double *nu, int n_nu, double Te, double tau_e, double *output, bool no_CMB, double prefac) {
+    for(int i=0; i<n_nu; i++) {
+        output[i] = tau_e * calcSignal_kSZ_betatheta(nu[i], Te, prefac);
+    }
+}
+
+MOCKSZ_DLL void MockSZ_getSignal_kSZ_betat2heta(double *nu, int n_nu, double Te, double tau_e, double *output, bool no_CMB, double prefac) {
+    for(int i=0; i<n_nu; i++) {
+        output[i] = tau_e * calcSignal_kSZ_betat2heta(nu[i], Te, prefac);
+    }
+}
+
 MOCKSZ_DLL void MockSZ_getSignal_ntSZ(double *nu, int n_nu, double alpha, double tau_e, double *output, bool no_CMB, double acc) {
     double CMB_factor = -tau_e;
 

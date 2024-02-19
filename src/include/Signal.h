@@ -29,6 +29,11 @@ struct kSZ_params {
  */
 double calcSignal_kSZ(double mu, void *args);
 
+double calcSignal_tSZ_beta2(double nu, double Te, double beta);
+
+double calcSignal_kSZ_betatheta(double nu, double Te, double prefac);
+double calcSignal_kSZ_betat2heta(double nu, double Te, double prefac);
+
 /**
  * Obtain CMB intensity at frequency nu.
  *

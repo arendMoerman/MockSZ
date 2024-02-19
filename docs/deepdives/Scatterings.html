@@ -7517,7 +7517,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [16]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [1]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -7565,16 +7565,15 @@ a.anchor-link {
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=de027508-4ffd-4ca5-9873-f664864fa14d">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=8359fbe0-2452-4287-9217-11a993ed5410">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>The curves in the left panel represent the scattering probability $P(s;\beta)$: the probability that an electron with velocity $\beta = v / c$ in the lab frame undergoes a scattering interaction with a photon at frequency $\nu_0$, such that the photon has a new frequency $\nu$, averaged over all photon incidence angles $\mu$. This frequency shift is expressed by the logarithmic frequency shift $s=\ln(\frac{\nu}{\nu_0})$.</p>
-<p>Note how the scattering probability grows wider and more asymmetric for increasing $\beta$, showing a higher probability for upscattering. This is due to the higher electron velocity, which increases he probability of upscattering a photon.</p>
-<p>As a check, we calculated the total integrated $P(s;\beta)$ over $s$, $P_\mathrm{tot}$. Because $P(s;\beta)$ is a probability, this value should be 1. In the right panel, we show the error of our calculation. It can be seen that the error is on the order of a thousandth which serves as a reassuring sanity check.</p>
-<h2 id="The-electron-distributions">The electron distributions<a class="anchor-link" href="#The-electron-distributions">¶</a></h2><p>Now, having discussed the single electron-photon scattering case, we need to discuss electron distributions. Since a radiation field may interact with electrons at different velocities, the case of scattering off an ensemble of electrons needs to be implemented. The first distribution we encounter is a Maxwell-Juttner distribution, also known as a relativistic thermal distribution.</p>
+<p>The curves represent the scattering probability $P(s;\beta)$: the probability that an electron with velocity $\beta = v / c$ undergoes a scattering interaction with a photon at frequency $\nu_0$, such that the photon has a new frequency $\nu$, averaged over all photon incidence angles $\mu$ with respect to the electron's velocity vector. This frequency shift is expressed by the logarithmic frequency shift $s=\ln(\frac{\nu}{\nu_0})$. It is important to note here that the integral over interaction angles assumes an isotropic illumination of the electron. In reality, the CMB illuminating the electron is anisotropic and any bulk motion of the gas containing the electron will introduce a Doppler shift of the CMB in the electron's rest frame. This last effect is taken into account in <code>MockSZ</code> by introducing analytical cross-terms, in addition to the scattering terms treated in this notebook.</p>
+<p>Note how the scattering probability grows wider and more asymmetric for increasing $\beta$, showing a higher probability for upscattering. This is due to the higher electron velocity, which increases he probability of upscattering a photon, and relativistic beaming, which increases the spectral range of photons as seen in the electrons rest frame.</p>
+<h2 id="The-electron-distributions">The electron distributions<a class="anchor-link" href="#The-electron-distributions">¶</a></h2><p>Now, having discussed the single electron-photon scattering case, we can discuss electron distributions. Since a radiation field may interact with electrons at different velocities, the case of scattering of a photon off an ensemble of electrons needs to be implemented. The first distribution we encounter is a Maxwell-Juttner distribution, also known as a relativistic thermal distribution.</p>
 </div>
 </div>
 </div>
@@ -7622,13 +7621,13 @@ a.anchor-link {
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=3f621d48-6a91-48d9-819f-e97147217486">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=8cde281e-049b-4ab0-8c87-910a9cda8e03">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>In addition to a thermalised distribution, <code>MockSZ</code> can also simulate a non-thermal distributions, the powerlaw distribution.</p>
+<p>In addition to a thermalised distribution, <code>MockSZ</code> can also simulate a non-thermal distribution, the powerlaw distribution.</p>
 </div>
 </div>
 </div>
@@ -7674,13 +7673,13 @@ a.anchor-link {
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=d2de1908-95ed-4379-87dc-777ff51fbab2">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=130de4fb-24ef-43c8-8126-5faf9b3ffbd8">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Photon-scattering-from-an-electron-population">Photon scattering from an electron population<a class="anchor-link" href="#Photon-scattering-from-an-electron-population">¶</a></h2><p>Now that we have discussed the single electron-photon scattering scenario, it is time to discuss the case of photon scattering from an electron population. The difference is that instead of a single $\beta$, an electron population contains a whole range of $\beta$'s. This is reflected by including the electron distribution in the total probability. It should be noted that each scattering probability shown here is for a single scattering per photon only. This amounts to us setting $\tau_\mathrm{e}=1$.</p>
+<h2 id="Photon-scattering-from-an-electron-population">Photon scattering from an electron population<a class="anchor-link" href="#Photon-scattering-from-an-electron-population">¶</a></h2><p>Now that we have discussed the single electron-photon scattering scenario, it is time to discuss the case of photon scattering from an electron population. The difference is that instead of a single $\beta$, an electron population contains a continuous range of $\beta$'s. This is reflected by including the electron distribution in the total probability. It should be noted that each scattering probability shown here is for a single scattering per photon only. This amounts to us setting $\tau_\mathrm{e}=1$.</p>
 <p>We start by showing scattering probabilities for a relativistic Maxwellian distributions of electrons.</p>
 </div>
 </div>
@@ -7727,13 +7726,13 @@ a.anchor-link {
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=b8886fe1-25f0-47ad-895e-7214f9509850">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=4ce38cb3-fc9b-4677-84b9-8c3157824962">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>It can be seen that the higher the electron temperature $T_\mathrm{e}$, the broader the distribution becomes. This is expected from the Maxwellian distribution, which gets broader with increasing $T_\mathrm{e}$.</p>
+<p>It can be seen that the higher the electron temperature $T_\mathrm{e}$, the broader the distribution becomes. This is expected from the Maxwellian distribution, which gets broader with increasing $T_\mathrm{e}$, allowing for larger values of $\beta$, which in turn broadesn the single electron-photon scattering kernel.</p>
 </div>
 </div>
 </div>
@@ -7778,7 +7777,7 @@ a.anchor-link {
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=31154b66-9ecb-4fc1-bbc3-6627be5d01b1">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=974ba1c3-904f-4463-a493-3854c30a60c3">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>

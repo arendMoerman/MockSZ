@@ -33,7 +33,8 @@ class TestModels(unittest.TestCase):
 
     @params(True, False)
     def test_IsoBetaModel(self, CMB):
-        isobObj = test_md.IsoBetaModel()
+        isobObj = test_md.IsoBetaModel(self.Te, self.v_pec, no_CMB=CMB)
+        
         isob_grid = isobObj.getIsoBeta(self.Az, self.El, self.ibeta, 
                                       self.ne0, self.thetac, self.Da,
                                       grid=True)
@@ -47,28 +48,29 @@ class TestModels(unittest.TestCase):
         
         self.assertEqual(isob_trace.size, self.nAz)
 
-        isob_cube_grid = isobObj.getIsoBetaCube(isob_grid, self.nu_arr, self.Te, self.v_pec, CMB)
+        isob_cube_grid = isobObj.getIsoBetaCube(isob_grid, self.nu_arr)
 
         self.assertEqual(isob_cube_grid.shape[0], self.nAz)
         self.assertEqual(isob_cube_grid.shape[1], self.nEl)
         self.assertEqual(isob_cube_grid.shape[2], self.n_test)
         
-        isob_cube_trace = isobObj.getIsoBetaCube(isob_trace, self.nu_arr, self.Te, self.v_pec, CMB)
+        isob_cube_trace = isobObj.getIsoBetaCube(isob_trace, self.nu_arr)
 
         self.assertEqual(isob_cube_trace.shape[0], self.nAz)
         self.assertEqual(isob_cube_trace.shape[1], self.n_test)
     
     @params(True, False)
     def test_SinglePointing(self, CMB):
-        spObj = test_md.SinglePointing()
+        tSZ_spObj = test_md.SinglePointing(self.Te, self.v_pec, no_CMB=CMB)
+        ntSZ_spObj = test_md.SinglePointing(self.alpha, self.v_pec, no_CMB=CMB)
 
-        tSZ = spObj.getSingleSignal_tSZ(self.nu_arr, self.Te, self.tau_e, no_CMB=CMB)
+        tSZ = tSZ_spObj.getSingleSignal_tSZ(self.nu_arr)
         self.assertEqual(tSZ.shape, self.nu_arr.shape)
         
-        ntSZ = spObj.getSingleSignal_ntSZ(self.nu_arr, self.alpha, self.tau_e, no_CMB=CMB)
+        ntSZ = ntSZ_spObj.getSingleSignal_ntSZ(self.nu_arr)
         self.assertEqual(ntSZ.shape, self.nu_arr.shape)
         
-        kSZ = spObj.getSingleSignal_kSZ(self.nu_arr, self.v_pec, self.tau_e, no_CMB=CMB)
+        kSZ = tSZ_spObj.getSingleSignal_kSZ(self.nu_arr)
         self.assertEqual(kSZ.shape, self.nu_arr.shape)
 
     def test_ScatteringKernels(self):

@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['kev_5ftemp_0',['keV_Temp',['../Conversions_8py.html#ae9e31553ee9cf04d1db3a0df32c0223b',1,'MockSZ.Conversions.keV_Temp()'],['../Conversions_8h.html#a4f699011ed89c1b1e933ca7bf03e0f21',1,'keV_Temp():&#160;Conversions.h']]],
-  ['kev_5ftheta_1',['keV_theta',['../Conversions_8py.html#aa2075685d4545a22cb55e800a4bbf270',1,'MockSZ::Conversions']]],
-  ['ksz_5fparams_2',['kSZ_params',['../structkSZ__params.html',1,'']]]
+  ['interfacecpu_2ecpp_0',['InterfaceCPU.cpp',['../InterfaceCPU_8cpp.html',1,'']]],
+  ['interfacecpu_2eh_1',['InterfaceCPU.h',['../InterfaceCPU_8h.html',1,'']]],
+  ['isobetamodel_2',['IsoBetaModel',['../classMockSZ_1_1Models_1_1IsoBetaModel.html',1,'MockSZ::Models']]]
 ];
