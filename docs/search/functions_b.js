@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['te_5ftheta_0',['Te_theta',['../Conversions_8h.html#a52fbc0829795d153bad6815b93fdf94d',1,'Conversions.h']]],
-  ['timer_5ffunc_1',['timer_func',['../Models_8py.html#ab1ca85f308bbc97dfdd04e61ec00539b',1,'MockSZ::Models']]]
+  ['si_5fjysr_0',['SI_JySr',['../Conversions_8py.html#a200d8828eb34cf980e67e859fa1e8909',1,'MockSZ::Conversions']]],
+  ['si_5ftemp_1',['SI_Temp',['../Conversions_8py.html#ac57785425bc4ee6e3712337d84eb4206',1,'MockSZ::Conversions']]]
 ];
