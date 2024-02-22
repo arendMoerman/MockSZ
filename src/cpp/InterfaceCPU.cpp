@@ -76,55 +76,43 @@ MOCKSZ_DLL void MockSZ_getMultiScatteringPL(double *s_arr, int n_s, double alpha
     gsl_integration_workspace_free (w);
 }
 
-MOCKSZ_DLL void MockSZ_getSignal_tSZ(double *nu, int n_nu, double Te, double tau_e, double *output, bool no_CMB, double acc) { 
-    double CMB_factor = -tau_e;
-
+MOCKSZ_DLL void MockSZ_getSignal_tSZ(double *nu, int n_nu, double Te, double tau_e, double *output, double acc) { 
     double s0 = -3;
     double s1 = 3;
     
-    if(!no_CMB) {
-        CMB_factor += 1;
-    }
-
     double *func_evals = new double[MEVALS * MEVALS];
     int n_eval = romberg_write(&get_n_eval, &getMultiScatteringMJ, s0, s1, Te, func_evals, MEVALS, acc); 
     for(int i=0; i<n_nu; i++) {
         output[i] = 0.;
         double args[2] = {nu[i], tau_e};
-        output[i] = CMB_factor * get_CMB(nu[i]);
         
         output[i] += romberg_read(&conv_CMB_scatt, s0, s1, args, func_evals, n_eval);
+        output[i] -= tau_e * get_CMB(nu[i]);
     }
     delete[] func_evals;
 }
 
-MOCKSZ_DLL void MockSZ_getSignal_tSZ_beta2(double *nu, int n_nu, double Te, double tau_e, double *output, bool no_CMB, double beta) {
+MOCKSZ_DLL void MockSZ_getSignal_tSZ_beta2(double *nu, int n_nu, double Te, double tau_e, double *output, double beta) {
     for(int i=0; i<n_nu; i++) {
         output[i] = tau_e * calcSignal_tSZ_beta2(nu[i], Te, beta);
     }
 }
 
-MOCKSZ_DLL void MockSZ_getSignal_kSZ_betatheta(double *nu, int n_nu, double Te, double tau_e, double *output, bool no_CMB, double prefac) {
+MOCKSZ_DLL void MockSZ_getSignal_kSZ_betatheta(double *nu, int n_nu, double Te, double tau_e, double *output, double prefac) {
     for(int i=0; i<n_nu; i++) {
         output[i] = tau_e * calcSignal_kSZ_betatheta(nu[i], Te, prefac);
     }
 }
 
-MOCKSZ_DLL void MockSZ_getSignal_kSZ_betat2heta(double *nu, int n_nu, double Te, double tau_e, double *output, bool no_CMB, double prefac) {
+MOCKSZ_DLL void MockSZ_getSignal_kSZ_betat2heta(double *nu, int n_nu, double Te, double tau_e, double *output, double prefac) {
     for(int i=0; i<n_nu; i++) {
         output[i] = tau_e * calcSignal_kSZ_betat2heta(nu[i], Te, prefac);
     }
 }
 
-MOCKSZ_DLL void MockSZ_getSignal_ntSZ(double *nu, int n_nu, double alpha, double tau_e, double *output, bool no_CMB, double acc) {
-    double CMB_factor = -tau_e;
-
+MOCKSZ_DLL void MockSZ_getSignal_ntSZ(double *nu, int n_nu, double alpha, double tau_e, double *output, double acc) {
     double s0 = -9;
     double s1 = 18;
-    
-    if(!no_CMB) {
-        CMB_factor += 1;
-    }
     
     double *func_evals = new double[MEVALS * MEVALS];
     int n_eval = romberg_write(&get_n_eval, &getMultiScatteringPL, s0, s1, alpha, func_evals, MEVALS, acc); 
@@ -132,14 +120,14 @@ MOCKSZ_DLL void MockSZ_getSignal_ntSZ(double *nu, int n_nu, double alpha, double
     for(int i=0; i<n_nu; i++) {
         output[i] = 0.;
         double args[2] = {nu[i], tau_e};
-        output[i] = CMB_factor * get_CMB(nu[i]);
         
         output[i] += romberg_read(&conv_CMB_scatt, s0, s1, args, func_evals, n_eval);
+        output[i] -= tau_e * get_CMB(nu[i]);
     }
     delete[] func_evals;
 }
 
-MOCKSZ_DLL void MockSZ_getSignal_kSZ(double *nu, int n_nu, double v_pec, double tau_e, double *output, bool no_CMB, double acc) {
+MOCKSZ_DLL void MockSZ_getSignal_kSZ(double *nu, int n_nu, double v_pec, double tau_e, double *output, double acc) {
     gsl_integration_workspace *w = gsl_integration_workspace_alloc (NW_INT);
     gsl_function F;
     F.function = &calcSignal_kSZ;
@@ -155,12 +143,6 @@ MOCKSZ_DLL void MockSZ_getSignal_kSZ(double *nu, int n_nu, double v_pec, double 
         gsl_integration_qag(&F, mu0, mu1, acc, acc, NW_INT, GQMODE, w, &(output[i]), &err);
     }
     gsl_integration_workspace_free (w);
-    
-    if(!no_CMB) {
-        for(int i=0; i<n_nu; i++) {
-            output[i] += get_CMB(nu[i]);
-        }
-    }
 }
 
 MOCKSZ_DLL void MockSZ_getIsoBeta(double *Az, double *El, int n_Az, int n_El, double ibeta, double ne0, double thetac, double Da, double *output, bool grid) {

@@ -61,18 +61,15 @@ class TestModels(unittest.TestCase):
     
     @params(True, False)
     def test_SinglePointing(self, CMB):
-        tSZ_spObj = test_md.SinglePointing(self.Te, self.v_pec, no_CMB=CMB)
-        ntSZ_spObj = test_md.SinglePointing(self.alpha, self.v_pec, no_CMB=CMB)
+        tkSZ_spObj = test_md.SinglePointing(self.Te, self.v_pec, no_CMB=CMB)
+        ntkSZ_spObj = test_md.SinglePointing(self.alpha, self.v_pec, no_CMB=CMB)
 
-        tSZ = tSZ_spObj.getSingleSignal_tSZ(self.nu_arr)
-        self.assertEqual(tSZ.shape, self.nu_arr.shape)
+        tkSZ = tkSZ_spObj.getSingleSignal_tkSZ(self.nu_arr)
+        self.assertEqual(tkSZ.shape, self.nu_arr.shape)
         
-        ntSZ = ntSZ_spObj.getSingleSignal_ntSZ(self.nu_arr)
-        self.assertEqual(ntSZ.shape, self.nu_arr.shape)
+        ntkSZ = ntkSZ_spObj.getSingleSignal_ntkSZ(self.nu_arr)
+        self.assertEqual(ntkSZ.shape, self.nu_arr.shape)
         
-        kSZ = tSZ_spObj.getSingleSignal_kSZ(self.nu_arr)
-        self.assertEqual(kSZ.shape, self.nu_arr.shape)
-
     def test_ScatteringKernels(self):
         skObj = test_md.ScatteringKernels()
 

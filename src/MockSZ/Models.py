@@ -38,7 +38,7 @@ class SinglePointing(object):
     @ingroup singlepointing
     """
 
-    def __init__(self, param, v_pec=None, phi_cl=0, tau_e=1, no_CMB=False):
+    def __init__(self, param=None, v_pec=None, phi_cl=0, tau_e=1, no_CMB=False):
         """!
         Initialise a single-pointing model of a galaxy cluster.
 
@@ -73,7 +73,7 @@ class SinglePointing(object):
         self.clib = MBind.loadMockSZlib()
     
     @timer_func
-    def getSingleSignal_tSZ(self, nu_arr, timer=False, acc=1e-6):
+    def getSingleSignal_tkSZ(self, nu_arr, timer=False, acc=1e-6):
         """!
         Generate a single pointing signal of the tSZ effect.
 
@@ -84,17 +84,35 @@ class SinglePointing(object):
         @returns res 1D array containing tSZ effect.
         """
 
-        res = MBind.getDistributionTwoParam(nu_arr, self.param, self.tau_e, self.no_CMB, acc, 
-                                            func=self.clib.MockSZ_getSignal_tSZ)
+        res = np.zeros(nu_arr.size)
+        
+        if not self.no_CMB:
+            res += self.getCMB(nu_arr)
+        
+        if self.param is not None:
+            res += MBind.getDistributionTwoParam(nu_arr, self.param, self.tau_e, acc, 
+                                    func=self.clib.MockSZ_getSignal_tSZ)
 
         if self.v_pec is not None:
-            res += MBind.getDistributionTwoParam(nu_arr, self.param, self.tau_e, self.no_CMB, self.beta_cl, 
+                
+            res += MBind.getDistributionTwoParam(nu_arr, self.beta_cl_z, self.tau_e, acc, 
+                                        func=self.clib.MockSZ_getSignal_kSZ)
+            if self.param is not None:
+                res += MBind.getDistributionTwoParam(nu_arr, self.param, self.tau_e, self.beta_cl, 
                                             func=self.clib.MockSZ_getSignal_tSZ_beta2)
-
+                
+                res += MBind.getDistributionTwoParam(nu_arr, self.param, self.tau_e, self.beta_cl_z, 
+                                            func=self.clib.MockSZ_getSignal_kSZ_betatheta)
+            
+                b2t_fac = self.beta_cl_z**2 * 3/2 - self.beta_cl**2/2
+                
+                res += MBind.getDistributionTwoParam(nu_arr, self.param, self.tau_e, b2t_fac, 
+                                            func=self.clib.MockSZ_getSignal_kSZ_betat2heta)
+        
         return res
     
     @timer_func
-    def getSingleSignal_ntSZ(self, nu_arr, timer=False, acc=1e-6):
+    def getSingleSignal_ntkSZ(self, nu_arr, timer=False, acc=1e-6):
         """!
         Generate a single pointing signal of the ntSZ effect, according to a powerlaw.
 
@@ -104,38 +122,24 @@ class SinglePointing(object):
         
         @returns res 1D array containing ntSZ effect.
         """
-
-        res = MBind.getDistributionTwoParam(nu_arr, self.param, self.tau_e, self.no_CMB, acc, 
-                                            func=self.clib.MockSZ_getSignal_ntSZ)
-
-        return res
-    
-    @timer_func
-    def getSingleSignal_kSZ(self, nu_arr, timer=False, acc=1e-6):
-        """!
-        Generate a single pointing signal of the kSZ effect.
-
-        The CMB can be added by adding the kSZ signal to a tSZ or ntSZ signal containing the CMB.
-
-        @param nu_arr Numpy array of frequencies for kSZ effect, in Hz.
-        @param timer Time function execution. Used in decorator.
-        @param acc Required relative accuracy of integration.
         
-        @returns res 1D array containing kSZ effect.
-        """
-
-        res = MBind.getDistributionTwoParam(nu_arr, self.beta_cl_z, self.tau_e, self.no_CMB, acc, 
-                                            func=self.clib.MockSZ_getSignal_kSZ)
+        res = np.zeros(nu_arr.size)
+        
+        if not self.no_CMB:
+            res += self.getCMB(nu_arr)
+        
         if self.param is not None:
-            res += MBind.getDistributionTwoParam(nu_arr, self.param, self.tau_e, self.no_CMB, self.beta_cl_z, 
-                                            func=self.clib.MockSZ_getSignal_kSZ_betatheta)
-            
-            b2t_fac = self.beta_cl_z**2 * 3/2 - self.beta_cl**2/2
+            res += MBind.getDistributionTwoParam(nu_arr, self.param, self.tau_e, acc, 
+                                    func=self.clib.MockSZ_getSignal_ntSZ)
 
-            res += MBind.getDistributionTwoParam(nu_arr, self.param, self.tau_e, self.no_CMB, b2t_fac, 
-                                            func=self.clib.MockSZ_getSignal_kSZ_betat2heta)
+        if self.v_pec is not None:
+            res += MBind.getDistributionTwoParam(nu_arr, self.beta_cl_z, self.tau_e, acc, 
+                                        func=self.clib.MockSZ_getSignal_kSZ)
 
         return res
+
+    def getCMB(self, nu_arr):
+        return MBind.getCMB(nu_arr)
 
 class IsoBetaModel(SinglePointing):
     """!
@@ -197,12 +201,7 @@ class IsoBetaModel(SinglePointing):
         @returns res 2D or 3D grid (depending on dimensions of isobeta) containing SZ signal attenuated by optical depth in isobeta.
         """
 
-        res_kSZ = self.getSingleSignal_kSZ(nu_arr, acc=acc)
-
-        res_tSZ = self.getSingleSignal_kSZ(nu_arr, acc=acc)
-        
-        res_SZ = res_tSZ + res_kSZ
-
+        res_SZ = self.getSingleSignal_tkSZ(nu_arr, acc=acc)
 
         if len(isobeta.shape) == 1:
             shape = (isobeta.size, nu_arr.size)
@@ -217,7 +216,7 @@ class IsoBetaModel(SinglePointing):
 
         res *= res_SZ
         
-        if self.no_CMB_cl == False:
+        if not self.no_CMB_cl:
             res += MBind.getCMB(nu_arr)
         
         return res

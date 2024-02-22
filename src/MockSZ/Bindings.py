@@ -54,32 +54,32 @@ def loadMockSZlib():
     lib.MockSZ_getSignal_tSZ.argtypes = [ctypes.POINTER(ctypes.c_double), 
                                          ctypes.c_int, ctypes.c_double, ctypes.c_double, 
                                          ctypes.POINTER(ctypes.c_double), 
-                                         ctypes.c_bool, ctypes.c_double]
+                                         ctypes.c_double]
     
     lib.MockSZ_getSignal_tSZ_beta2.argtypes = [ctypes.POINTER(ctypes.c_double), 
                                          ctypes.c_int, ctypes.c_double, ctypes.c_double, 
                                          ctypes.POINTER(ctypes.c_double), 
-                                         ctypes.c_bool, ctypes.c_double]
+                                         ctypes.c_double]
     
     lib.MockSZ_getSignal_ntSZ.argtypes = [ctypes.POINTER(ctypes.c_double), 
                                           ctypes.c_int, ctypes.c_double, ctypes.c_double, 
                                           ctypes.POINTER(ctypes.c_double), 
-                                          ctypes.c_bool, ctypes.c_double]
+                                          ctypes.c_double]
     
     lib.MockSZ_getSignal_kSZ.argtypes = [ctypes.POINTER(ctypes.c_double), 
                                          ctypes.c_int, ctypes.c_double, ctypes.c_double, 
                                          ctypes.POINTER(ctypes.c_double), 
-                                         ctypes.c_bool, ctypes.c_double] 
+                                         ctypes.c_double] 
     
     lib.MockSZ_getSignal_kSZ_betatheta.argtypes = [ctypes.POINTER(ctypes.c_double), 
                                          ctypes.c_int, ctypes.c_double, ctypes.c_double, 
                                          ctypes.POINTER(ctypes.c_double), 
-                                         ctypes.c_bool, ctypes.c_double]
+                                         ctypes.c_double]
     
     lib.MockSZ_getSignal_kSZ_betat2heta.argtypes = [ctypes.POINTER(ctypes.c_double), 
                                          ctypes.c_int, ctypes.c_double, ctypes.c_double, 
                                          ctypes.POINTER(ctypes.c_double), 
-                                         ctypes.c_bool, ctypes.c_double]
+                                         ctypes.c_double]
     
     lib.MockSZ_getIsoBeta.argtypes = [ctypes.POINTER(ctypes.c_double), 
                                       ctypes.POINTER(ctypes.c_double), 
@@ -138,7 +138,7 @@ def getDistributionSingleParam(x_arr, param, acc, func):
 
     return output
 
-def getDistributionTwoParam(x_arr, param1, param2, no_CMB, acc, func):
+def getDistributionTwoParam(x_arr, param1, param2, acc, func):
     """!
     Binding for evaluating various two-parameter distributions used in MockSZ.
     These include the actual tSZ, ntSZ and kSZ signal.
@@ -158,12 +158,11 @@ def getDistributionTwoParam(x_arr, param1, param2, no_CMB, acc, func):
     cnum_x = ctypes.c_int(x_arr.size)
     cparam1 = ctypes.c_double(param1)
     cparam2 = ctypes.c_double(param2)
-    cno_CMB = ctypes.c_bool(no_CMB)
     cacc = ctypes.c_double(acc)
 
     coutput = (ctypes.c_double * x_arr.size)(*(np.zeros(x_arr.size).tolist()))
     
-    args = [cx_arr, cnum_x, cparam1, cparam2, coutput, cno_CMB, cacc]
+    args = [cx_arr, cnum_x, cparam1, cparam2, coutput, cacc]
     
     mgr.new_thread(target=func, args=args)
 
