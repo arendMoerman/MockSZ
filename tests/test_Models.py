@@ -61,14 +61,31 @@ class TestModels(unittest.TestCase):
     
     @params(True, False)
     def test_SinglePointing(self, CMB):
-        tkSZ_spObj = test_md.SinglePointing(self.Te, self.v_pec, no_CMB=CMB)
-        ntkSZ_spObj = test_md.SinglePointing(self.alpha, self.v_pec, no_CMB=CMB)
+        v_pec = None
+        param_Te = self.Te
+        param_alpha = self.alpha
+        
+        if CMB:
+            v_pec = self.v_pec
+            param_Te = None
+            param_alpha = None
+
+        tkSZ_spObj = test_md.SinglePointing(param=param_Te, v_pec=v_pec, no_CMB=CMB)
+        ntkSZ_spObj = test_md.SinglePointing(param=param_alpha, v_pec=v_pec, no_CMB=CMB)
 
         tkSZ = tkSZ_spObj.getSingleSignal_tkSZ(self.nu_arr)
         self.assertEqual(tkSZ.shape, self.nu_arr.shape)
         
         ntkSZ = ntkSZ_spObj.getSingleSignal_ntkSZ(self.nu_arr)
         self.assertEqual(ntkSZ.shape, self.nu_arr.shape)
+        
+        tkSZ, time = tkSZ_spObj.getSingleSignal_tkSZ(self.nu_arr, timer=True)
+        self.assertEqual(tkSZ.shape, self.nu_arr.shape)
+        self.assertEqual(type(time), float)
+        
+        ntkSZ, time = ntkSZ_spObj.getSingleSignal_ntkSZ(self.nu_arr, timer=True)
+        self.assertEqual(ntkSZ.shape, self.nu_arr.shape)
+        self.assertEqual(type(time), float)
         
     def test_ScatteringKernels(self):
         skObj = test_md.ScatteringKernels()

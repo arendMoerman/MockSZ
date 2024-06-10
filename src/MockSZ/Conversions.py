@@ -3,10 +3,14 @@
 Methods for unit conversions.
 """
 
+from typing import Union, Sequence
+
 import MockSZ.Constants as ct
 import numpy as np
 
-def keV_theta(Te):
+Numbers = Union[Union[float, Sequence], Union[int, Sequence[int]]]
+
+def keV_theta(Te : Numbers) -> Numbers:
     """!
     Get dimensionless electron temperature.
 
@@ -18,7 +22,7 @@ def keV_theta(Te):
     theta = ct.k * keV_Temp(Te) / (ct.me * ct.c**2)
     return theta
 
-def keV_Temp(energy_keV):
+def keV_Temp(energy_keV : Numbers) -> Numbers:
     """!
     Convert an energy in kilo electronvolt to temperature in Kelvin
 
@@ -31,7 +35,7 @@ def keV_Temp(energy_keV):
 
     return T
 
-def SI_JySr(I_nu):
+def SI_JySr(I_nu : Numbers) -> Numbers:
     """
     Convert a specific brightness in SI units and convert to Jansky over steradian.
 
@@ -44,7 +48,8 @@ def SI_JySr(I_nu):
 
     return JySr
 
-def SI_Temp(I_nu, nu_arr):
+def SI_Temp(I_nu   : Numbers, 
+            nu_arr : Numbers) -> Numbers:
     """!
     Take specific intensity in SI units.
     Convert to a brightness temperature in Kelvin, assuming Rayleigh-Jeans tail.
@@ -58,7 +63,7 @@ def SI_Temp(I_nu, nu_arr):
     Tb = I_nu * ct.c**2 / (2 * ct.k * nu_arr**2)
     return Tb
 
-def freq_x(nu_arr):
+def freq_x(nu_arr : Numbers) -> Numbers:
     """!
     Convert frequency in Hertz to dimensionless frequency using CMB temperature.
 
@@ -71,7 +76,7 @@ def freq_x(nu_arr):
 
     return x
 
-def x_freq(x):
+def x_freq(x : Numbers) -> Numbers:
     """!
     Convert dimensionless frequency to frequency in Hertz using CMB temperature.
 

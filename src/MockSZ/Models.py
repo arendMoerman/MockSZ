@@ -4,24 +4,33 @@ Cluster/single-pointing models for making SZ maps.
 Additionally, this file contains a class that is useful for investigating scattering kernels and electron distributions.
 """
 
-import numpy as np
+# STL
 from time import time
+from typing import Callable, Optional, Sequence
 
+# External packages
+import numpy as np
+
+# MockSZ-specifics
 import MockSZ.Bindings as MBind
 import MockSZ.Constants as MConst
 import MockSZ.Conversions as MConv
 
-def timer_func(func): 
+def timer_func(func : Callable) -> Callable: 
     """!
     Decorator for timing functions in MockSZ.
     Useful for estimating performance.
+
+    @param func Function to be timed.
+
+    @returns Function to be timed, wrapped in timer.
     """
 
     def wrap_func(*args, **kwargs): 
         t1 = time() 
         result = func(*args, **kwargs) 
         t2 = time()
-        if kwargs.get("timer") is not None and kwargs.get("timer") == True:
+        if kwargs.get("timer") == True:
             return result, t2-t1
             #print(f'Function {func.__name__!r} executed in {(t2-t1):.4f}s') 
         return result 
@@ -38,7 +47,11 @@ class SinglePointing(object):
     @ingroup singlepointing
     """
 
-    def __init__(self, param=None, v_pec=None, phi_cl=0, tau_e=1, no_CMB=False):
+    def __init__(self, param    : Optional[float] = None, 
+                       v_pec    : Optional[float] = None, 
+                       phi_cl   : Optional[float] = 0, 
+                       tau_e    : Optional[float] = 1, 
+                       no_CMB   : Optional[bool]  = False) -> None:
         """!
         Initialise a single-pointing model of a galaxy cluster.
 
@@ -73,11 +86,13 @@ class SinglePointing(object):
         self.clib = MBind.loadMockSZlib()
     
     @timer_func
-    def getSingleSignal_tkSZ(self, nu_arr, timer=False, acc=1e-6):
+    def getSingleSignal_tkSZ(self, nu_arr   : Sequence[float], 
+                                   timer    : Optional[bool]  = False, 
+                                   acc      : Optional[float] = 1e-6) -> Sequence[float]:
         """!
         Generate a single pointing signal of the tSZ effect.
 
-        @param nu_arr Numpy array of frequencies for tSZ effect, in Hz.
+        @param nu_arr Array of frequencies for tSZ effect, in Hz.
         @param timer Time function execution. Used in decorator.
         @param acc Required relative accuracy of integration.
         
@@ -112,7 +127,9 @@ class SinglePointing(object):
         return res
     
     @timer_func
-    def getSingleSignal_ntkSZ(self, nu_arr, timer=False, acc=1e-6):
+    def getSingleSignal_ntkSZ(self, nu_arr  : Sequence[float], 
+                                    timer   : Optional[bool]  = False, 
+                                    acc     : Optional[float] = 1e-6) -> Sequence[float]:
         """!
         Generate a single pointing signal of the ntSZ effect, according to a powerlaw.
 
@@ -138,7 +155,7 @@ class SinglePointing(object):
 
         return res
 
-    def getCMB(self, nu_arr):
+    def getCMB(self, nu_arr : Sequence[float]) -> Sequence[float]:
         return MBind.getCMB(nu_arr)
 
 class IsoBetaModel(SinglePointing):
@@ -152,7 +169,10 @@ class IsoBetaModel(SinglePointing):
     @ingroup clustermodels
     """
     
-    def __init__(self, param, v_pec=None, phi_cl=0, no_CMB=False):
+    def __init__(self, param    : float, 
+                       v_pec    : Optional[float] = None, 
+                       phi_cl   : Optional[float] = 0, 
+                       no_CMB   : Optional[bool]  = False) -> None:
         """!
         Initialise a single-pointing model of a galaxy cluster.
         Under the hood, calls the constructor of a single-pointing class.
@@ -170,12 +190,18 @@ class IsoBetaModel(SinglePointing):
         super().__init__(param, v_pec, phi_cl, 1, True)
         self.no_CMB_cl = no_CMB
     
-    def getIsoBeta(self, Az, El, ibeta, ne0, thetac, Da, grid=False):
+    def getIsoBeta(self, Az     : Sequence[float], 
+                         El     : Sequence[float], 
+                         ibeta  : float, 
+                         ne0    : float, 
+                         thetac : float, 
+                         Da     : float, 
+                         grid   : Optional[bool] = False) -> Sequence[float]:
         """!
         Get an isothermal-beta optical depth screen. 
 
-        @param Az Numpy array containing the range of Azimuth co-ordinates, in arcseconds.
-        @param El Numpy array containing the range of Elevation co-ordinates, in arcseconds.
+        @param Az Array containing the range of Azimuth co-ordinates, in arcseconds.
+        @param El Array containing the range of Elevation co-ordinates, in arcseconds.
         @param ibeta Beta parameter for isothermal model.
         @param ne0 Central electron number density, in number / cm**3.
         @param thetac Angular cluster core radius, in arcseconds.
@@ -190,12 +216,14 @@ class IsoBetaModel(SinglePointing):
         res = MBind.getIsoBeta(Az, El, ibeta, ne0, thetac, Da, grid)
         return res
     
-    def getIsoBetaCube(self, isobeta, nu_arr, acc=1e-6):
+    def getIsoBetaCube(self, isobeta : Sequence[float], 
+                             nu_arr  : Sequence[float], 
+                             acc     : Optional[float] = 1e-6) -> Sequence[float]:
         """!
         Get an isothermal-beta model from an optical depth screen.
 
         @param isobeta An optical depth screen generated by self.getIsoBeta.
-        @param nu_arr Numpy array of frequencies for SZ effect, in Hz.
+        @param nu_arr Array of frequencies for SZ effect, in Hz.
         @param acc Required relative accuracy of integration.
         
         @returns res 2D or 3D grid (depending on dimensions of isobeta) containing SZ signal attenuated by optical depth in isobeta.
@@ -234,10 +262,12 @@ class ScatteringKernels(object):
     @ingroup scatteringkernels
     """
     
-    def __init__(self):
+    def __init__(self) -> None:
         self.clib = MBind.loadMockSZlib()
 
-    def getSingleScattering(self, s_arr, beta, acc=1e-6):
+    def getSingleScattering(self, s_arr : Sequence[float], 
+                                  beta  : float, 
+                                  acc   : float = 1e-6) -> Sequence[float]:
         """!
         Obtain single-electron scattering kernel, for a range of s and a single beta.
         This method assumes a Thomson scattering in the electron rest frame.
@@ -253,7 +283,8 @@ class ScatteringKernels(object):
 
         return res
     
-    def getMaxwellJuttner(self, beta_arr, Te):
+    def getMaxwellJuttner(self, beta_arr : Sequence[float], 
+                                Te       : float) -> Sequence[float]:
         """!
         Obtain a Maxwell-Juttner distribution.
 
@@ -268,7 +299,8 @@ class ScatteringKernels(object):
 
         return res
     
-    def getPowerlaw(self, beta_arr, alpha):
+    def getPowerlaw(self, beta_arr : Sequence[float], 
+                          alpha    : float) -> Sequence[float]:
         """!
         Obtain a relativistic powerlaw distribution.
 
@@ -283,7 +315,9 @@ class ScatteringKernels(object):
 
         return res
     
-    def getMultiScatteringMJ(self, s_arr, Te, acc=1e-6):
+    def getMultiScatteringMJ(self, s_arr : Sequence[float], 
+                                   Te    : float, 
+                                   acc   : Optional[float] = 1e-6) -> Sequence[float]:
         """!
         Obtain multi-electron scattering kernel, for a range of beta.
         This kernel is calculated using a Maxwell-Juttner distribution.
@@ -300,7 +334,9 @@ class ScatteringKernels(object):
 
         return res
     
-    def getMultiScatteringPL(self, s_arr, alpha, acc=1e-6):
+    def getMultiScatteringPL(self, s_arr : Sequence[float], 
+                                   alpha : float, 
+                                   acc   : Optional[float] = 1e-6) -> Sequence[float]:
         """!
         Obtain multi-electron scattering kernel, for a range of beta.
         This kernel is calculated using a relativistic powerlaw distribution.
