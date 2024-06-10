@@ -3,14 +3,19 @@
 Bindings for the ctypes interface for MockSZ. 
 """
 
+# STL
 import ctypes
-import numpy as np
 import os
 import pathlib
+from typing import Callable, Optional, Sequence
 
+# External packages
+import numpy as np
+
+# MockSZ-specifics
 import MockSZ.Threadmgr as TManager
 
-def loadMockSZlib():
+def loadMockSZlib() -> ctypes.CDLL:
     """!
     Load the MockSZ shared library. Will detect the operating system and link the library accordingly.
 
@@ -107,7 +112,10 @@ def loadMockSZlib():
 
     return lib
 
-def getDistributionSingleParam(x_arr, param, acc, func):
+def getDistributionSingleParam(x_arr : Sequence[float], 
+                               param : float, 
+                               acc   : float, 
+                               func  : Callable) -> Sequence[float]:
     """!
     Binding for evaluating various single-parameter distributions used in MockSZ.
 
@@ -138,7 +146,11 @@ def getDistributionSingleParam(x_arr, param, acc, func):
 
     return output
 
-def getDistributionTwoParam(x_arr, param1, param2, acc, func):
+def getDistributionTwoParam(x_arr  : Sequence[float], 
+                            param1 : float, 
+                            param2 : float, 
+                            acc    : float, 
+                            func   : Callable) -> Sequence[float]:
     """!
     Binding for evaluating various two-parameter distributions used in MockSZ.
     These include the actual tSZ, ntSZ and kSZ signal.
@@ -170,7 +182,13 @@ def getDistributionTwoParam(x_arr, param1, param2, acc, func):
 
     return output
 
-def getIsoBeta(Az, El, ibeta, ne0, thetac, Da, grid):
+def getIsoBeta(Az     : Sequence[float], 
+               El     : Sequence[float], 
+               ibeta  : float, 
+               ne0    : float, 
+               thetac : float, 
+               Da     : float, 
+               grid   : bool) -> Sequence[float]:
     """!
     Binding for calculating an isothermal-beta optical depth screen. 
 
@@ -217,7 +235,7 @@ def getIsoBeta(Az, El, ibeta, ne0, thetac, Da, grid):
 
     return output
 
-def getCMB(nu_arr):
+def getCMB(nu_arr : Sequence[float]) -> Sequence[float]:
     """!
     Binding for calculating CMB blackbody.
 
