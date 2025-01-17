@@ -5,10 +5,13 @@ Methods for unit conversions.
 
 from typing import Union, Sequence
 
-import MockSZ.Constants as ct
 import numpy as np
+import scipy.constants as const
 
 Numbers = Union[Union[float, Sequence], Union[int, Sequence[int]]]
+
+
+TCMB = 2.726 # K
 
 def keV_theta(Te : Numbers) -> Numbers:
     """!
@@ -19,7 +22,7 @@ def keV_theta(Te : Numbers) -> Numbers:
     @returns theta Dimensionless electron temperature.
     """
 
-    theta = ct.k * keV_Temp(Te) / (ct.me * ct.c**2)
+    theta = const.k * keV_Temp(Te) / (const.m_e * const.c**2)
     return theta
 
 def keV_Temp(energy_keV : Numbers) -> Numbers:
@@ -31,7 +34,7 @@ def keV_Temp(energy_keV : Numbers) -> Numbers:
     @returns T temperature in Kelvin.
     """
 
-    T = energy_keV / ct.k * ct.eV * 1e3
+    T = energy_keV / const.k * const.eV * 1e3
 
     return T
 
@@ -60,7 +63,7 @@ def SI_Temp(I_nu   : Numbers,
     @returns Tb Brightness temperature.
     """
 
-    Tb = I_nu * ct.c**2 / (2 * ct.k * nu_arr**2)
+    Tb = I_nu * const.c**2 / (2 * const.k * nu_arr**2)
     return Tb
 
 def freq_x(nu_arr : Numbers) -> Numbers:
@@ -72,7 +75,7 @@ def freq_x(nu_arr : Numbers) -> Numbers:
     @returns x The dimensionless frequency.
     """
 
-    x = ct.h * nu_arr / (ct.k * ct.Tcmb)
+    x = const.h * nu_arr / (const.k * TCMB)
 
     return x
 
@@ -85,7 +88,7 @@ def x_freq(x : Numbers) -> Numbers:
     @param nu_arr Numpy array with frequencies of I_nu in Hz.
     """
 
-    nu_arr = x / ct.h * ct.k * ct.Tcmb
+    nu_arr = x / const.h * const.k * TCMB
 
     return nu_arr
 

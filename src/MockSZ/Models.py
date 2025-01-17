@@ -10,10 +10,10 @@ from typing import Callable, Optional, Sequence
 
 # External packages
 import numpy as np
+import scipy.constants as const
 
 # MockSZ-specifics
 import MockSZ.Bindings as MBind
-import MockSZ.Constants as MConst
 import MockSZ.Conversions as MConv
 
 def timer_func(func : Callable) -> Callable: 
@@ -76,7 +76,7 @@ class SinglePointing(object):
         self.no_CMB = no_CMB
 
         if v_pec is not None:
-            self.beta_cl = self.v_pec * 1e3 / MConst.c
+            self.beta_cl = self.v_pec * 1e3 / const.c
             self.beta_cl_z = self.beta_cl * np.cos(np.radians(phi_cl))
 
         else:
