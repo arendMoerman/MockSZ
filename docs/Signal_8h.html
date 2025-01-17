@@ -128,15 +128,8 @@ Classes</h2></td></tr>
 Functions</h2></td></tr>
 <tr class="memitem:a5ed8eaf41e0f475664001811dbfb3294"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Signal_8h.html#a5ed8eaf41e0f475664001811dbfb3294">calcSignal_kSZ</a> (double mu, void *args)</td></tr>
 <tr class="separator:a5ed8eaf41e0f475664001811dbfb3294"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9e0705ba1009e5022045f0862d2aacbc"><td class="memItemLeft" align="right" valign="top"><a id="a9e0705ba1009e5022045f0862d2aacbc" name="a9e0705ba1009e5022045f0862d2aacbc"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>calcSignal_tSZ_beta2</b> (double nu, double Te, double beta)</td></tr>
-<tr class="separator:a9e0705ba1009e5022045f0862d2aacbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a484b7d8e26a4d484df9bf763028ae74e"><td class="memItemLeft" align="right" valign="top"><a id="a484b7d8e26a4d484df9bf763028ae74e" name="a484b7d8e26a4d484df9bf763028ae74e"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>calcSignal_kSZ_betatheta</b> (double nu, double Te, double prefac)</td></tr>
-<tr class="separator:a484b7d8e26a4d484df9bf763028ae74e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a11c7e51de4f31f6c2b2086f12e3899da"><td class="memItemLeft" align="right" valign="top"><a id="a11c7e51de4f31f6c2b2086f12e3899da" name="a11c7e51de4f31f6c2b2086f12e3899da"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>calcSignal_kSZ_betat2heta</b> (double nu, double Te, double prefac)</td></tr>
-<tr class="separator:a11c7e51de4f31f6c2b2086f12e3899da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac920c22816ed5880cb465d7d369929ce"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Signal_8h.html#ac920c22816ed5880cb465d7d369929ce">calcSignal_corrections</a> (double nu, double Te, double beta_pec, double cosu)</td></tr>
+<tr class="separator:ac920c22816ed5880cb465d7d369929ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7fd1773d5ae92fb188ed16ff9aa57334"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Signal_8h.html#a7fd1773d5ae92fb188ed16ff9aa57334">get_CMB</a> (double nu)</td></tr>
 <tr class="separator:a7fd1773d5ae92fb188ed16ff9aa57334"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aec42ac3c5eae212fc292aaece0f8040d"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Signal_8h.html#aec42ac3c5eae212fc292aaece0f8040d">get_n_eval</a> (double(*func)(double, void *), double s, double arg)</td></tr>
@@ -147,6 +140,56 @@ double&#160;</td><td class="memItemRight" valign="bottom"><b>calcSignal_kSZ_beta
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Declarations of the single-pointing kSZ signal and utility functions for tSZ and ntSZ signals in MockSZ. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
+<a id="ac920c22816ed5880cb465d7d369929ce" name="ac920c22816ed5880cb465d7d369929ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac920c22816ed5880cb465d7d369929ce">&#9670;&#160;</a></span>calcSignal_corrections()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double calcSignal_corrections </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>nu</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>Te</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>beta_pec</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>cosu</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Correction (cross) terms up to second order in bulk velocity and electron temperature.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">nu</td><td>Frequency at which to calculate correction terms. </td></tr>
+    <tr><td class="paramname">Te</td><td>Electron temperature in keV. </td></tr>
+    <tr><td class="paramname">beta_pec</td><td>Dimensionless peculiar velocity of cluster. </td></tr>
+    <tr><td class="paramname">cosu</td><td>Direction cosine between peculiar velocity and sightline. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a5ed8eaf41e0f475664001811dbfb3294" name="a5ed8eaf41e0f475664001811dbfb3294"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5ed8eaf41e0f475664001811dbfb3294">&#9670;&#160;</a></span>calcSignal_kSZ()</h2>
 
@@ -176,7 +219,7 @@ double&#160;</td><td class="memItemRight" valign="bottom"><b>calcSignal_kSZ_beta
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">mu</td><td>direction cosine between electron and photon (integration variable). </td></tr>
-    <tr><td class="paramname">args</td><td>Struct containing nu, v_pec and tau_e.</td></tr>
+    <tr><td class="paramname">args</td><td>Struct containing nu, beta_z and tau_e.</td></tr>
   </table>
   </dd>
 </dl>
