@@ -87,11 +87,6 @@ extern "C"
      */
     MOCKSZ_DLL void MockSZ_getSignal_tSZ(double *nu, int n_nu, double Te, double tau_e, double *output, double acc);
     
-    MOCKSZ_DLL void MockSZ_getSignal_tSZ_beta2(double *nu, int n_nu, double Te, double tau_e, double *output, double beta);
-    
-    MOCKSZ_DLL void MockSZ_getSignal_kSZ_betatheta(double *nu, int n_nu, double Te, double tau_e, double *output, double prefac);
-    MOCKSZ_DLL void MockSZ_getSignal_kSZ_betat2heta(double *nu, int n_nu, double Te, double tau_e, double *output, double prefac);
-    
     /**
      * Single-pointing signal assuming non-thermal SZ effect.
      *
@@ -109,12 +104,24 @@ extern "C"
      *
      * @param nu Array with frequencies at which to calculate tSZ signal, in Hz.
      * @param n_nu Number of frequencies in nu.
-     * @param v_pec Peculiar velocity in km /s.
+     * @param beta_pec_z Dimensionless peculiar velocity of cluster along sightline.
      * @param tau_e Optical depth along sightline.
      * @param output Array for storing output.
      * @param acc Accuracy of integrator.
      */
-    MOCKSZ_DLL void MockSZ_getSignal_kSZ(double *nu, int n_nu, double v_pec, double tau_e, double *output, double acc);
+    MOCKSZ_DLL void MockSZ_getSignal_kSZ(double *nu, int n_nu, double beta_pec_z, double tau_e, double *output, double acc);
+    
+    /**
+     * Correction (cross) terms up to second order in bulk velocity and electron temperature.
+     *
+     * @param nu Array with frequencies at which to calculate correction term, in Hz.
+     * @param n_nu Number of frequencies in nu.
+     * @param Te Electron temperature in keV.
+     * @param beta_pec Dimensionless peculiar velocity of cluster.
+     * @param output Array for storing output.
+     * @param cosu Direction cosine between peculiar velocity and sightline.
+     */
+    MOCKSZ_DLL void MockSZ_getSignal_corrections(double *nu, int n_nu, double Te, double beta_pec, double *output, double cosu);
 
     /**
      * Generate an isothermal-beta model, from an azimuth and elevation array.

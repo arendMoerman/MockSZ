@@ -14,25 +14,30 @@
  * Input structure for integral for kSZ effect.
  */
 struct kSZ_params {
-    double nu;      /*< Frequency at which to integrate kSZ signal.*/
-    double v_pec;   /*< Velocity of gas in km / s.*/
-    double tau_e;   /*< Optical depth of gas.*/
+    double nu;          /*< Frequency at which to integrate kSZ signal.*/
+    double beta_pec_z;  /*< Dimensionless bulk velocity of the gas along sightline.*/
+    double tau_e;       /*< Optical depth of gas.*/
 };
 
 /**
  * Single-pointing signal assuming kinematic SZ effect.
  *
  * @param mu direction cosine between electron and photon (integration variable).
- * @param args Struct containing nu, v_pec and tau_e.
+ * @param args Struct containing nu, beta_z and tau_e.
  *
  * @returns Integrated kSZ signal at frequency nu.
  */
 double calcSignal_kSZ(double mu, void *args);
 
-double calcSignal_tSZ_beta2(double nu, double Te, double beta);
-
-double calcSignal_kSZ_betatheta(double nu, double Te, double prefac);
-double calcSignal_kSZ_betat2heta(double nu, double Te, double prefac);
+/**
+ * Correction (cross) terms up to second order in bulk velocity and electron temperature.
+ *
+ * @param nu Frequency at which to calculate correction terms.
+ * @param Te Electron temperature in keV.
+ * @param beta_pec Dimensionless peculiar velocity of cluster.
+ * @param cosu Direction cosine between peculiar velocity and sightline.
+ */
+double calcSignal_corrections(double nu, double Te, double beta_pec, double cosu);
 
 /**
  * Obtain CMB intensity at frequency nu.

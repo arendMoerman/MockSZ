@@ -77,7 +77,7 @@ class SinglePointing(object):
 
         if v_pec is not None:
             self.beta_cl = self.v_pec * 1e3 / const.c
-            self.beta_cl_z = self.beta_cl * np.cos(np.radians(phi_cl))
+            self.beta_cl_z = np.cos(np.radians(phi_cl))
 
         else:
             self.beta_cl = None
@@ -110,19 +110,11 @@ class SinglePointing(object):
 
         if self.v_pec is not None:
                 
-            res += MBind.getDistributionTwoParam(nu_arr, self.beta_cl_z, self.tau_e, acc, 
+            res += MBind.getDistributionTwoParam(nu_arr, self.beta_cl * self.beta_cl_z, self.tau_e, acc, 
                                         func=self.clib.MockSZ_getSignal_kSZ)
             if self.param is not None:
-                res += MBind.getDistributionTwoParam(nu_arr, self.param, self.tau_e, self.beta_cl, 
-                                            func=self.clib.MockSZ_getSignal_tSZ_beta2)
-                
-                res += MBind.getDistributionTwoParam(nu_arr, self.param, self.tau_e, self.beta_cl_z, 
-                                            func=self.clib.MockSZ_getSignal_kSZ_betatheta)
-            
-                b2t_fac = self.beta_cl_z**2 * 3/2 - self.beta_cl**2/2
-                
-                res += MBind.getDistributionTwoParam(nu_arr, self.param, self.tau_e, b2t_fac, 
-                                            func=self.clib.MockSZ_getSignal_kSZ_betat2heta)
+                res += self.tau_e * MBind.getDistributionTwoParam(nu_arr, self.param, self.beta_cl, self.beta_cl_z, 
+                                            func=self.clib.MockSZ_getSignal_corrections)
         
         return res
     

@@ -61,11 +61,6 @@ def loadMockSZlib() -> ctypes.CDLL:
                                          ctypes.POINTER(ctypes.c_double), 
                                          ctypes.c_double]
     
-    lib.MockSZ_getSignal_tSZ_beta2.argtypes = [ctypes.POINTER(ctypes.c_double), 
-                                         ctypes.c_int, ctypes.c_double, ctypes.c_double, 
-                                         ctypes.POINTER(ctypes.c_double), 
-                                         ctypes.c_double]
-    
     lib.MockSZ_getSignal_ntSZ.argtypes = [ctypes.POINTER(ctypes.c_double), 
                                           ctypes.c_int, ctypes.c_double, ctypes.c_double, 
                                           ctypes.POINTER(ctypes.c_double), 
@@ -76,12 +71,7 @@ def loadMockSZlib() -> ctypes.CDLL:
                                          ctypes.POINTER(ctypes.c_double), 
                                          ctypes.c_double] 
     
-    lib.MockSZ_getSignal_kSZ_betatheta.argtypes = [ctypes.POINTER(ctypes.c_double), 
-                                         ctypes.c_int, ctypes.c_double, ctypes.c_double, 
-                                         ctypes.POINTER(ctypes.c_double), 
-                                         ctypes.c_double]
-    
-    lib.MockSZ_getSignal_kSZ_betat2heta.argtypes = [ctypes.POINTER(ctypes.c_double), 
+    lib.MockSZ_getSignal_corrections.argtypes = [ctypes.POINTER(ctypes.c_double), 
                                          ctypes.c_int, ctypes.c_double, ctypes.c_double, 
                                          ctypes.POINTER(ctypes.c_double), 
                                          ctypes.c_double]
@@ -102,11 +92,9 @@ def loadMockSZlib() -> ctypes.CDLL:
     lib.MockSZ_getMultiScatteringMJ.restype = None
     lib.MockSZ_getMultiScatteringPL.restype = None
     lib.MockSZ_getSignal_tSZ.restype = None
-    lib.MockSZ_getSignal_tSZ_beta2.restype = None
     lib.MockSZ_getSignal_ntSZ.restype = None
     lib.MockSZ_getSignal_kSZ.restype = None
-    lib.MockSZ_getSignal_kSZ_betatheta.restype = None
-    lib.MockSZ_getSignal_kSZ_betat2heta.restype = None
+    lib.MockSZ_getSignal_corrections.restype = None
     lib.MockSZ_getIsoBeta.restype = None
     lib.MockSZ_getCMB.restype = None
 

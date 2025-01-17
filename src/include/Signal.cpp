@@ -9,8 +9,8 @@ double calcSignal_kSZ(double mu, void *args) {
     double nu = (ksz_params->nu);
     double tau_e = (ksz_params->tau_e);
     
-    double beta_pec = (ksz_params->v_pec);
-    double gamma_pec = beta_gamma(beta_pec);
+    double beta_pec_z = (ksz_params->beta_pec_z);
+    double gamma_pec_z = beta_gamma(beta_pec_z);
 
     double I_CMB;
 
@@ -19,54 +19,41 @@ double calcSignal_kSZ(double mu, void *args) {
     x1 = CH * nu / KB / TCMB;
     I_CMB = get_CMB(nu);
 
-    x2 = x1 * gamma_pec*gamma_pec * (1 + beta_pec) * (1 - beta_pec * mu);
+    x2 = x1 * gamma_pec_z*gamma_pec_z * (1 + beta_pec_z) * (1 - beta_pec_z * mu);
     return tau_e * I_CMB * 3./8. * (1 + mu*mu) * ((exp(x1) - 1) / (exp(x2) - 1) - 1);
 }
 
-double calcSignal_tSZ_beta2(double nu, double Te, double beta) {
+double calcSignal_corrections(double nu, double Te, double beta_pec, double cosu) {
     double X = nu_x(nu);
     double theta = Te_theta(keV_Temp(Te));
     double eX = exp(X);
     double Xt = X * cosh(X/2) / sinh(X/2);
     double St = X / sinh(X/2);
 
+    double prefac = 2*CH * nu*nu*nu / CL / CL * X * eX / (eX-1) / (eX-1);
+    
+    double out = 0.;
+    
+    // Beta squared terms
     double Y0 = Xt - 4;
     double Y1 = -10 + Xt*(47./2 - Xt*(42./5 - Xt*7./10)) + St*(-21./5 + Xt*7./5);
+    
+    out = beta_pec*beta_pec * (Y0/3 + theta*(5.*Y0/6 + 2.*Y1/3));
 
-    double conv = 2*CH * nu*nu*nu / CL/ CL * eX / (eX-1) / (eX-1);
-
-    return conv * beta*beta * (Y0/3 + theta*(5.*Y0/6 + 2.*Y1/3));
-}
-
-double calcSignal_kSZ_betatheta(double nu, double Te, double prefac) {
-    double X = nu_x(nu);
-    double theta = Te_theta(keV_Temp(Te));
-    double eX = exp(X);
-    double Xt = X * cosh(X/2) / sinh(X/2);
-    double St = X / sinh(X/2);
-
+    // Beta - theta terms
     double C1 = 10 - Xt*(47./5 - Xt*7./5) + 7./10*St*St;
     double C2 = 25 + Xt*(-111.7 + Xt*(84.7 + Xt*(-18.3 + 11./10*Xt))) + 
             St*St*(84.7/2 + Xt*(-183./5 + 12.1/2*Xt) + 11./10*St*St);
-
-    double conv = 2*CH * nu*nu*nu / CL/ CL * X * eX / (eX-1) / (eX-1);
-
-    return -conv * prefac * theta*(C1 + theta*C2);
-}
-
-double calcSignal_kSZ_betat2heta(double nu, double Te, double prefac) {
-    double X = nu_x(nu);
-    double theta = Te_theta(keV_Temp(Te));
-    double eX = exp(X);
-    double Xt = X * cosh(X/2) / sinh(X/2);
-    double St = X / sinh(X/2);
     
+    out -= beta_pec * cosu * theta*(C1 + theta*C2);
+
+    // Beta squared - theta terms
     double D0 = -2./3 + 11./30*Xt;
     double D1 = -4 + Xt*(12 + Xt*(-6 + 19./30*Xt)) + St*St*(-3 + 19./15 * Xt);
 
-    double conv = 2*CH * nu*nu*nu / CL/ CL * X * eX / (eX-1) / (eX-1);
+    out += beta_pec*beta_pec * 0.5 * (3*cosu*cosu - 1) * (D0 + theta * D1);
 
-    return -conv * prefac * (D0 + theta * D1);
+    return prefac * out;
 }
 
 double get_CMB(double nu) {
