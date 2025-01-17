@@ -115,9 +115,13 @@ Installation</h1>
 <p>The prerequisites for installing <code>MockSZ</code> on any operating system are:</p><ul>
 <li>A working <a href="https://www.python.org/downloads/release/python-380/">Python installation of version 3.8 or higher</a>.</li>
 <li>A <a href="https://pip.pypa.io/en/stable/installation/">pip installation</a>.</li>
+<li>A C++ compiler.</li>
+<li>The GNU scientific library.</li>
 </ul>
-<p>All other Python prerequisites are fetched and installed upon installing <code>MockSZ</code>.</p>
-<p>Keep in mind that <code>MockSZ</code> needs the <a href="https://www.gnu.org/software/gsl/">GNU Scientific Library</a>, or GSL for short, for correct functioning. Please refer to the GSL webpage for installation instructions.</p>
+<p>All Python package prerequisites are fetched and installed upon installing <code>MockSZ</code>.</p>
+<p>The program has been tested with the g++ compiler, which can be downloaded easily from the apt repository: </p><div class="fragment"><div class="line">apt install g++</div>
+</div><!-- fragment --><p> Additionally, <code>MockSZ</code> needs the <a href="https://www.gnu.org/software/gsl/">GNU Scientific Library</a>, or GSL for short, for correct functioning. Please refer to the GSL webpage for installation instructions.</p>
+<p>Note that <code>MockSZ</code> has only been tested on Linux distros, so a correct functioning with Apple or Windows operating systems is not guaranteed.</p>
 <h2><a class="anchor" id="pdist"></a>
 Install From PyPi</h2>
 <p><code>MockSZ</code> is on PyPi! Just pip install: </p><div class="fragment"><div class="line">pip install MockSZ</div>
@@ -125,7 +129,7 @@ Install From PyPi</h2>
 <h2><a class="anchor" id="sdist"></a>
 Install From Source</h2>
 <p>Wheel is required if building from source:: </p><div class="fragment"><div class="line">pip install wheel</div>
-</div><!-- fragment --><p>Then, clone into the git repo and pip install: </p><div class="fragment"><div class="line">git clone https:<span class="comment">//github.com/arend95/MockSZ</span></div>
+</div><!-- fragment --><p>Then, clone into the git repo and pip install: </p><div class="fragment"><div class="line">git clone https:<span class="comment">//github.com/arendMoerman/MockSZ</span></div>
 <div class="line">pip install .</div>
 </div><!-- fragment --><p>This way of installing ensures that the newest version is installed.</p>
 <h2><a class="anchor" id="optdep"></a>

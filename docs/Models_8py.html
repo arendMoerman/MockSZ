@@ -127,24 +127,24 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ab1ca85f308bbc97dfdd04e61ec00539b"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Models_8py.html#ab1ca85f308bbc97dfdd04e61ec00539b">MockSZ.Models.timer_func</a> (func)</td></tr>
-<tr class="memdesc:ab1ca85f308bbc97dfdd04e61ec00539b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decorator for timing functions in MockSZ.  <br /></td></tr>
-<tr class="separator:ab1ca85f308bbc97dfdd04e61ec00539b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a31085d654a157cf616bf53de1803d8"><td class="memItemLeft" align="right" valign="top">Callable&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Models_8py.html#a1a31085d654a157cf616bf53de1803d8">MockSZ.Models.timer_func</a> (Callable func)</td></tr>
+<tr class="memdesc:a1a31085d654a157cf616bf53de1803d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decorator for timing functions in MockSZ.  <br /></td></tr>
+<tr class="separator:a1a31085d654a157cf616bf53de1803d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Cluster/single-pointing models for making SZ maps. </p>
 <p>Additionally, this file contains a class that is useful for investigating scattering kernels and electron distributions. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="ab1ca85f308bbc97dfdd04e61ec00539b" name="ab1ca85f308bbc97dfdd04e61ec00539b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab1ca85f308bbc97dfdd04e61ec00539b">&#9670;&#160;</a></span>timer_func()</h2>
+<a id="a1a31085d654a157cf616bf53de1803d8" name="a1a31085d654a157cf616bf53de1803d8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a31085d654a157cf616bf53de1803d8">&#9670;&#160;</a></span>timer_func()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">def MockSZ.Models.timer_func </td>
+          <td class="memname"> Callable MockSZ.Models.timer_func </td>
           <td>(</td>
-          <td class="paramtype">&#160;</td>
+          <td class="paramtype">Callable&#160;</td>
           <td class="paramname"><em>func</em></td><td>)</td>
           <td></td>
         </tr>
@@ -152,7 +152,14 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Decorator for timing functions in MockSZ. </p>
-<p>Useful for estimating performance. </p>
+<p>Useful for estimating performance.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">func</td><td>Function to be timed.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Function to be timed, wrapped in timer. </dd></dl>
 
 </div>
 </div>

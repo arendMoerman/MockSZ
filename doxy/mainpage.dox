@@ -13,11 +13,19 @@ The actual calculations are off-loaded through a set of bindings to libraries wr
 The prerequisites for installing `MockSZ` on any operating system are:
 - A working [Python installation of version 3.8 or higher](https://www.python.org/downloads/release/python-380/).
 - A [pip installation](https://pip.pypa.io/en/stable/installation/).
+- A C++ compiler.
+- The GNU scientific library.
 
-All other Python prerequisites are fetched and installed upon installing `MockSZ`.
+All Python package prerequisites are fetched and installed upon installing `MockSZ`.
 
-Keep in mind that `MockSZ` needs the [GNU Scientific Library](https://www.gnu.org/software/gsl/), or GSL for short, for correct functioning.
+The program has been tested with the g++ compiler, which can be downloaded easily from the apt repository:
+```
+apt install g++
+```
+Additionally, `MockSZ` needs the [GNU Scientific Library](https://www.gnu.org/software/gsl/), or GSL for short, for correct functioning.
 Please refer to the GSL webpage for installation instructions.
+
+Note that `MockSZ` has only been tested on Linux distros, so a correct functioning with Apple or Windows operating systems is not guaranteed.
 
 \subsection pdist Install From PyPi
 `MockSZ` is on PyPi! Just pip install:
@@ -34,7 +42,7 @@ pip install wheel
 
 Then, clone into the git repo and pip install:
 ```
-git clone https://github.com/arend95/MockSZ
+git clone https://github.com/arendMoerman/MockSZ
 pip install .
 ```
 

@@ -7517,7 +7517,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [9]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [2]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib</span>
@@ -7530,7 +7530,7 @@ a.anchor-link {
 <span class="kn">import</span> <span class="nn">MockSZ.Conversions</span> <span class="k">as</span> <span class="nn">MConv</span>
 
 <span class="o">%</span><span class="k">matplotlib</span> inline
-<span class="n">simObj</span> <span class="o">=</span> <span class="n">MModels</span><span class="o">.</span><span class="n">SinglePointing</span><span class="p">()</span>
+
 
 <span class="n">Te</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
 
@@ -7546,7 +7546,8 @@ a.anchor-link {
 <span class="n">xmax</span> <span class="o">=</span><span class="p">[]</span>
 
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">Te</span><span class="p">:</span>
-    <span class="n">tSZ</span> <span class="o">=</span> <span class="n">simObj</span><span class="o">.</span><span class="n">getSingleSignal_tSZ</span><span class="p">(</span><span class="n">nu</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">tau_e</span><span class="o">=</span><span class="n">tau_e</span><span class="p">,</span> <span class="n">no_CMB</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">simObj</span> <span class="o">=</span> <span class="n">MModels</span><span class="o">.</span><span class="n">SinglePointing</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">tau_e</span><span class="o">=</span><span class="n">tau_e</span><span class="p">,</span> <span class="n">no_CMB</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">tSZ</span> <span class="o">=</span> <span class="n">simObj</span><span class="o">.</span><span class="n">getSingleSignal_tkSZ</span><span class="p">(</span><span class="n">nu</span><span class="p">)</span>
 
     <span class="n">xmin</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">MConv</span><span class="o">.</span><span class="n">freq_x</span><span class="p">(</span><span class="n">nu</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">tSZ</span><span class="p">)]))</span>
     <span class="n">xmax</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">MConv</span><span class="o">.</span><span class="n">freq_x</span><span class="p">(</span><span class="n">nu</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">tSZ</span><span class="p">)]))</span>
