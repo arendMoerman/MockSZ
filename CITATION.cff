@@ -1,0 +1,11 @@
+cff-version: "1.2.0"
+authors:
+- family-names: Moerman
+  given-names: Arend
+  orcid: "https://orcid.org/0000-0002-0475-6134"
+contact:
+- family-names: Moerman
+  given-names: Arend
+  orcid: "https://orcid.org/0000-0002-0475-6134"
+doi: 10.5281/zenodo.15395233
+message: If you use this software, please cite the Zenodo entry: 10.5281/zenodo.15395233 
