@@ -1,18 +1,9 @@
-cff-version: "1.2.0"
-authors:
-- family-names: Moerman
-  given-names: Arend
-  orcid: "https://orcid.org/0000-0002-0475-6134"
-contact:
-- family-names: Moerman
-  given-names: Arend
-  orcid: "https://orcid.org/0000-0002-0475-6134"
-doi: 10.5281/zenodo.15395233
-message: If you use this software, please add the following citation:
+cff-version: 1.2.0
+message: "If you use this software, please add the following citation:"
 authors:
   - family-names: Moerman
     given-names: Arend
-    orcid: "https://orcid.org/0000-0002-0475-6134"
+    orcid: https://orcid.org/0000-0002-0475-6134
 title: "MockSZ: generate mock SZ maps"
 version: 0.2.4
 identifiers:
